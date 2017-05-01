@@ -1,9 +1,10 @@
 package com.pedrodavidlp.ittrivial
 
+import android.view.animation.BaseInterpolator
 import android.view.animation.Interpolator
 
 
-class RouletteInterpolator : Interpolator {
+class RouletteInterpolator : BaseInterpolator() {
   override fun getInterpolation(ratio: Float): Float {
     if(ratio < 0.1) {
       return ratio * 10 * 0.4f

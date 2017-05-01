@@ -13,16 +13,11 @@ class MatchActivity : AppCompatActivity() {
     setContentView(R.layout.activity_match)
 
     wheelMenu = findViewById(R.id.wheelMenu) as Roulette
-
-    wheelMenu.setDivCount(12)
-    //wheelMenu.setWheelImage(R.drawable.ruleta)
-
     selectedPositionText = findViewById(R.id.selected_position_text) as TextView
-    selectedPositionText.text = "selected: " + (wheelMenu.getSelectedPosition() + 1)
 
     wheelMenu.setWheelChangeListener(object : Roulette.RouletteChangeListener {
-      override fun onSelectionChange(selectedPosition: Int) {
-        selectedPositionText.text = "selected: " + (selectedPosition + 1)
+      override fun onSelectionChange(selectedPosition: String) {
+        selectedPositionText.text = selectedPosition
       }
     })
   }
