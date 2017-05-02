@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.pedrodavidlp.ittrivial">
 
     <application
@@ -12,6 +13,8 @@
         <activity android:name=".MenuActivity">
         </activity>
         <activity android:name=".MatchActivity">
+        </activity>
+        <activity android:name=".PlayerListGuestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
