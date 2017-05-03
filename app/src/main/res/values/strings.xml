@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">ITTrivial</string>
-
     <string name="question_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut placerat felis ut massa dictum, at iaculis diam posuere. Cras non odio est. Cras elementum nulla ac ante mattis, nec dictum est gravida. Sed metus quam, faucibus non interdum ut, pharetra vel mi. Donec mollis justo nisi, vel elementum purus cursus vel. In maximus posuere interdum.</string>
+    <string name="username">Enter Username</string>
+    <string name="playButton">Let\'s Play !</string>
 </resources>

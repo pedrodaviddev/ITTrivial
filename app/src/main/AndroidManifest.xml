@@ -11,6 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MenuActivity"></activity>
         <activity android:name=".MatchActivity">
+
+        </activity>
+        <activity android:name=".EnterGame">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
