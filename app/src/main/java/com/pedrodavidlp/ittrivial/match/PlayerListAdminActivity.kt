@@ -1,11 +1,12 @@
 package com.pedrodavidlp.ittrivial.match
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-
 import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.game.MatchActivity
 import kotlinx.android.synthetic.main.activity_player_list_admin.*
+import org.jetbrains.anko.startActivity
 
 class PlayerListAdminActivity : AppCompatActivity() {
 
@@ -14,5 +15,8 @@ class PlayerListAdminActivity : AppCompatActivity() {
     setContentView(R.layout.activity_player_list_admin)
     adminPlayerList.adapter = PlayerListAdapter()
     adminPlayerList.layoutManager = LinearLayoutManager(applicationContext)
+    startGameButton.setOnClickListener {
+      startActivity<MatchActivity>()
+    }
   }
 }
