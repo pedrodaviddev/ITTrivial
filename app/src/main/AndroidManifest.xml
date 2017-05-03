@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
           package="com.pedrodavidlp.ittrivial">
+    package="com.pedrodavidlp.ittrivial">
 
     <application
         android:allowBackup="true"
@@ -10,16 +10,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivity">
-        </activity>
-        <activity android:name=".MatchActivity">
-        </activity>
-        <activity android:name=".PlayerListGuestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+        <activity android:name=".MenuActivity">
+
+        </activity>
+        <activity android:name=".game.MatchActivity">
+
+        </activity>
+        <activity android:name=".login.EnterGame">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Question">
+
         </activity>
     </application>
 
