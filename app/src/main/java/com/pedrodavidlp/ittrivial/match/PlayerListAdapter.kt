@@ -1,9 +1,10 @@
-package com.pedrodavidlp.ittrivial
+package com.pedrodavidlp.ittrivial.match
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.pedrodavidlp.ittrivial.R
 import kotlinx.android.synthetic.main.items_player_list.view.*
 
 class PlayerListAdapter: RecyclerView.Adapter<PlayerListAdapter.PlayerListViewHolder>(){

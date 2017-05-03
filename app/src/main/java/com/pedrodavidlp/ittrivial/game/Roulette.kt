@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial
+package com.pedrodavidlp.ittrivial.game
 
 import android.content.Context
 
@@ -74,7 +74,7 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
     fun onSelectionChange(selectedPosition: String)
   }
 
-  private inner class RouletteTouchListener : View.OnTouchListener {
+  private inner class RouletteTouchListener : OnTouchListener {
     override fun onTouch(v: View, event: MotionEvent): Boolean {
       rotateWheel()
       this@Roulette.setOnTouchListener(null)

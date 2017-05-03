@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial
+package com.pedrodavidlp.ittrivial.game
 
 import android.view.animation.BaseInterpolator
 import android.view.animation.Interpolator

@@ -1,9 +1,10 @@
-package com.pedrodavidlp.ittrivial
+package com.pedrodavidlp.ittrivial.game
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.pedrodavidlp.ittrivial.R
 
-class Question : AppCompatActivity() {
+class QuestionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
