@@ -1,7 +1,8 @@
-package com.pedrodavidlp.ittrivial
+package com.pedrodavidlp.ittrivial.match
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.pedrodavidlp.ittrivial.R
 
 class MenuActivity : AppCompatActivity() {
 

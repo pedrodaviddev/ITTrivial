@@ -1,9 +1,10 @@
-package com.pedrodavidlp.ittrivial
+package com.pedrodavidlp.ittrivial.login
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import com.pedrodavidlp.ittrivial.R
 
 class EnterGame : AppCompatActivity() {
 
