@@ -3,8 +3,8 @@ package com.pedrodavidlp.ittrivial.login
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.match.PlayerListAdminActivity
-import com.pedrodavidlp.ittrivial.match.PlayerListGuestActivity
+import com.pedrodavidlp.ittrivial.join.GamesListActivity
+import com.pedrodavidlp.ittrivial.join.PlayerListAdminActivity
 import kotlinx.android.synthetic.main.activity_menu.*
 import org.jetbrains.anko.startActivity
 
@@ -18,7 +18,7 @@ class MenuActivity : AppCompatActivity() {
       finish()
     }
     joinMatchButton.setOnClickListener {
-      startActivity<PlayerListGuestActivity>()
+      startActivity<GamesListActivity>()
       finish()
     }
 
