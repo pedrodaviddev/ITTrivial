@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial.match
+package com.pedrodavidlp.ittrivial.join
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
