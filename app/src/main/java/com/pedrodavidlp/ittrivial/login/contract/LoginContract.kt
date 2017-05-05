@@ -1,6 +1,6 @@
 package com.pedrodavidlp.ittrivial.login.contract
 
-class LoginContract {
+class EnterGameContract {
     interface View {
         fun showError(message: String)
     }
