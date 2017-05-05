@@ -1,7 +1,10 @@
 package com.pedrodavidlp.ittrivial.login.contract
 
+import com.pedrodavidlp.ittrivial.game.domain.Game
+
 class GameListContract {
   interface View {
+    fun onLoadList(gameList: List<Game>)
     fun showError(message: String)
   }
 
@@ -16,7 +19,7 @@ class GameListContract {
   }
 
   interface InteractorOutput {
-    fun onFetchGameListSuccess()
+    fun onFetchGameListSuccess(gameList: List<Game>)
     fun onFetchGameListError()
   }
 
