@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial.game
+package com.pedrodavidlp.ittrivial.game.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial.game.contract
+package com.pedrodavidlp.ittrivial.login.contract
 
 class LoginContract {
     interface View {

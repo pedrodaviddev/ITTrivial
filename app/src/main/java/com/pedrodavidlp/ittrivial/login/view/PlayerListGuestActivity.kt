@@ -1,9 +1,10 @@
-package com.pedrodavidlp.ittrivial.login
+package com.pedrodavidlp.ittrivial.login.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.login.view.PlayerListAdapter
 import kotlinx.android.synthetic.main.activity_player_list_guest.*
 
 class PlayerListGuestActivity : AppCompatActivity() {
