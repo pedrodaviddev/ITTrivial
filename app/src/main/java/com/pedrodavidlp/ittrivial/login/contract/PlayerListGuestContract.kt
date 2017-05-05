@@ -21,7 +21,7 @@ class PlayerListGuestContract {
   }
 
   interface InteractorOutput {
-    fun onGetSuccess()
+    fun onGetSuccess(list: List<Player>)
     fun onGetError()
   }
 
