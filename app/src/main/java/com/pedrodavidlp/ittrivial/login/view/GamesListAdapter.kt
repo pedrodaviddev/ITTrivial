@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial.join
+package com.pedrodavidlp.ittrivial.login
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

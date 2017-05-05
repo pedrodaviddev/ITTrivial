@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial.join
+package com.pedrodavidlp.ittrivial.login
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

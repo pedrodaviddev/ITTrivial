@@ -3,8 +3,8 @@ package com.pedrodavidlp.ittrivial.login
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.join.GamesListActivity
-import com.pedrodavidlp.ittrivial.join.PlayerListAdminActivity
+import com.pedrodavidlp.ittrivial.login.GamesListActivity
+import com.pedrodavidlp.ittrivial.login.PlayerListAdminActivity
 import kotlinx.android.synthetic.main.activity_menu.*
 import org.jetbrains.anko.startActivity
 
