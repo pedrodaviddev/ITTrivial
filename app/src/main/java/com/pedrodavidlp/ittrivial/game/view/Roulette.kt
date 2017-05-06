@@ -1,8 +1,8 @@
 package com.pedrodavidlp.ittrivial.game.view
 
 import android.content.Context
-
 import android.util.AttributeSet
+
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -10,7 +10,13 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, attrs) {
+  interface OnCategorySelected {
+    fun onCategorySelected()
+  }
+
+  lateinit private var listener: OnCategorySelected
   private var current: String = ""
+
   lateinit private var rChangeListener: RouletteChangeListener
 
   init {
@@ -42,6 +48,7 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
         rChangeListener.onSelectionChange(current)
         rotation += auxAngle
         this@Roulette.setOnTouchListener(RouletteTouchListener())
+        listener.onCategorySelected()
       }
 
       override fun onAnimationStart(p0: Animation?) {
@@ -69,21 +76,25 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
     }
     return 360.0f
   }
-
   interface RouletteChangeListener {
     fun onSelectionChange(selectedPosition: String)
-  }
 
+  }
   private inner class RouletteTouchListener : OnTouchListener {
     override fun onTouch(v: View, event: MotionEvent): Boolean {
       rotateWheel()
       this@Roulette.setOnTouchListener(null)
       return true
     }
+
   }
 
   fun getCurrentPos(): String {
     return current
+  }
+
+  fun setOnCategorySelectedListener(listener: OnCategorySelected) {
+    this.listener = listener
   }
 }
 
