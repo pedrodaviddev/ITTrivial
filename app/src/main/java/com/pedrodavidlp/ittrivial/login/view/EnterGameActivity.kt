@@ -1,12 +1,13 @@
-package com.pedrodavidlp.ittrivial.login
+package com.pedrodavidlp.ittrivial.login.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.login.view.MenuActivity
 import kotlinx.android.synthetic.main.activity_enter_game.*
 import org.jetbrains.anko.startActivity
 
-class EnterGame : AppCompatActivity() {
+class EnterGameActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

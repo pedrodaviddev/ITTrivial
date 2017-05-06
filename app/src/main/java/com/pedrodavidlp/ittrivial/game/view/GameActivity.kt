@@ -1,12 +1,12 @@
-package com.pedrodavidlp.ittrivial.game
+package com.pedrodavidlp.ittrivial.game.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.game.Roulette
+import com.pedrodavidlp.ittrivial.game.view.Roulette
 
-class MatchActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity() {
   lateinit private var wheelMenu: Roulette
   lateinit private var selectedPositionText: TextView
 

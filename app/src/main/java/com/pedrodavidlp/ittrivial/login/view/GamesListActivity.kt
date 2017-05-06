@@ -1,9 +1,10 @@
-package com.pedrodavidlp.ittrivial.join
+package com.pedrodavidlp.ittrivial.login.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.login.view.PlayerListGuestActivity
 import kotlinx.android.synthetic.main.activity_games_list.*
 import org.jetbrains.anko.startActivity
 

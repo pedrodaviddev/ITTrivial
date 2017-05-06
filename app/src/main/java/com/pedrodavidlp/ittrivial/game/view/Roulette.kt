@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial.game
+package com.pedrodavidlp.ittrivial.game.view
 
 import android.content.Context
 
