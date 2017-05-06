@@ -3,7 +3,7 @@ package com.pedrodavidlp.ittrivial.login.contract
 import com.pedrodavidlp.ittrivial.game.domain.Game
 import com.pedrodavidlp.ittrivial.login.domain.model.Player
 
-class PlayerListGuestContract {
+class PlayerListContract {
 
   interface View {
     fun showError(message: String)
