@@ -5,6 +5,7 @@ import com.pedrodavidlp.ittrivial.login.domain.model.Player
 class GameContract {
   interface View {
     fun initUi()
+    fun loadList(playerList: List<Player>)
     fun finishedGame()
   }
 

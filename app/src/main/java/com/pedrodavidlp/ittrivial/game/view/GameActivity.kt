@@ -2,25 +2,49 @@ package com.pedrodavidlp.ittrivial.game.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.TextView
+import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.game.view.Roulette
+import com.pedrodavidlp.ittrivial.game.contract.GameContract
+import com.pedrodavidlp.ittrivial.game.data.MockPlayerRepository
+import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
+import com.pedrodavidlp.ittrivial.game.router.GameRouter
+import com.pedrodavidlp.ittrivial.login.domain.model.Player
+import com.pedrodavidlp.ittrivial.login.view.ScoreListAdapter
+import kotlinx.android.synthetic.main.activity_match.*
 
-class GameActivity : AppCompatActivity() {
-  lateinit private var wheelMenu: Roulette
-  lateinit private var selectedPositionText: TextView
+class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategorySelected {
 
+  lateinit var presenter: GamePresenter
+  lateinit var router: GameRouter
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_match)
+    router = GameRouter(this)
+    presenter = GamePresenter(MockPlayerRepository())
+    presenter.setView(this)
+    presenter.init()
+  }
 
-    wheelMenu = findViewById(R.id.wheelMenu) as Roulette
-    selectedPositionText = findViewById(R.id.selected_position_text) as TextView
+  override fun loadList(playerList: List<Player>) {
+    (gamePlayerList.adapter as ScoreListAdapter).setList(playerList)
+  }
 
-    wheelMenu.setWheelChangeListener(object : Roulette.RouletteChangeListener {
+  override fun initUi() {
+    gamePlayerList.adapter = ScoreListAdapter()
+    gamePlayerList.layoutManager = LinearLayoutManager(applicationContext)
+    roulette.setWheelChangeListener(object : Roulette.RouletteChangeListener {
       override fun onSelectionChange(selectedPosition: String) {
-        selectedPositionText.text = selectedPosition
+        selected_position_text.text = selectedPosition
       }
     })
+    roulette.setOnCategorySelectedListener(this)
+  }
+
+  override fun finishedGame() {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onCategorySelected() {
+    router.goToQuestion()
   }
 }
