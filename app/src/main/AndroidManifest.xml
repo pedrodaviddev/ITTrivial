@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".login.view.GamesListActivity">
         </activity>
+        <activity android:name=".game.view.WaitActivity">
+        </activity>
     </application>
 
 </manifest>

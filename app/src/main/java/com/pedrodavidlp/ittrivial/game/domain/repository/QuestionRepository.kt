@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial.game.domain
+package com.pedrodavidlp.ittrivial.game.domain.repository
 
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
 

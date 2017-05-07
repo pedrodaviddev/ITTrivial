@@ -2,8 +2,8 @@ package com.pedrodavidlp.ittrivial.game.data
 
 import com.google.firebase.database.*
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
-import com.pedrodavidlp.ittrivial.game.domain.Question
-import com.pedrodavidlp.ittrivial.game.domain.QuestionRepository
+import com.pedrodavidlp.ittrivial.game.domain.model.Question
+import com.pedrodavidlp.ittrivial.game.domain.repository.QuestionRepository
 
 class FireQuestionRepository: QuestionRepository {
   val database: FirebaseDatabase = FirebaseDatabase.getInstance()
