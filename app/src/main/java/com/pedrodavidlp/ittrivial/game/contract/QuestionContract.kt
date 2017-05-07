@@ -1,6 +1,6 @@
 package com.pedrodavidlp.ittrivial.game.contract
 
-import com.pedrodavidlp.ittrivial.game.domain.Question
+import com.pedrodavidlp.ittrivial.game.domain.model.Question
 
 class QuestionContract {
   interface View {
@@ -11,7 +11,7 @@ class QuestionContract {
   interface Presenter {
     fun init()
     fun setView(view: View)
-    fun onLogin(username: String)
+    fun getQuestion()
   }
 
   interface Interactor {

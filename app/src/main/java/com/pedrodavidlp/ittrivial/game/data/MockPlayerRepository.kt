@@ -2,8 +2,8 @@ package com.pedrodavidlp.ittrivial.game.data
 
 import android.os.Handler
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
-import com.pedrodavidlp.ittrivial.game.domain.Game
-import com.pedrodavidlp.ittrivial.game.domain.PlayerRepository
+import com.pedrodavidlp.ittrivial.game.domain.model.Game
+import com.pedrodavidlp.ittrivial.game.domain.repository.PlayerRepository
 import com.pedrodavidlp.ittrivial.login.domain.model.Player
 
 class MockPlayerRepository : PlayerRepository {

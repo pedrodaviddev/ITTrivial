@@ -1,6 +1,6 @@
 package com.pedrodavidlp.ittrivial.login.contract
 
-import com.pedrodavidlp.ittrivial.game.domain.Game
+import com.pedrodavidlp.ittrivial.game.domain.model.Game
 
 class GameListContract {
   interface View {
