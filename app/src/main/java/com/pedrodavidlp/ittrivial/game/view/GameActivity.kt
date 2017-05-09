@@ -6,9 +6,9 @@ import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.data.MockPlayerRepository
+import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
-import com.pedrodavidlp.ittrivial.login.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.view.ScoreListAdapter
 import kotlinx.android.synthetic.main.activity_match.*
 

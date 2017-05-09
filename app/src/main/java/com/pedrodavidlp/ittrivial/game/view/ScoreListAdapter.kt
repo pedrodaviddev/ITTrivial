@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.login.domain.model.Player
+import com.pedrodavidlp.ittrivial.game.domain.model.Player
+import com.pedrodavidlp.ittrivial.login.domain.model.User
 import kotlinx.android.synthetic.main.items_scores_list.view.*
 
 class ScoreListAdapter : RecyclerView.Adapter<ScoreListAdapter.ScoreListViewHolder>() {
@@ -19,7 +20,7 @@ class ScoreListAdapter : RecyclerView.Adapter<ScoreListAdapter.ScoreListViewHold
   }
 
   override fun onBindViewHolder(holder: ScoreListViewHolder, position: Int) {
-    holder.setData(listPlayers[position].username, listPlayers[position].score)
+    holder.setData(listPlayers[position].username)
   }
 
   fun setList(list: List<Player>) {
@@ -28,9 +29,8 @@ class ScoreListAdapter : RecyclerView.Adapter<ScoreListAdapter.ScoreListViewHold
   }
 
   inner class ScoreListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun setData(username: String, score: Int) {
+    fun setData(username: String) {
       itemView.usernameInScore.text = username
-      itemView.scorePlayer.text = score.toString()
     }
 
   }
