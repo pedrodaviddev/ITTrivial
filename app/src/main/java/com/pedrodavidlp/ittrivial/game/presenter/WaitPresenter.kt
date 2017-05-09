@@ -6,6 +6,7 @@ import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
 import com.pedrodavidlp.ittrivial.login.domain.model.Player
 
 class WaitPresenter(val useCase: GetTurn) : WaitContract.Presenter, WaitContract.InteractorOutput {
+
   lateinit var v: WaitContract.View
 
   override fun init() {
@@ -26,5 +27,9 @@ class WaitPresenter(val useCase: GetTurn) : WaitContract.Presenter, WaitContract
 
   override fun onChangeTurn(player: Player) {
     v.changeTurn(player)
+  }
+
+  override fun getCategory() {
+    useCase.getCategory(Game("mock"), this)
   }
 }

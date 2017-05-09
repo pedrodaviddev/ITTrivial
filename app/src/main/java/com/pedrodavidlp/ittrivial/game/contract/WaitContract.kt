@@ -13,10 +13,12 @@ class WaitContract {
     fun init()
     fun setView(view: View)
     fun getTurn()
+    fun getCategory()
   }
 
   interface Interactor {
     fun getTurn(game: Game, callback: WaitContract.InteractorOutput)
+    fun getCategory(game: Game, callback: WaitContract.InteractorOutput)
   }
 
   interface InteractorOutput {
