@@ -7,6 +7,7 @@ import com.pedrodavidlp.ittrivial.game.view.QuestionActivity
 import org.jetbrains.anko.startActivity
 
 class GameRouter(val activity: GameActivity) : GameContract.Router {
+
   override fun goToQuestion() {
     Handler().postDelayed({
       activity.startActivity<QuestionActivity>()
