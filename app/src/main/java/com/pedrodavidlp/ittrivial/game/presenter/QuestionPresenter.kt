@@ -18,7 +18,7 @@ class QuestionPresenter(val repository: QuestionRepository, val router: Question
   }
 
   override fun getQuestion() {
-    repository.loadQuestion(this)
+    repository.getQuestion(this)
   }
 
   override fun onError() {

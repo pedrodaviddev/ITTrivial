@@ -21,6 +21,7 @@ class GameListContract {
   interface InteractorOutput {
     fun onFetchGameListSuccess(gameList: List<Game>)
     fun onFetchGameListError()
+    fun onJoinGame(game: Game)
   }
 
   interface Router {

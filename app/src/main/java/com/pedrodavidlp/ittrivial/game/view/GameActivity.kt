@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
+import com.pedrodavidlp.ittrivial.game.data.MockGameRepository
 import com.pedrodavidlp.ittrivial.game.data.MockPlayerRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
@@ -20,7 +21,7 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_match)
     router = GameRouter(this)
-    presenter = GamePresenter(MockPlayerRepository())
+    presenter = GamePresenter(MockGameRepository())
     presenter.setView(this)
     presenter.init()
   }

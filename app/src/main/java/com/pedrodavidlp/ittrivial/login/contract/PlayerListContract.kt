@@ -24,6 +24,7 @@ class PlayerListContract {
   interface InteractorOutput {
     fun onGetSuccess(list: List<Player>)
     fun onGetError()
+    fun onInitGame()
   }
 
   interface Router {
