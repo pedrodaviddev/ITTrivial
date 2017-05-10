@@ -7,9 +7,8 @@ import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
 import com.pedrodavidlp.ittrivial.login.data.MockLobbyRepository
-import com.pedrodavidlp.ittrivial.login.domain.usecase.GetGames
-import com.pedrodavidlp.ittrivial.login.router.GameListPresenter
-import com.pedrodavidlp.ittrivial.login.view.PlayerListGuestActivity
+import com.pedrodavidlp.ittrivial.login.domain.usecase.GetGameList
+import com.pedrodavidlp.ittrivial.login.presenter.GameListPresenter
 import kotlinx.android.synthetic.main.activity_games_list.*
 import org.jetbrains.anko.startActivity
 
@@ -24,7 +23,7 @@ class GamesListActivity : AppCompatActivity(), GameListContract.View {
     gamesList.setOnClickListener {
       startActivity<PlayerListGuestActivity>()
     }
-    presenter = GameListPresenter(GetGames(MockLobbyRepository()))
+    presenter = GameListPresenter(GetGameList(MockLobbyRepository()))
     presenter.setView(this)
     presenter.init()
   }

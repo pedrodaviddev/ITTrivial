@@ -1,11 +1,10 @@
-package com.pedrodavidlp.ittrivial.login.router
+package com.pedrodavidlp.ittrivial.login.presenter
 
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
-import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
-import com.pedrodavidlp.ittrivial.login.domain.usecase.GetGames
+import com.pedrodavidlp.ittrivial.login.domain.usecase.GetGameList
 
-class GameListPresenter(val useCase: GetGames): GameListContract.Presenter, GameListContract.InteractorOutput {
+class GameListPresenter(val useCase: GetGameList): GameListContract.Presenter, GameListContract.InteractorOutput {
   lateinit var vw: GameListContract.View
 
   override fun init() {

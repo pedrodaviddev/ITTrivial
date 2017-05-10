@@ -17,7 +17,7 @@ class MockLobbyRepository: LobbyRepository {
     }, 15000)
   }
 
-  override fun getUsersInGame(callback: UserListContract.InteractorOutput) {
+  override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
     callback.onGetSuccess(listOf(User("franlo")))
     Handler(Looper.getMainLooper()).postDelayed({
       callback.onGetSuccess(listOf(User("franlo"), User("cotel")))
@@ -34,7 +34,7 @@ class MockLobbyRepository: LobbyRepository {
     callback.onInitGame()
   }
 
-  override fun joinGame(callback: GameListContract.InteractorOutput) {
+  override fun joinGame(game: Game, callback: GameListContract.InteractorOutput) {
     //mock dont do nothing
   }
 }

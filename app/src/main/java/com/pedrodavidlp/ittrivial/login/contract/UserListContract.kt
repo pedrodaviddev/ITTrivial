@@ -8,17 +8,16 @@ class UserListContract {
 
   interface View {
     fun showError(message: String)
-    fun onLoadList(list: List<Player>)
+    fun onLoadList(list: List<User>)
   }
 
   interface Presenter {
     fun init()
     fun setView(view: View)
-    fun getPlayerList(game: Game)
   }
 
   interface Interactor {
-    fun getPlayerList(game: Game)
+    fun getPlayerList(game: Game, callback: UserListContract.InteractorOutput)
   }
 
   interface InteractorOutput {
