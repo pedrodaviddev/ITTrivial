@@ -1,6 +1,7 @@
 package com.pedrodavidlp.ittrivial.login.view
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
@@ -20,9 +21,7 @@ class GamesListActivity : AppCompatActivity(), GameListContract.View {
     setContentView(R.layout.activity_games_list)
     gamesList.adapter = GamesListAdapter()
     gamesList.layoutManager = LinearLayoutManager(applicationContext)
-    gamesList.setOnClickListener {
-      startActivity<PlayerListGuestActivity>()
-    }
+    mockMethod()
     presenter = GameListPresenter(GetGameList(MockLobbyRepository()))
     presenter.setView(this)
     presenter.init()
@@ -34,5 +33,12 @@ class GamesListActivity : AppCompatActivity(), GameListContract.View {
 
   override fun showError(message: String) {
 
+  }
+
+  private fun mockMethod(){
+    Handler().postDelayed({
+      startActivity<PlayerListGuestActivity>()
+      finish()
+    },3000)
   }
 }
