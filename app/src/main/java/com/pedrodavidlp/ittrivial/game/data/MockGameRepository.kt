@@ -15,6 +15,15 @@ class MockGameRepository : GameRepository {
         Player("Adam Gontier", true, false, true, true, true),
         Player("Hayley Williams", true, true, true, false, true)
     ))
+    Handler(Looper.getMainLooper()).postDelayed(
+        {
+          callback.onGetScores(listOf(
+              Player("Axel Rose!", true, true, false, true, true),
+              Player("Adam Gontieraaa", true, false, true, true, true),
+              Player("Hayley Williamssss", true, true, true, false, true)
+          ))
+        }
+        , 10000)
   }
 
   override fun getTurnInGame(game: Game, callback: WaitContract.InteractorOutput) {
