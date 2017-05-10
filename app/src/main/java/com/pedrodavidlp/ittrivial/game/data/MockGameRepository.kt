@@ -6,8 +6,6 @@ import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
-import com.pedrodavidlp.ittrivial.login.contract.GameListContract
-import com.pedrodavidlp.ittrivial.login.contract.PlayerListContract
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 
 class MockGameRepository : GameRepository {
@@ -34,6 +32,6 @@ class MockGameRepository : GameRepository {
   }
 
   override fun loseTurnInGame(game: Game) {
-
+    //In mock this do nothing
   }
 }

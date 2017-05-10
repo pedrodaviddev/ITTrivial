@@ -4,7 +4,7 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.domain.model.User
 
-class PlayerListContract {
+class UserListContract {
 
   interface View {
     fun showError(message: String)
@@ -22,7 +22,7 @@ class PlayerListContract {
   }
 
   interface InteractorOutput {
-    fun onGetSuccess(list: List<Player>)
+    fun onGetSuccess(list: List<User>)
     fun onGetError()
     fun onInitGame()
   }

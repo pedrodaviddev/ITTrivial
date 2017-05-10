@@ -3,8 +3,6 @@ package com.pedrodavidlp.ittrivial.game.domain.repository
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
-import com.pedrodavidlp.ittrivial.login.contract.GameListContract
-import com.pedrodavidlp.ittrivial.login.contract.PlayerListContract
 
 interface GameRepository {
   fun getPlayersOnGame(game: Game, callback: GameContract.InteractorOutput)
