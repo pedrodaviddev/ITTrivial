@@ -15,11 +15,9 @@ class MenuActivity : AppCompatActivity() {
     setContentView(R.layout.activity_menu)
     createMatchButton.setOnClickListener {
       startActivity<PlayerListAdminActivity>()
-      finish()
     }
     joinMatchButton.setOnClickListener {
       startActivity<GamesListActivity>()
-      finish()
     }
 
   }

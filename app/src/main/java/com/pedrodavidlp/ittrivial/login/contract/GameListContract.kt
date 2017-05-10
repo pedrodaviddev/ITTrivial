@@ -11,11 +11,10 @@ class GameListContract {
   interface Presenter {
     fun init()
     fun setView(view: View)
-    fun onFetchGameList()
   }
 
   interface Interactor {
-    fun getGameList()
+    fun getGameList(callback: GameListContract.InteractorOutput)
   }
 
   interface InteractorOutput {

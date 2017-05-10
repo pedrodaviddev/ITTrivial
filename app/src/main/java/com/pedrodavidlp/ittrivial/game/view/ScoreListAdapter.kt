@@ -10,7 +10,7 @@ import com.pedrodavidlp.ittrivial.login.domain.model.User
 import kotlinx.android.synthetic.main.items_scores_list.view.*
 
 class ScoreListAdapter : RecyclerView.Adapter<ScoreListAdapter.ScoreListViewHolder>() {
-  var listPlayers: List<Player> = ArrayList()
+  private var listPlayers: List<Player> = ArrayList()
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScoreListViewHolder =
       ScoreListViewHolder(LayoutInflater.from(parent.context)
           .inflate(R.layout.items_scores_list, parent, false))
