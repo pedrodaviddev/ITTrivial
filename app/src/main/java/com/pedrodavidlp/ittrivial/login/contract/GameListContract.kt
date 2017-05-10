@@ -11,16 +11,16 @@ class GameListContract {
   interface Presenter {
     fun init()
     fun setView(view: View)
-    fun onFetchGameList()
   }
 
   interface Interactor {
-    fun getGameList()
+    fun getGameList(callback: GameListContract.InteractorOutput)
   }
 
   interface InteractorOutput {
     fun onFetchGameListSuccess(gameList: List<Game>)
     fun onFetchGameListError()
+    fun onJoinGame(game: Game)
   }
 
   interface Router {

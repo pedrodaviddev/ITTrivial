@@ -2,14 +2,15 @@ package com.pedrodavidlp.ittrivial.game.data
 
 import com.google.firebase.database.*
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
+import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.domain.repository.QuestionRepository
 
 class FireQuestionRepository: QuestionRepository {
   val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-  val ref: DatabaseReference = database.getReference("questions")
 
-  override fun loadQuestion(callback: QuestionContract.InteractorOutput) {
+  val ref: DatabaseReference = database.getReference("questions")
+  override fun getQuestion(callback: QuestionContract.InteractorOutput) {
     ref.addValueEventListener(object: ValueEventListener{
       override fun onDataChange(dataSnapShot: DataSnapshot) {
         var q1: DataSnapshot = dataSnapShot.child("enterprise").child("q1")
@@ -31,5 +32,8 @@ class FireQuestionRepository: QuestionRepository {
     })
   }
 
+  override fun updateScore(player: Player) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 
 }
