@@ -24,17 +24,19 @@ class MockLobbyRepository: LobbyRepository {
     return listGames
   }
 
-  override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
-    callback.onGetSuccess(listOf(User("franlo")))
+  override fun getUsersInGame(game: Game, observer: Observer<List<User>>): List<User> {
+    var listUsers: List<User> by Delegates.observable(emptyList()){ _, _, new ->
+      observer.onChange(new)
+    }
+    listUsers = listOf(User("franlo"))
     Handler(Looper.getMainLooper()).postDelayed({
-      callback.onGetSuccess(listOf(User("franlo"), User("cotel")))
+      listUsers = listOf(User("franlo"), User("cotel"))
     }, 7000)
     Handler(Looper.getMainLooper()).postDelayed({
-      callback.onGetSuccess(listOf(User("franlo"), User("cotel"), User("nhemesy")))
+     listUsers = listOf(User("franlo"), User("cotel"), User("nhemesy"))
     }, 15000)
-    Handler(Looper.getMainLooper()).postDelayed({
-      this.onInitGame(callback)
-    }, 17000)
+
+    return listUsers
   }
 
   override fun onInitGame(callback: UserListContract.InteractorOutput) {
