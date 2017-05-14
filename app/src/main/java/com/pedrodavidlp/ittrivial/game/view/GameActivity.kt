@@ -33,8 +33,8 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
     gamePlayerList.adapter = ScoreListAdapter()
     gamePlayerList.layoutManager = LinearLayoutManager(applicationContext)
     roulette.setWheelChangeListener(object : Roulette.RouletteChangeListener {
-      override fun onSelectionChange(selectedPosition: String) {
-        selected_position_text.text = selectedPosition
+      override fun onSelectionChange(selectedPosition: Category) {
+        selected_position_text.text = selectedPosition.name
       }
     })
     roulette.setOnCategorySelectedListener(this)
@@ -44,7 +44,7 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
-  override fun onCategorySelected() {
-    router.goToQuestion()
+  override fun onCategorySelected(category: Category) {
+    presenter.makeTransitionTo(category)
   }
 }
