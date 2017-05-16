@@ -1,15 +1,15 @@
 package com.pedrodavidlp.ittrivial.game.view
 
-class TransitionEnterprise : TransitionTemplate() {
+import android.widget.ImageView
+import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.game.router.GameRouter
+
+class TransitionEnterprise(image: ImageView, router: GameRouter) : TransitionTemplate(image, router) {
   override fun goToQuestion() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
   }
 
   override fun setImage() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
-
-  override fun animate() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    image.setImageResource(R.drawable.ic_enterprise)
   }
 }

@@ -3,6 +3,8 @@ package com.pedrodavidlp.ittrivial.game.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.VelocityTracker
+import android.view.View.VISIBLE
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.data.MockGameRepository
@@ -19,8 +21,7 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_match)
-    router = GameRouter(this)
-    presenter = GamePresenter(MockGameRepository())
+    presenter = GamePresenter(MockGameRepository(), GameRouter(this))
     presenter.setView(this)
     presenter.init()
   }
@@ -33,8 +34,9 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
     gamePlayerList.adapter = ScoreListAdapter()
     gamePlayerList.layoutManager = LinearLayoutManager(applicationContext)
     roulette.setWheelChangeListener(object : Roulette.RouletteChangeListener {
-      override fun onSelectionChange(selectedPosition: Category) {
-        selected_position_text.text = selectedPosition.name
+      override fun onSelectionChange(category: Category){
+        selectedCategoryText.visibility = VISIBLE
+        selectedCategoryText.text = category.name
       }
     })
     roulette.setOnCategorySelectedListener(this)
@@ -45,6 +47,6 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
   }
 
   override fun onCategorySelected(category: Category) {
-    presenter.makeTransitionTo(category)
+    presenter.makeTransitionTo(category, transitionImage)
   }
 }

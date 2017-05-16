@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="history">#ffea00</color>
+    <color name="historyDark">#827717</color>
+    <color name="network">#42a5f5</color>
+    <color name="networkDark">#1a237e</color>
+    <color name="enterprise">#ff9800</color>
+    <color name="enterpriseDark">#6d4c41</color>
+    <color name="hardware">#aa00ff</color>
+    <color name="hardwareDark">#4a148c</color>
+    <color name="software">#f44336</color>
+    <color name="softwareDark">#b71c1c</color>
 </resources>

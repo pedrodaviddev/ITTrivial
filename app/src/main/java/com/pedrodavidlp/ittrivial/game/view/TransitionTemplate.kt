@@ -1,16 +1,25 @@
 package com.pedrodavidlp.ittrivial.game.view
 
-abstract class TransitionTemplate {
+import android.view.View.VISIBLE
+import android.view.animation.AlphaAnimation
+import android.widget.ImageView
+import com.pedrodavidlp.ittrivial.game.router.GameRouter
 
-  protected fun makeTransition(){
-    animate()
+abstract class TransitionTemplate(val image: ImageView, val router: GameRouter) {
+
+  fun makeTransition() {
     setImage()
-    goToQuestion()
+    image.visibility = VISIBLE
+    animate()
   }
 
-  abstract fun goToQuestion()
+  protected abstract fun goToQuestion()
 
-  abstract fun setImage()
+  protected abstract fun setImage()
 
-  abstract fun animate()
+  protected open fun animate() {
+    val animation = AlphaAnimation(0.0f, 1.0f)
+    animation.duration = 2000
+    image.startAnimation(animation)
+  }
 }

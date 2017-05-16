@@ -33,6 +33,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'org.jetbrains.anko:anko-common:0.9.1'
     compile 'com.google.firebase:firebase-database:10.2.4'
+    compile 'com.android.support:support-dynamic-animation:25.3.1'
     testCompile 'junit:junit:4.12'
 }
 repositories {
