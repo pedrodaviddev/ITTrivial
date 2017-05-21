@@ -22,7 +22,7 @@ class FireLobbyRepository: LobbyRepository {
   override fun getGames(callback: GameListContract.InteractorOutput) {
     ref.child("games").addValueEventListener(object :ValueEventListener{
       override fun onCancelled(p0: DatabaseError?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        callback.onError()
       }
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -38,7 +38,7 @@ class FireLobbyRepository: LobbyRepository {
   override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
     ref.child("games").child(game.name).child("players").addValueEventListener(object : ValueEventListener{
       override fun onCancelled(p0: DatabaseError?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        callback.onError()
       }
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -54,25 +54,30 @@ class FireLobbyRepository: LobbyRepository {
   override fun onInitGame(game: Game, callback: UserListContract.InteractorOutput) {
     ref.child("games").child(game.name).child("numplayers").addValueEventListener(object : ValueEventListener{
       override fun onCancelled(p0: DatabaseError?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        callback.onError()
       }
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
-        getNumPlayers(dataSnapshot.value)
+        val random = Random()
+        val numPlayers = dataSnapshot.getValue(Int:: class.java)
+        val num = random.nextInt(numPlayers - 1) + 1
+        ref.child("games").child(game.name).child("started").setValue(1)
+        ref.child("games").child(game.name).child("turn").setValue(num)
       }
     })
-
-    val random = Random()
-//    val num = random.nextInt(numPlayers)
-    ref.child("games").child(game.name).child("started").setValue(1)
-//    ref.child("games").child(game.name).child("turn").setValue(Random(numPlayers as Long))
   }
 
   override fun joinGame(game: Game, callback: GameListContract.InteractorOutput) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
+    ref.child("games").child(game.name).child("numplayers").addValueEventListener(object : ValueEventListener{
+      override fun onCancelled(p0: DatabaseError?) {
+        callback.onError()
+      }
 
-  fun getNumPlayers(databaseReference: Any){
-    val numPlayers = databaseReference
+      override fun onDataChange(dataSnapshot: DataSnapshot) {
+        val numPlayers = dataSnapshot.getValue(Int :: class.java)
+        ref.child("games").child(game.name).child("numplayers").setValue(numPlayers + 1)
+        ref.child("games").child(game.name).child("players").child("pl$numPlayers").setValue(Player("pl$numPlayers"))
+      }
+    })
   }
 }

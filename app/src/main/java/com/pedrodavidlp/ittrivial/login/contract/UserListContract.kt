@@ -22,7 +22,7 @@ class UserListContract {
 
   interface InteractorOutput {
     fun onFetchUserListSuccess(playerList: List<User>)
-    fun onGetError()
+    fun onError()
     fun onInitGame()
   }
 

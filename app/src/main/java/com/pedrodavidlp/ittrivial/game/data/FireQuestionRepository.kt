@@ -32,7 +32,7 @@ class FireQuestionRepository: QuestionRepository {
     })
   }
 
-  override fun updateScore(player: Player) {
+  override fun updateCrowns(player: Player) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
