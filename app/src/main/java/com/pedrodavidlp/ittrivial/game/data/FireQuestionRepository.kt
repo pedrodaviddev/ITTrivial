@@ -11,6 +11,7 @@ import java.util.*
 class FireQuestionRepository: QuestionRepository {
   val firebase: FirebaseDatabase = FirebaseDatabase.getInstance()
   val ref : DatabaseReference = firebase.reference
+  val questionList = ArrayList<Question>()
 
   override fun getQuestion(category: String, callback: QuestionContract.InteractorOutput) {  // To change: category is a Category, not a String.
     ref.child("questions").child(category).addValueEventListener(object : ValueEventListener{
@@ -21,10 +22,15 @@ class FireQuestionRepository: QuestionRepository {
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val random = Random()
         val numQuestions = dataSnapshot.childrenCount.toInt()
-        val num = random.nextInt(numQuestions - 1)+1
-        val question = dataSnapshot.child("q$num").value
-        callback.onQuestionLoaded(question as Question)
-      }
+        var num = random.nextInt(numQuestions - 1)+1
+        var question = dataSnapshot.child("q$num").getValue(Question::class.java)
+        while (question in questionList) {
+          num = random.nextInt(numQuestions - 1)+1
+          question = dataSnapshot.child("q$num").getValue(Question::class.java)
+        }
+        questionList.add(question as Question)
+        callback.onQuestionLoaded(question)
+        }
     })
   }
 
