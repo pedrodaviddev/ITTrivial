@@ -21,7 +21,7 @@ class UserListContract {
   }
 
   interface InteractorOutput {
-    fun onFetchUserListSuccess(playerList: List<User>)
+    fun onFetchUserListSuccess(list: List<User>)
     fun onError()
     fun onInitGame()
   }

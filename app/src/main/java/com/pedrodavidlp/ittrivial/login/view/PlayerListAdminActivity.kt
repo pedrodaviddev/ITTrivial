@@ -7,6 +7,7 @@ import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.view.GameActivity
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
+import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 import com.pedrodavidlp.ittrivial.login.data.MockLobbyRepository
 import com.pedrodavidlp.ittrivial.login.domain.model.User
 import com.pedrodavidlp.ittrivial.login.domain.usecase.GetUserList
@@ -27,7 +28,7 @@ class PlayerListAdminActivity : AppCompatActivity(), UserListContract.View {
       startActivity<GameActivity>()
       finish()
     }
-    presenter = UserListPresenter(GetUserList(MockLobbyRepository()), UserListRouter(this))
+    presenter = UserListPresenter(GetUserList(FireLobbyRepository()), UserListRouter(this))
     presenter.setView(this)
     presenter.init()
   }

@@ -23,19 +23,19 @@ class MockLobbyRepository: LobbyRepository {
   }
 
   override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
-    callback.onFetchPlayerListSuccess(listOf(Player("franlo")))
+//    callback.onFetchUserListSuccess(listOf(User("franlo")))
     Handler(Looper.getMainLooper()).postDelayed({
-      callback.onFetchPlayerListSuccess(listOf(Player("franlo"), Player("cotel")))
+      callback.onFetchUserListSuccess(listOf(User("franlo"), User("cotel")))
     }, 7000)
     Handler(Looper.getMainLooper()).postDelayed({
-      callback.onFetchPlayerListSuccess(listOf(Player("franlo"), Player("cotel"), Player("nhemesy")))
+      callback.onFetchUserListSuccess(listOf(User("franlo"), User("cotel"), User("nhemesy")))
     }, 15000)
     Handler(Looper.getMainLooper()).postDelayed({
-      this.onInitGame(callback)
+      this.onInitGame(Game("hola"),callback)
     }, 17000)
   }
 
-  override fun onInitGame(callback: UserListContract.InteractorOutput) {
+  override fun onInitGame(game: Game, callback: UserListContract.InteractorOutput) {
     callback.onInitGame()
   }
 
