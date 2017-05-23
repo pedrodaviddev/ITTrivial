@@ -3,14 +3,13 @@ package com.pedrodavidlp.ittrivial.login.data
 import android.os.Handler
 import android.os.Looper
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
-import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.domain.model.User
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 
 class MockLobbyRepository: LobbyRepository {
-  override fun createGame(game: Game, admin: Player) {
+  override fun createGame(admin: User) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
