@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
+import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 import com.pedrodavidlp.ittrivial.login.data.MockLobbyRepository
 import com.pedrodavidlp.ittrivial.login.domain.usecase.GetGameList
 import com.pedrodavidlp.ittrivial.login.presenter.GameListPresenter
@@ -22,7 +23,7 @@ class GamesListActivity : AppCompatActivity(), GameListContract.View {
     gamesList.adapter = GamesListAdapter()
     gamesList.layoutManager = LinearLayoutManager(applicationContext)
     mockMethod()
-    presenter = GameListPresenter(GetGameList(MockLobbyRepository()))
+    presenter = GameListPresenter(GetGameList(FireLobbyRepository()))
     presenter.setView(this)
     presenter.init()
   }

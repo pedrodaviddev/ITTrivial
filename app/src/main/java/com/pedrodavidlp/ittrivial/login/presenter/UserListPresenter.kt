@@ -17,14 +17,14 @@ class UserListPresenter(val useCase: GetUserList, val router: UserListRouter) : 
   }
 
   private fun getPlayerList(game: Game) {
-    useCase.getPlayerList(game, this)
+    useCase.getUserList(game, this)
   }
 
-  override fun onGetSuccess(list: List<User>) {
+  override fun onFetchUserListSuccess(list: List<User>) {
    vw.onLoadList(list)
   }
 
-  override fun onGetError() {
+  override fun onError() {
     vw.showError("Error")
   }
 
