@@ -5,6 +5,7 @@ import com.pedrodavidlp.ittrivial.login.contract.GameListContract
 import com.pedrodavidlp.ittrivial.login.domain.usecase.GetGameList
 
 class GameListPresenter(val useCase: GetGameList): GameListContract.Presenter, GameListContract.InteractorOutput {
+
   lateinit var vw: GameListContract.View
 
   override fun init() {
@@ -24,5 +25,8 @@ class GameListPresenter(val useCase: GetGameList): GameListContract.Presenter, G
 
   override fun onJoinGame(game: Game) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+  override fun onError() {
+
   }
 }

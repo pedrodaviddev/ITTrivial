@@ -9,6 +9,10 @@ import com.pedrodavidlp.ittrivial.login.domain.model.User
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 
 class MockLobbyRepository: LobbyRepository {
+  override fun createGame(admin: User) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
   override fun getGames(callback: GameListContract.InteractorOutput) {
     callback.onFetchGameListSuccess(listOf(Game("Solo hay una partida")))
     Handler(Looper.getMainLooper()).postDelayed({
@@ -18,19 +22,19 @@ class MockLobbyRepository: LobbyRepository {
   }
 
   override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
-    callback.onGetSuccess(listOf(User("franlo")))
+//    callback.onFetchUserListSuccess(listOf(User("franlo")))
     Handler(Looper.getMainLooper()).postDelayed({
-      callback.onGetSuccess(listOf(User("franlo"), User("cotel")))
+      callback.onFetchUserListSuccess(listOf(User("franlo"), User("cotel")))
     }, 7000)
     Handler(Looper.getMainLooper()).postDelayed({
-      callback.onGetSuccess(listOf(User("franlo"), User("cotel"), User("nhemesy")))
+      callback.onFetchUserListSuccess(listOf(User("franlo"), User("cotel"), User("nhemesy")))
     }, 15000)
     Handler(Looper.getMainLooper()).postDelayed({
-      this.onInitGame(callback)
+      this.onInitGame(Game("hola"),callback)
     }, 17000)
   }
 
-  override fun onInitGame(callback: UserListContract.InteractorOutput) {
+  override fun onInitGame(game: Game, callback: UserListContract.InteractorOutput) {
     callback.onInitGame()
   }
 

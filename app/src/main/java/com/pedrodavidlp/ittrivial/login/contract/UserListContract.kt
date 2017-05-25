@@ -17,12 +17,12 @@ class UserListContract {
   }
 
   interface Interactor {
-    fun getPlayerList(game: Game, callback: UserListContract.InteractorOutput)
+    fun getUserList(game: Game, callback: UserListContract.InteractorOutput)
   }
 
   interface InteractorOutput {
-    fun onGetSuccess(list: List<User>)
-    fun onGetError()
+    fun onFetchUserListSuccess(list: List<User>)
+    fun onError()
     fun onInitGame()
   }
 

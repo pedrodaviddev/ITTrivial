@@ -1,17 +1,18 @@
 package com.pedrodavidlp.ittrivial.game.data
 
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
+import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.domain.repository.QuestionRepository
 import java.util.*
 
 class MockQuestionRepository : QuestionRepository {
-  override fun updateScore(player: Player) {
-    //this do nothing here
+  override fun updateCrowns(game: Game, category: String, player: Player) {
+
   }
 
-  override fun getQuestion(callback: QuestionContract.InteractorOutput) {
+  override fun getQuestion(category: String, callback: QuestionContract.InteractorOutput) {
     val random = Random()
     when(random.nextInt(4)){
       0 ->     callback.onQuestionLoaded(Question("Porque conrado es tan hipster",
