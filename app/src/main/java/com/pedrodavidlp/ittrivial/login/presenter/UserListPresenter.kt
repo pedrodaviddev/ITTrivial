@@ -4,10 +4,13 @@ import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.domain.model.User
+import com.pedrodavidlp.ittrivial.login.domain.usecase.ExitGame
 import com.pedrodavidlp.ittrivial.login.domain.usecase.GetUserList
 import com.pedrodavidlp.ittrivial.login.router.UserListRouter
 
-class UserListPresenter(val useCase: GetUserList, val router: UserListRouter) : UserListContract.Presenter, UserListContract.InteractorOutput {
+class UserListPresenter(val getList: GetUserList,
+                        val exitGame: ExitGame,
+                        val router: UserListRouter) : UserListContract.Presenter, UserListContract.InteractorOutput {
   lateinit private var vw: UserListContract.View
   override fun init() {
     vw.initUI()
@@ -19,7 +22,7 @@ class UserListPresenter(val useCase: GetUserList, val router: UserListRouter) : 
   }
 
   private fun getPlayerList(game: Game) {
-    useCase.getUserList(game, this)
+    getList.getUserList(game, this)
   }
 
   override fun onFetchUserListSuccess(list: List<User>) {
@@ -36,5 +39,9 @@ class UserListPresenter(val useCase: GetUserList, val router: UserListRouter) : 
 
   fun getCurrentGame(): Game {
     return Session.game
+  }
+
+  fun exitGame() {
+    exitGame.exitGame(getCurrentGame(), this)
   }
 }

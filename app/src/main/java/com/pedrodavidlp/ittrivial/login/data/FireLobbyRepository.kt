@@ -13,12 +13,9 @@ import kotlin.collections.ArrayList
 
 class FireLobbyRepository : LobbyRepository {
   val randomNames: Array<String> = arrayOf("Ailurophile", "Assemblage",
-      "Becoming", "Beleaguer", "Brood",
-      "Bucolic", "Bungalow", "Chatoyant", "Comely",
-      "Conflate", "Cynosure", "Dalliance", "Demesne",
-      "Dominion", "Demure", "Denouement", "Desuetude",
-      "Desultory", "Diaphanous", "Dissemble", "Dulcet",
-      "Ebullience", " Effervescent", "Efflorescence",
+      "Becoming", "Beleaguer", "Brood", "Bucolic", "Bungalow", "Chatoyant", "Comely",
+      "Conflate", "Cynosure", "Dalliance", "Demesne", "Dominion", "Demure", "Denouement", "Desuetude",
+      "Desultory", "Diaphanous", "Dissemble", "Dulcet", "Ebullience", " Effervescent", "Efflorescence",
       "Elision", "Elixir", "Eloquence", "Embrocation", "Emollient", "Ephemeral",
       "Epiphany", "Erstwhile", "Ethereal", "Evanescent", "Evocative", "Fetching",
       "Felicity", "Forbearance", "Fugacious", "Furtive", "Gambol", "Glamour",
@@ -32,10 +29,9 @@ class FireLobbyRepository : LobbyRepository {
       "Ripple", "Scintilla", "Sempiternal", "Seraglio", "Serendipity", "Summery",
       "Sumptuous", "Surreptitious", "Susquehanna", "Susurrous", "Talisman", "Tintinnabulation",
       "Umbrella", "Untoward", "Vestigial", "Wafture", "Wherewithal", "Woebegone")
+
   val firebase: FirebaseDatabase = FirebaseDatabase.getInstance()
   val ref: DatabaseReference = firebase.reference
-
-
   override fun createGame(admin: User) {
     ref.child("games").addListenerForSingleValueEvent(object : ValueEventListener {
       override fun onCancelled(databaseError: DatabaseError) {
@@ -59,6 +55,7 @@ class FireLobbyRepository : LobbyRepository {
     })
 
   }
+
 
   override fun getGames(callback: GameListContract.InteractorOutput) {
     ref.child("games").addValueEventListener(object : ValueEventListener {
@@ -129,5 +126,9 @@ class FireLobbyRepository : LobbyRepository {
   override fun enterGame(game: Game, callback: GameListContract.InteractorOutput) {
     ref.child("games").child(game.name).child("players").child(Session.username).setValue(Player(Session.username))
     callback.onJoinGame(game)
+  }
+
+  override fun exitGame(game: Game, callback: UserListContract.InteractorOutput) {
+    ref.child("games").child(game.name).child("players").child(Session.username).removeValue()
   }
 }
