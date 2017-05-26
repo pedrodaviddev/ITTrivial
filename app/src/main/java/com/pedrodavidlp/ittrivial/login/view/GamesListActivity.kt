@@ -2,7 +2,7 @@ package com.pedrodavidlp.ittrivial.login.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.pedrodavidlp.ittrivial.R
@@ -22,7 +22,7 @@ class GamesListActivity : AppCompatActivity(), GameListContract.View {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_games_list)
     gamesList.adapter = GamesListAdapter()
-    gamesList.layoutManager = LinearLayoutManager(applicationContext)
+    gamesList.layoutManager = GridLayoutManager(applicationContext, 2)
     RecyclerListener.addTo(gamesList).setOnItemClickListener(object : RecyclerListener.OnItemClickListener {
       override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
         presenter.enterGame(Game(((recyclerView.adapter) as GamesListAdapter).listGames[position].name))

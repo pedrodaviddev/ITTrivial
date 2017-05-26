@@ -25,6 +25,7 @@ class PlayerListGuestActivity : AppCompatActivity(), UserListContract.View {
     presenter.setView(this)
     presenter.init()
   }
+
   override fun onLoadList(list: List<User>) {
     (adminPlayerList.adapter as UserListAdapter).setList(list)
   }

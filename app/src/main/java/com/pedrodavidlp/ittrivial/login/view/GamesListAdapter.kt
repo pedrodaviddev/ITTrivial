@@ -1,5 +1,6 @@
 package com.pedrodavidlp.ittrivial.login.view
 
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -25,13 +26,28 @@ class GamesListAdapter : RecyclerView.Adapter<GamesListAdapter.GamesListViewHold
   }
 
   override fun onBindViewHolder(holder: GamesListViewHolder, position: Int) {
-    holder.setData(listGames[position].name)
+    holder.setData(listGames[position].name, position + 1)
   }
 
 
   inner class GamesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun setData(username: String) {
+    fun setData(username: String, playerCount: Int) {
       itemView.gameName.text = username
+      itemView.numberPlayers.text = "$playerCount jugadores"
+      if (playerCount > 4) {
+        itemView.numberPlayersBackground
+            .background = ContextCompat.getDrawable(itemView.context, R.color.mediumCapacity)
+        itemView.gameNameBackground
+            .background = ContextCompat.getDrawable(itemView.context, R.color.mediumCapacityAlpha)
+      }
+
+      if (playerCount > 7) {
+        itemView.numberPlayersBackground
+            .background = ContextCompat.getDrawable(itemView.context, R.color.littleCapacity)
+        itemView.gameNameBackground
+            .background = ContextCompat.getDrawable(itemView.context, R.color.littleCapacityAlpha)
+      }
+
     }
 
   }
