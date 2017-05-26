@@ -1,6 +1,7 @@
 package com.pedrodavidlp.ittrivial.login.data
 
 import com.google.firebase.database.*
+import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
@@ -123,5 +124,10 @@ class FireLobbyRepository : LobbyRepository {
 
   private fun selectRandomName(): String {
     return randomNames[Random().nextInt(randomNames.size - 1)]
+  }
+
+  override fun enterGame(game: Game, callback: GameListContract.InteractorOutput) {
+    ref.child("games").child(game.name).child("players").child(Session.username).setValue(Player(Session.username))
+    callback.onJoinGame(game)
   }
 }

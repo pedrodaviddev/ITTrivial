@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
-import com.pedrodavidlp.ittrivial.login.domain.model.User
 import kotlinx.android.synthetic.main.items_games_list.view.*
 
 class GamesListAdapter : RecyclerView.Adapter<GamesListAdapter.GamesListViewHolder>() {
-  private var listGames: List<Game> = ArrayList()
+  var listGames: List<Game> = ArrayList()
+    get() = field
+    set(list) {
+      field = list
+      notifyDataSetChanged()
+    }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GamesListViewHolder =
       GamesListViewHolder(LayoutInflater.from(parent.context)
@@ -24,10 +28,6 @@ class GamesListAdapter : RecyclerView.Adapter<GamesListAdapter.GamesListViewHold
     holder.setData(listGames[position].name)
   }
 
-  fun setList(list: List<Game>) {
-    this.listGames = list
-    notifyDataSetChanged()
-  }
 
   inner class GamesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setData(username: String) {

@@ -11,4 +11,5 @@ interface LobbyRepository {
   fun onInitGame(game: Game, callback: UserListContract.InteractorOutput)
   fun joinGame(game: Game, callback: GameListContract.InteractorOutput)
   fun createGame(admin: User)
+  fun enterGame(game: Game, callback: GameListContract.InteractorOutput)
 }

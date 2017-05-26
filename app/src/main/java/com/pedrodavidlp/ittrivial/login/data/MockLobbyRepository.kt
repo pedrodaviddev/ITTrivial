@@ -9,6 +9,10 @@ import com.pedrodavidlp.ittrivial.login.domain.model.User
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 
 class MockLobbyRepository: LobbyRepository {
+  override fun enterGame(game: Game, callback: GameListContract.InteractorOutput) {
+
+  }
+
   override fun createGame(admin: User) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }

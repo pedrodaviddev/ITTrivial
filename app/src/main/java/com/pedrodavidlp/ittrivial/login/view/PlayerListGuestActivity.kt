@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
-import com.pedrodavidlp.ittrivial.login.data.MockLobbyRepository
 import com.pedrodavidlp.ittrivial.login.domain.model.User
 import com.pedrodavidlp.ittrivial.login.domain.usecase.GetUserList
 import com.pedrodavidlp.ittrivial.login.presenter.UserListPresenter
@@ -31,5 +30,9 @@ class PlayerListGuestActivity : AppCompatActivity(), UserListContract.View {
 
   override fun showError(message: String) {
 
+  }
+
+  override fun initUI() {
+    this.title = presenter.getCurrentGame().name
   }
 }
