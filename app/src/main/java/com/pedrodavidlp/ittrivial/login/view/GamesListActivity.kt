@@ -21,6 +21,7 @@ class GamesListActivity : AppCompatActivity(), GameListContract.View {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_games_list)
+    this.title = "Lista de partidas"
     gamesList.adapter = GamesListAdapter()
     gamesList.layoutManager = GridLayoutManager(applicationContext, 2)
     RecyclerListener.addTo(gamesList).setOnItemClickListener(object : RecyclerListener.OnItemClickListener {

@@ -26,27 +26,37 @@ class GamesListAdapter : RecyclerView.Adapter<GamesListAdapter.GamesListViewHold
   }
 
   override fun onBindViewHolder(holder: GamesListViewHolder, position: Int) {
-    holder.setData(listGames[position].name, position + 1)
+    val randomnums = listOf(1, 2, 3, 4, 5, 1, 2, 3, 4, 6, 5, 1, 6, 6, 6, 1, 3, 2)
+    holder.setData(listGames[position].name, randomnums[position])
   }
 
 
   inner class GamesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    var playersIcons =
+        listOf(itemView.user1, itemView.user2,
+            itemView.user3, itemView.user4,
+            itemView.user5, itemView.user6)
+
     fun setData(username: String, playerCount: Int) {
       itemView.gameName.text = username
-      itemView.numberPlayers.text = "$playerCount jugadores"
-      if (playerCount > 4) {
+      if (playerCount > 2) {
         itemView.numberPlayersBackground
             .background = ContextCompat.getDrawable(itemView.context, R.color.mediumCapacity)
         itemView.gameNameBackground
             .background = ContextCompat.getDrawable(itemView.context, R.color.mediumCapacityAlpha)
       }
 
-      if (playerCount > 7) {
+      if (playerCount > 4) {
         itemView.numberPlayersBackground
             .background = ContextCompat.getDrawable(itemView.context, R.color.littleCapacity)
         itemView.gameNameBackground
             .background = ContextCompat.getDrawable(itemView.context, R.color.littleCapacityAlpha)
       }
+      (0..playerCount - 1)
+          .forEach {
+            playersIcons[it]
+                .setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_user_blue))
+          }
 
     }
 
