@@ -4,21 +4,22 @@ import android.os.Handler
 import android.os.Looper
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
+import com.pedrodavidlp.ittrivial.login.contract.MenuContract
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.domain.model.User
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 
 class MockLobbyRepository: LobbyRepository {
+  override fun createGame(admin: User, callback: MenuContract.InteractorOutput) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
   override fun exitGame(game: Game, callback: UserListContract.InteractorOutput) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
   override fun enterGame(game: Game, callback: GameListContract.InteractorOutput) {
 
-  }
-
-  override fun createGame(admin: User) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
   override fun getGames(callback: GameListContract.InteractorOutput) {
@@ -44,9 +45,5 @@ class MockLobbyRepository: LobbyRepository {
 
   override fun onInitGame(game: Game, callback: UserListContract.InteractorOutput) {
     callback.onInitGame()
-  }
-
-  override fun joinGame(game: Game, callback: GameListContract.InteractorOutput) {
-    //mock dont do nothing
   }
 }

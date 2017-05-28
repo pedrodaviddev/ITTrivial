@@ -11,7 +11,9 @@ import com.pedrodavidlp.ittrivial.login.router.UserListRouter
 class UserListPresenter(val getList: GetUserList,
                         val exitGame: ExitGame,
                         val router: UserListRouter) : UserListContract.Presenter, UserListContract.InteractorOutput {
+
   lateinit private var vw: UserListContract.View
+
   override fun init() {
     vw.initUI()
     this.getPlayerList(this.getCurrentGame())
@@ -26,7 +28,7 @@ class UserListPresenter(val getList: GetUserList,
   }
 
   override fun onFetchUserListSuccess(list: List<User>) {
-   vw.onLoadList(list)
+    vw.onLoadList(list)
   }
 
   override fun onError() {

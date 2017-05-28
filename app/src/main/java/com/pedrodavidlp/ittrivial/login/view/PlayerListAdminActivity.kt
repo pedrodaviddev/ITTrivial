@@ -33,6 +33,7 @@ class PlayerListAdminActivity : AppCompatActivity(), UserListContract.View {
     presenter = UserListPresenter(GetUserList(FireLobbyRepository()), ExitGame(FireLobbyRepository()), UserListRouter(this))
     presenter.setView(this)
     presenter.init()
+    this.title = presenter.getCurrentGame().name
   }
 
   override fun onLoadList(list: List<User>) {
