@@ -26,8 +26,7 @@ class GamesListAdapter : RecyclerView.Adapter<GamesListAdapter.GamesListViewHold
   }
 
   override fun onBindViewHolder(holder: GamesListViewHolder, position: Int) {
-    val randomnums = listOf(1, 2, 3, 4, 5, 1, 2, 3, 4, 6, 5, 1, 6, 6, 6, 1, 3, 2)
-    holder.setData(listGames[position].name, randomnums[position])
+    holder.setData(listGames[position].name, listGames[position].numPlayers)
   }
 
 
@@ -51,6 +50,10 @@ class GamesListAdapter : RecyclerView.Adapter<GamesListAdapter.GamesListViewHold
             .background = ContextCompat.getDrawable(itemView.context, R.color.littleCapacity)
         itemView.gameNameBackground
             .background = ContextCompat.getDrawable(itemView.context, R.color.littleCapacityAlpha)
+      }
+      (0..5).forEach {
+        playersIcons[it]
+            .setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_account_circle_black_24dp))
       }
       (0..playerCount - 1)
           .forEach {

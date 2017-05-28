@@ -9,11 +9,9 @@ class RecyclerListener private constructor(private val mRecyclerView: RecyclerVi
   private val mAttachListener = object : RecyclerView.OnChildAttachStateChangeListener {
     override fun onChildViewAttachedToWindow(view: View) {
       view.setOnClickListener(mOnClickListener)
-
     }
 
     override fun onChildViewDetachedFromWindow(view: View) {
-
     }
   }
   lateinit var mOnItemClickListener: OnItemClickListener

@@ -14,7 +14,6 @@ import com.pedrodavidlp.ittrivial.login.domain.usecase.GetGameList
 import com.pedrodavidlp.ittrivial.login.presenter.GameListPresenter
 import com.pedrodavidlp.ittrivial.login.router.GameListRouter
 import kotlinx.android.synthetic.main.activity_games_list.*
-import org.jetbrains.anko.startActivity
 
 class GameListActivity : AppCompatActivity(), GameListContract.View {
   lateinit private var presenter: GameListPresenter
@@ -28,7 +27,9 @@ class GameListActivity : AppCompatActivity(), GameListContract.View {
 
     RecyclerListener.addTo(gamesList).setOnItemClickListener(object : RecyclerListener.OnItemClickListener {
       override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
-        presenter.enterGame(Game(((recyclerView.adapter) as GamesListAdapter).listGames[position].name))
+        RecyclerListener.removeFrom(recyclerView)
+        val game = (recyclerView.adapter as GamesListAdapter).listGames[position]
+        presenter.enterGame(game)
       }
     })
     presenter = GameListPresenter(GetGameList(FireLobbyRepository()), EnterGame(FireLobbyRepository()), GameListRouter(this))

@@ -19,11 +19,11 @@ class PlayerListGuestActivity : AppCompatActivity(), UserListContract.View {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_player_list_guest)
-//    adminPlayerList.adapter = UserListAdapter()
-//    adminPlayerList.layoutManager = LinearLayoutManager(applicationContext)
-//    presenter = UserListPresenter(GetUserList(FireLobbyRepository()), ExitGame(FireLobbyRepository()), UserListRouter(this))
-//    presenter.setView(this)
-//    presenter.init()
+    adminPlayerList.adapter = UserListAdapter()
+    adminPlayerList.layoutManager = LinearLayoutManager(applicationContext)
+    presenter = UserListPresenter(GetUserList(FireLobbyRepository()), ExitGame(FireLobbyRepository()), UserListRouter(this))
+    presenter.setView(this)
+    presenter.init()
   }
 
   override fun onLoadList(list: List<User>) {
@@ -36,10 +36,5 @@ class PlayerListGuestActivity : AppCompatActivity(), UserListContract.View {
 
   override fun initUI() {
     this.title = presenter.getCurrentGame().name
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    presenter.exitGame()
   }
 }

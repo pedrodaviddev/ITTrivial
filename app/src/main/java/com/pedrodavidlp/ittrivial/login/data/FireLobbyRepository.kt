@@ -47,13 +47,13 @@ class FireLobbyRepository : LobbyRepository {
           keys.add(it.key)
         }
         var name = selectRandomName()
-        while(keys.contains(name)){
+        while (keys.contains(name)) {
           name = selectRandomName()
         }
         ref.child("games").child(name).child("players").child("admin").setValue(admin)
         ref.child("games").child(name).child("numplayers").setValue(1)
         ref.child("games").child(name).child("started").setValue(0)
-        callback.onGameCreated(Game(name))
+        callback.onGameCreated(Game(name, 1))
       }
 
     })
@@ -70,7 +70,7 @@ class FireLobbyRepository : LobbyRepository {
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val gameList = ArrayList<Game>()
         dataSnapshot.children.forEach {
-          gameList.add(Game(it.key))
+          gameList.add(Game(it.key, it.child("players").childrenCount.toInt()))
         }
         callback.onFetchGameListSuccess(gameList)
       }
@@ -114,7 +114,7 @@ class FireLobbyRepository : LobbyRepository {
   }
 
   override fun enterGame(game: Game, callback: GameListContract.InteractorOutput) {
-    ref.child("games").child(game.name).child("numplayers").addValueEventListener(object : ValueEventListener {
+    ref.child("games").child(game.name).child("numplayers").addListenerForSingleValueEvent(object : ValueEventListener {
       override fun onCancelled(p0: DatabaseError) {
         callback.onError()
       }
