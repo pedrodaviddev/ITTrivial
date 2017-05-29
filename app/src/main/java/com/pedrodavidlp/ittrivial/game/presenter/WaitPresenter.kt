@@ -1,10 +1,8 @@
 package com.pedrodavidlp.ittrivial.game.presenter
 
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
-import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
-import com.pedrodavidlp.ittrivial.login.domain.model.User
 
 class WaitPresenter(val useCase: GetTurn) : WaitContract.Presenter, WaitContract.InteractorOutput {
   lateinit var v: WaitContract.View
@@ -18,7 +16,7 @@ class WaitPresenter(val useCase: GetTurn) : WaitContract.Presenter, WaitContract
   }
 
   override fun getTurn() {
-    useCase.getTurn(Game("mock"), this)
+
   }
 
   override fun onMyTurn() {

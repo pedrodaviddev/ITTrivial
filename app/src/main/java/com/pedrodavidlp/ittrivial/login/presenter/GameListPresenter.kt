@@ -1,16 +1,24 @@
 package com.pedrodavidlp.ittrivial.login.presenter
 
+import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
+import com.pedrodavidlp.ittrivial.login.domain.usecase.EnterGame
 import com.pedrodavidlp.ittrivial.login.domain.usecase.GetGameList
+import com.pedrodavidlp.ittrivial.login.router.GameListRouter
 
-class GameListPresenter(val useCase: GetGameList): GameListContract.Presenter, GameListContract.InteractorOutput {
+class GameListPresenter(private val gameList: GetGameList,
+                        private val enterGame: EnterGame,
+                        private val router: GameListRouter) :
+    GameListContract.Presenter,
+    GameListContract.InteractorOutput {
 
   lateinit var vw: GameListContract.View
 
   override fun init() {
-    useCase.getGameList(this)
+    gameList.getGameList(this)
   }
+
   override fun setView(view: GameListContract.View) {
     this.vw = view
   }
@@ -24,9 +32,15 @@ class GameListPresenter(val useCase: GetGameList): GameListContract.Presenter, G
   }
 
   override fun onJoinGame(game: Game) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    Session.game = game
+    router.goToPlayerGameList()
   }
+
   override fun onError() {
 
+  }
+
+  fun enterGame(game: Game) {
+    enterGame.enterGame(game, this)
   }
 }

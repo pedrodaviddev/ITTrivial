@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="bigCapacity">#689F38</color>
+    <color name="bigCapacityAlpha">#55689F38</color>
+    <color name="mediumCapacity">#FF8F00</color>
+    <color name="mediumCapacityAlpha">#55FF8F00</color>
+    <color name="littleCapacity">#D84315</color>
+    <color name="littleCapacityAlpha">#55D84315</color>
 </resources>

@@ -1,7 +1,6 @@
 package com.pedrodavidlp.ittrivial.game.presenter
 
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
-import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 
@@ -17,7 +16,7 @@ class GamePresenter(val repository: GameRepository) : GameContract.Presenter, Ga
   }
 
   override fun getScores() {
-    repository.getPlayersOnGame(Game("prueba"), this)
+
   }
 
   override fun onGetScores(playerList: List<Player>) {
