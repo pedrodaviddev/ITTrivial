@@ -52,7 +52,7 @@ class FireLobbyRepository : LobbyRepository {
         }
         ref.child("games").child(name).child("players").child("admin").setValue(admin)
         ref.child("games").child(name).child("numplayers").setValue(1)
-        ref.child("games").child(name).child("started").setValue(0)
+        ref.child("games").child(name).child("started").setValue(false)
         callback.onGameCreated(Game(name, 1))
       }
 
@@ -88,8 +88,24 @@ class FireLobbyRepository : LobbyRepository {
         dataSnapshot.children.forEach {
           userList.add(User(it.key))
         }
+        this@FireLobbyRepository.setListenerToStartGame(game, callback)
         callback.onFetchUserListSuccess(userList)
       }
+    })
+  }
+
+  private fun setListenerToStartGame(game: Game, callback: UserListContract.InteractorOutput) {
+    ref.child("games").child(game.name).child("started").addValueEventListener(object : ValueEventListener {
+
+      override fun onDataChange(dataSnapshot: DataSnapshot) {
+        if (dataSnapshot.getValue(Boolean::class.java))
+          callback.onInitGame()
+      }
+
+      override fun onCancelled(p0: DatabaseError?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+      }
+
     })
   }
 
@@ -103,10 +119,15 @@ class FireLobbyRepository : LobbyRepository {
         val random = Random()
         val numPlayers = dataSnapshot.getValue(Int::class.java)
         val num = random.nextInt(numPlayers - 1) + 1
-        ref.child("games").child(game.name).child("started").setValue(1)
+        ref.child("games").child(game.name).child("started").setValue(false)
         ref.child("games").child(game.name).child("turn").setValue(num)
       }
     })
+  }
+
+  override fun startGame(game: Game, callback: UserListContract.InteractorOutput) {
+    ref.child("games").child(game.name).child("started").setValue(true)
+    callback.onInitGame()
   }
 
   private fun selectRandomName(): String {

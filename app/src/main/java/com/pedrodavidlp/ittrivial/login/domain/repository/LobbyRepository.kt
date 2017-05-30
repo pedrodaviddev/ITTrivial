@@ -13,4 +13,5 @@ interface LobbyRepository {
   fun createGame(admin: User, callback: MenuContract.InteractorOutput)
   fun enterGame(game: Game, callback: GameListContract.InteractorOutput)
   fun exitGame(game: Game, callback: UserListContract.InteractorOutput)
+  fun startGame(game: Game, callback: UserListContract.InteractorOutput)
 }
