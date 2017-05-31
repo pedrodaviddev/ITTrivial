@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.game.view.GameActivity
+import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 import com.pedrodavidlp.ittrivial.login.domain.model.User

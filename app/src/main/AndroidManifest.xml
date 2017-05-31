@@ -10,16 +10,16 @@
         android:theme="@style/AppTheme">
         <activity android:name=".login.view.MenuActivity">
         </activity>
-        <activity android:name=".game.view.GameActivity">
+        <activity android:name=".game.view.activity.GameActivity">
         </activity>
         <activity android:name=".login.view.EnterGameActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".game.view.QuestionActivity">
+        <activity android:name=".game.view.activity.QuestionActivity">
         </activity>
         <activity android:name=".login.view.PlayerListAdminActivity">
         </activity>
@@ -27,7 +27,7 @@
         </activity>
         <activity android:name=".login.view.GameListActivity">
         </activity>
-        <activity android:name=".game.view.WaitActivity">
+        <activity android:name=".game.view.activity.WaitActivity">
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package com.pedrodavidlp.ittrivial.game.view
+package com.pedrodavidlp.ittrivial.game.view.activity
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -9,6 +9,7 @@ import com.pedrodavidlp.ittrivial.game.data.MockQuestionRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
 import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
+import com.pedrodavidlp.ittrivial.game.view.Category
 import kotlinx.android.synthetic.main.activity_question.*
 
 class QuestionActivity : AppCompatActivity(), QuestionContract.View {
@@ -17,14 +18,15 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_question)
-
+    this.setCategoryUI(intent.getSerializableExtra("Category") as Category)
     presenter = QuestionPresenter(MockQuestionRepository(), QuestionRouter(this))
     presenter.setView(this)
     presenter.init()
   }
 
+
   override fun showError(message: String) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
   }
 
   override fun onLoadQuestion(question: Question) {
@@ -54,6 +56,31 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       presenter.fail()
     }
 
+  }
+
+  private fun setCategoryUI(category: Category) {
+    when (category) {
+      Category.HARDWARE -> {
+        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.hardwareDark))
+        title = "Hardware"
+      }
+      Category.ENTERPRISE -> {
+        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.enterpriseDark))
+        title = "Empresa"
+      }
+      Category.HISTORY -> {
+        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.historyDark))
+        title = "Historia"
+      }
+      Category.NETWORK -> {
+        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.networkDark))
+        title = "Redes"
+      }
+      Category.SOFTWARE -> {
+        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.softwareDark))
+        title = "Software"
+      }
+    }
   }
 
   private fun removeAllListeners() {

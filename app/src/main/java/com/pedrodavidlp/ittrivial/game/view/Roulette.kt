@@ -9,13 +9,15 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
+import com.pedrodavidlp.ittrivial.game.view.Category.*
+
 class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, attrs) {
   interface OnCategorySelected {
-    fun onCategorySelected()
+    fun onCategorySelected(category: Category)
   }
 
   lateinit private var listener: OnCategorySelected
-  private var current: String = ""
+  lateinit private var current: Category
 
   lateinit private var rChangeListener: RouletteChangeListener
 
@@ -48,7 +50,7 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
         rChangeListener.onSelectionChange(current)
         rotation += auxAngle
         this@Roulette.setOnTouchListener(RouletteTouchListener())
-        listener.onCategorySelected()
+        listener.onCategorySelected(current)
       }
 
       override fun onAnimationStart(p0: Animation?) {
@@ -60,11 +62,11 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
   }
 
   private fun setQuadrant(angle: Float) {
-    current = if (angle < 72)  "Hardware"
-    else if (angle < 144) "Network"
-    else if (angle < 216)  "Software"
-    else if (angle < 288)  "Enterprise"
-    else "History"
+    current = if (angle < 72)  HARDWARE
+    else if (angle < 144) NETWORK
+    else if (angle < 216)  SOFTWARE
+    else if (angle < 288)  ENTERPRISE
+    else HISTORY
   }
 
   private fun generateRotationAnge(): Float {
@@ -77,7 +79,7 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
     return 360.0f
   }
   interface RouletteChangeListener {
-    fun onSelectionChange(selectedPosition: String)
+    fun onSelectionChange(category: Category)
 
   }
   private inner class RouletteTouchListener : OnTouchListener {
@@ -87,10 +89,6 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
       return true
     }
 
-  }
-
-  fun getCurrentPos(): String {
-    return current
   }
 
   fun setOnCategorySelectedListener(listener: OnCategorySelected) {
