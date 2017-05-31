@@ -11,13 +11,13 @@
         <activity android:name=".login.view.MenuActivity">
         </activity>
         <activity android:name=".game.view.activity.GameActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".login.view.EnterGameActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".game.view.activity.QuestionActivity">
         </activity>

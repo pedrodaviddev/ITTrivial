@@ -5,7 +5,7 @@ import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
-import com.pedrodavidlp.ittrivial.game.view.*
+import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.Category.*
 import com.pedrodavidlp.ittrivial.game.view.activity.transition.*
 

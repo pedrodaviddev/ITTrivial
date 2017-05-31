@@ -1,6 +1,5 @@
 package com.pedrodavidlp.ittrivial.game.view.activity.transition
 
-import android.opengl.Visibility
 import android.support.animation.DynamicAnimation
 import android.support.animation.SpringAnimation
 import android.support.animation.SpringForce

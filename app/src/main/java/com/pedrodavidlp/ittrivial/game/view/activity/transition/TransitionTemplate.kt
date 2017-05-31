@@ -22,7 +22,7 @@ abstract class TransitionTemplate(val image: ImageView, val router: GameRouter) 
   protected open fun animate() {
     val animation = AlphaAnimation(0.0f, 1.0f)
     animation.duration = 2000
-    animation.setAnimationListener(object : Animation.AnimationListener{
+    animation.setAnimationListener(object : Animation.AnimationListener {
       override fun onAnimationRepeat(p0: Animation?) {}
 
       override fun onAnimationEnd(p0: Animation?) {
