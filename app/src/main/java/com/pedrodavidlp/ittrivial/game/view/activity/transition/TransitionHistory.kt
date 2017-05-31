@@ -1,22 +1,18 @@
-package com.pedrodavidlp.ittrivial.game.view
+package com.pedrodavidlp.ittrivial.game.view.activity.transition
 
-import android.animation.ObjectAnimator
-import android.content.Context
 import android.os.Handler
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
-import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
-import com.pedrodavidlp.ittrivial.game.view.Category.HISTORY
+import com.pedrodavidlp.ittrivial.game.view.Category
 
 class TransitionHistory(image: ImageView, router: GameRouter) : TransitionTemplate(image, router) {
 
   override fun setImage() {
-    image.setImageResource(R.drawable.ic_history)
+    image.setImageResource(com.pedrodavidlp.ittrivial.R.drawable.ic_history)
   }
 
   override fun animate() {
@@ -24,7 +20,7 @@ class TransitionHistory(image: ImageView, router: GameRouter) : TransitionTempla
     val animation = RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f)
     animation.duration = 2000
     image.startAnimation(animation)
-    animation.setAnimationListener(object : Animation.AnimationListener{
+    animation.setAnimationListener(object : Animation.AnimationListener {
       override fun onAnimationRepeat(animation: Animation?) {}
 
       override fun onAnimationEnd(animation: Animation?) {
@@ -39,7 +35,7 @@ class TransitionHistory(image: ImageView, router: GameRouter) : TransitionTempla
   }
 
   override fun goToQuestion() {
-    router.goToQuestion(HISTORY)
+    router.goToQuestion(Category.HISTORY)
   }
 
 }

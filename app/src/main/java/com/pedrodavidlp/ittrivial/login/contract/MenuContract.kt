@@ -1,7 +1,11 @@
 package com.pedrodavidlp.ittrivial.login.contract
 
+import com.pedrodavidlp.ittrivial.game.domain.model.Game
+
 class MenuContract {
   interface View {
+    fun setWelcome(username: String)
+
     fun showError(message: String)
   }
 
@@ -12,7 +16,12 @@ class MenuContract {
   }
 
   interface Router {
-    fun goToPlayerList()
-    fun goToGame()
+    fun createGame()
+    fun searchGames()
   }
+
+  interface InteractorOutput {
+    fun onGameCreated(game: Game)
+  }
+
 }

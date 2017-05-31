@@ -13,4 +13,10 @@
     <color name="hardwareDark">#4a148c</color>
     <color name="software">#f44336</color>
     <color name="softwareDark">#b71c1c</color>
+    <color name="bigCapacity">#689F38</color>
+    <color name="bigCapacityAlpha">#55689F38</color>
+    <color name="mediumCapacity">#FF8F00</color>
+    <color name="mediumCapacityAlpha">#55FF8F00</color>
+    <color name="littleCapacity">#D84315</color>
+    <color name="littleCapacityAlpha">#55D84315</color>
 </resources>

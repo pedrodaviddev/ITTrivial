@@ -11,13 +11,10 @@ class EnterGameContract {
     fun onLogin(username: String)
   }
 
-  interface Interactor {
-    fun login(username: String)
-  }
-
   interface InteractorOutput {
     fun onLoginSuccess()
     fun onLoginError()
+    fun onEnterGame()
   }
 
   interface Router {
