@@ -28,4 +28,5 @@ class WaitActivity : android.support.v7.app.AppCompatActivity(), WaitContract.Vi
     waitYourTurnText.text = "ES TU TURNO!!!!"
     router.goToGame()
   }
+
 }
