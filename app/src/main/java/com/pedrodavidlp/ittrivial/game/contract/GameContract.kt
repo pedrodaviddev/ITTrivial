@@ -1,6 +1,7 @@
 package com.pedrodavidlp.ittrivial.game.contract
 
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
+import com.pedrodavidlp.ittrivial.game.view.Category
 
 class GameContract {
   interface View {
@@ -24,7 +25,8 @@ class GameContract {
   }
 
   interface Router {
-    fun goToQuestion()
+    fun goToQuestion(category: Category)
     fun goToMenu()
+    fun goToWait()
   }
 }

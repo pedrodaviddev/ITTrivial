@@ -7,7 +7,6 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
 import com.pedrodavidlp.ittrivial.login.contract.MenuContract
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
-import com.pedrodavidlp.ittrivial.login.domain.model.User
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 import java.util.*
 import kotlin.collections.ArrayList
@@ -35,7 +34,7 @@ class FireLobbyRepository : LobbyRepository {
   val firebase: FirebaseDatabase = FirebaseDatabase.getInstance()
   val ref: DatabaseReference = firebase.reference
 
-  override fun createGame(admin: User, callback: MenuContract.InteractorOutput) {
+  override fun createGame(admin: Player, callback: MenuContract.InteractorOutput) {
     ref.child("games").addListenerForSingleValueEvent(object : ValueEventListener {
       override fun onCancelled(databaseError: DatabaseError) {
         TODO(databaseError.message)
@@ -50,7 +49,7 @@ class FireLobbyRepository : LobbyRepository {
         while (keys.contains(name)) {
           name = selectRandomName()
         }
-        ref.child("games").child(name).child("players").child("admin").setValue(admin)
+        ref.child("games").child(name).child("players").child(1.toString()).setValue(admin)
         ref.child("games").child(name).child("numplayers").setValue(1)
         ref.child("games").child(name).child("started").setValue(false)
         callback.onGameCreated(Game(name, 1))
@@ -84,9 +83,13 @@ class FireLobbyRepository : LobbyRepository {
       }
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
-        val userList = ArrayList<User>()
-        dataSnapshot.children.forEach {
-          userList.add(User(it.key))
+        val userList = ArrayList<Player>()
+        if(dataSnapshot.childrenCount.toInt() == 1){
+          userList.add(dataSnapshot.child("1").getValue(Player::class.java))
+        } else {
+          dataSnapshot.children.forEachIndexed { index, dataSnapshot ->
+            userList.add(dataSnapshot.child((index + 1).toString()).getValue(Player::class.java))
+          }
         }
         this@FireLobbyRepository.setListenerToStartGame(game, callback)
         callback.onFetchUserListSuccess(userList)
@@ -95,18 +98,30 @@ class FireLobbyRepository : LobbyRepository {
   }
 
   private fun setListenerToStartGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).child("started").addValueEventListener(object : ValueEventListener {
+    ref.child("games").child(game.name).addValueEventListener(object : ValueEventListener {
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
-        if (dataSnapshot.getValue(Boolean::class.java))
-          callback.onInitGame()
+        if (dataSnapshot.child("started").getValue(Boolean::class.java)) {
+          val turn = dataSnapshot.child("players").childrenCount
+          if (isMyTurn(dataSnapshot, turn)) {
+            callback.onInitAndMyTurn()
+          } else {
+            callback.onInitAndWait()
+          }
+        }
       }
 
       override fun onCancelled(p0: DatabaseError?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
       }
 
     })
+  }
+
+  private fun isMyTurn(dataSnapshot: DataSnapshot, turn: Long): Boolean {
+    return dataSnapshot.child("players")
+        .child(turn.toString())
+        .child("nickname")
+        .getValue(String::class.java) == Session.username
   }
 
   override fun onInitGame(game: Game, callback: UserListContract.InteractorOutput) {
@@ -126,8 +141,25 @@ class FireLobbyRepository : LobbyRepository {
   }
 
   override fun startGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).child("started").setValue(true)
-    callback.onInitGame()
+    ref.child("games").child(game.name).child("numplayers")
+        .addListenerForSingleValueEvent(object : ValueEventListener {
+          override fun onDataChange(dataSnapshot: DataSnapshot) {
+            ref.child("games")
+                .child(game.name).child("turn")
+                .setValue(this@FireLobbyRepository
+                    .selectRandomTurn(dataSnapshot.childrenCount.toInt()))
+            ref.child("games").child(game.name).child("started").setValue(true)
+            callback.onInitAndMyTurn()
+          }
+
+          override fun onCancelled(p0: DatabaseError?) {
+            callback.onError()
+          }
+        })
+  }
+
+  private fun selectRandomTurn(numberPlayers: Int): Int {
+    return Random().nextInt(numberPlayers)
   }
 
   private fun selectRandomName(): String {
@@ -142,8 +174,10 @@ class FireLobbyRepository : LobbyRepository {
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val numPlayers = dataSnapshot.getValue(Int::class.java)
-        ref.child("games").child(game.name).child("numplayers").setValue(numPlayers + 1)
-        ref.child("games").child(game.name).child("players").child(Session.username).setValue(Player(Session.username))
+        ref.child("games").child(game.name).child("numplayers")
+            .setValue(numPlayers + 1)
+        ref.child("games").child(game.name).child("players")
+            .child((numPlayers + 1).toString()).setValue(Player(Session.username))
         callback.onJoinGame(game)
       }
     })

@@ -2,8 +2,8 @@ package com.pedrodavidlp.ittrivial.login.presenter
 
 import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
+import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.contract.MenuContract
-import com.pedrodavidlp.ittrivial.login.domain.model.User
 import com.pedrodavidlp.ittrivial.login.domain.usecase.CreateGame
 import com.pedrodavidlp.ittrivial.login.router.MenuRouter
 
@@ -33,7 +33,7 @@ class MenuPresenter(private val router: MenuRouter, private val useCase: CreateG
   }
 
   fun createGame() {
-    useCase.createGame(User(Session.username), this)
+    useCase.createGame(Player(Session.username), this)
   }
 
   private fun setWelcome() {
