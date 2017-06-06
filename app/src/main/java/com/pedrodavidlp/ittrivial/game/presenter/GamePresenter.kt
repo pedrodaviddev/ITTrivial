@@ -13,6 +13,7 @@ import com.pedrodavidlp.ittrivial.game.view.activity.transition.*
 
 class GamePresenter(val repository: GameRepository,
                     val router: GameRouter) : GameContract.Presenter, GameContract.InteractorOutput {
+
   lateinit var vw: GameContract.View
 
   override fun init() {

@@ -21,6 +21,7 @@ class QuestionContract {
   interface InteractorOutput {
     fun onQuestionLoaded(question: Question)
     fun onError()
+    fun loseTurn()
   }
 
   interface Router {

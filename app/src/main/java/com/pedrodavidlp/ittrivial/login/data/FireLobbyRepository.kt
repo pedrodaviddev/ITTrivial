@@ -13,7 +13,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class FireLobbyRepository : LobbyRepository {
-  val playerNumber: Array<String> = arrayOf("I", "II", "III", "IV", "V", "VI")
+  companion object {
+    val playerNumber: Array<String> = arrayOf("I", "II", "III", "IV", "V", "VI")
+  }
   val randomNames: Array<String> = arrayOf("Ailurophile", "Assemblage",
       "Becoming", "Beleaguer", "Brood", "Bucolic", "Bungalow", "Chatoyant", "Comely",
       "Conflate", "Cynosure", "Dalliance", "Demesne", "Dominion", "Demure", "Denouement", "Desuetude",
