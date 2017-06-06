@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
+import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.data.MockQuestionRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
@@ -19,7 +20,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_question)
     this.setCategoryUI(intent.getSerializableExtra("Category") as Category)
-    presenter = QuestionPresenter(MockQuestionRepository(), QuestionRouter(this))
+    presenter = QuestionPresenter(MockQuestionRepository(), FireGameRepository(), QuestionRouter(this))
     presenter.setView(this)
     presenter.init()
   }

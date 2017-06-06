@@ -1,12 +1,17 @@
 package com.pedrodavidlp.ittrivial.game.presenter
 
+import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
+import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.domain.repository.QuestionRepository
 import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
 
-class QuestionPresenter(val repository: QuestionRepository, val router: QuestionRouter) :
+class QuestionPresenter(val question: QuestionRepository,
+                        val game: GameRepository,
+                        val router: QuestionRouter) :
     QuestionContract.Presenter, QuestionContract.InteractorOutput {
+
   lateinit var viper: QuestionContract.View
 
   override fun init() {
@@ -18,7 +23,7 @@ class QuestionPresenter(val repository: QuestionRepository, val router: Question
   }
 
   override fun getQuestion() {
-    repository.getQuestion("gola",this)
+    question.getQuestion("gola", this)
   }
 
   override fun onError() {
@@ -30,10 +35,14 @@ class QuestionPresenter(val repository: QuestionRepository, val router: Question
   }
 
   fun fail() {
-    router.goToWait()
+    game.loseTurnInGame(Session.game, this)
   }
 
   fun hit() {
     router.goToGame()
+  }
+
+  override fun loseTurn() {
+    router.goToWait()
   }
 }
