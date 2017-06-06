@@ -50,7 +50,7 @@ class GamePresenter(val repository: GameRepository,
   }
 
   fun manageTurn(isMyTurn: Boolean) {
-    if(!isMyTurn)
+    if (!isMyTurn)
       router.goToWait()
   }
 }

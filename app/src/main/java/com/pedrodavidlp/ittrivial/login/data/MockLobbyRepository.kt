@@ -43,11 +43,7 @@ class MockLobbyRepository : LobbyRepository {
       callback.onFetchUserListSuccess(listOf(Player("franlo"), Player("cotel"), Player("nhemesy")))
     }, 15000)
     Handler(Looper.getMainLooper()).postDelayed({
-      this.onInitGame(Game("hola", 2), callback)
-    }, 17000)
-  }
 
-  override fun onInitGame(game: Game, callback: UserListContract.InteractorOutput) {
-    callback.onInitAndMyTurn()
+    }, 17000)
   }
 }
