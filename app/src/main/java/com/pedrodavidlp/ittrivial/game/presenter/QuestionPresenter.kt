@@ -6,6 +6,7 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.domain.repository.QuestionRepository
 import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
+import com.pedrodavidlp.ittrivial.game.view.Category
 
 class QuestionPresenter(val question: QuestionRepository,
                         val game: GameRepository,
@@ -14,16 +15,16 @@ class QuestionPresenter(val question: QuestionRepository,
 
   lateinit var viper: QuestionContract.View
 
-  override fun init() {
-    this.getQuestion()
+  override fun init(category: Category) {
+    this.getQuestion(category)
   }
 
   override fun setView(view: QuestionContract.View) {
     this.viper = view
   }
 
-  override fun getQuestion() {
-    question.getQuestion("gola", this)
+  override fun getQuestion(category: Category) {
+    question.getQuestion(category, this)
   }
 
   override fun onError() {
