@@ -5,8 +5,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
+import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.data.FireQuestionRepository
-import com.pedrodavidlp.ittrivial.game.data.MockQuestionRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
 import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
@@ -20,12 +20,10 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_question)
-    val cat = intent.getSerializableExtra("Category") as Category
-    this.setCategoryUI(cat)
-    presenter = QuestionPresenter(FireQuestionRepository(), QuestionRouter(this))
-    presenter.getQuestion(cat)
+    val category = intent.getSerializableExtra("Category") as Category
+    presenter = QuestionPresenter(FireQuestionRepository(), FireGameRepository(), QuestionRouter(this))
     presenter.setView(this)
-    presenter.init()
+    presenter.init(category)
   }
 
 
@@ -36,12 +34,12 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
   override fun onLoadQuestion(question: Question) {
     questionText.text = question.question
     val random = Random()
-    val position = random.nextInt(3)+1
+    val position = random.nextInt(3) + 1
     if (position == 1) {
       first.text = question.answer
-      second.text = question.wAns1
-      third.text = question.wAns2
-      fourth.text = question.wAns3
+      second.text = question.wans1
+      third.text = question.wans2
+      fourth.text = question.wans3
 
       first.setOnClickListener {
         removeAllListeners()
@@ -64,11 +62,11 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
         presenter.fail()
       }
     }
-    if(position == 2) {
-      first.text = question.wAns1
+    if (position == 2) {
+      first.text = question.wans1
       second.text = question.answer
-      third.text = question.wAns2
-      fourth.text = question.wAns3
+      third.text = question.wans2
+      fourth.text = question.wans3
 
       first.setOnClickListener {
         removeAllListeners()
@@ -91,11 +89,11 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
         presenter.fail()
       }
     }
-    if(position == 3){
-      first.text = question.wAns1
-      second.text = question.wAns2
+    if (position == 3) {
+      first.text = question.wans1
+      second.text = question.wans2
       third.text = question.answer
-      fourth.text = question.wAns3
+      fourth.text = question.wans3
 
       first.setOnClickListener {
         removeAllListeners()
@@ -118,10 +116,10 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
         presenter.fail()
       }
     }
-    if(position == 4){
-      first.text = question.wAns1
-      second.text = question.wAns2
-      third.text = question.wAns3
+    if (position == 4) {
+      first.text = question.wans1
+      second.text = question.wans2
+      third.text = question.wans3
       fourth.text = question.answer
 
       first.setOnClickListener {

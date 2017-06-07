@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
-import com.pedrodavidlp.ittrivial.login.domain.model.User
 import kotlinx.android.synthetic.main.items_scores_list.view.*
 
 class ScoreListAdapter : RecyclerView.Adapter<ScoreListAdapter.ScoreListViewHolder>() {

@@ -1,3 +1,7 @@
 package com.pedrodavidlp.ittrivial.game.domain.model
 
-data class Question(val question: String, val answer: String, val wAns1: String, val wAns2: String, val wAns3: String)
+data class Question(val question: String = "No question",
+                    val answer: String = "Failed",
+                    val wans1: String = "Failed",
+                    val wans2: String = "Failed",
+                    val wans3: String = "Failed")

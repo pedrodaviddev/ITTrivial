@@ -1,5 +1,6 @@
 package com.pedrodavidlp.ittrivial.game.presenter
 
+import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
@@ -16,7 +17,7 @@ class WaitPresenter(val useCase: GetTurn) : WaitContract.Presenter, WaitContract
   }
 
   override fun getTurn() {
-
+    useCase.getTurn(Session.game, this)
   }
 
   override fun onMyTurn() {

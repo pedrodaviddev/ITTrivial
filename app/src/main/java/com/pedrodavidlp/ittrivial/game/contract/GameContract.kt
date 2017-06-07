@@ -27,5 +27,6 @@ class GameContract {
   interface Router {
     fun goToQuestion(category: Category)
     fun goToMenu()
+    fun goToWait()
   }
 }

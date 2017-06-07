@@ -15,7 +15,7 @@ class FireQuestionRepository: QuestionRepository {
   val questionList = ArrayList<Question>()
 
   override fun getQuestion(category: Category, callback: QuestionContract.InteractorOutput) {  // To change: category is a Category, not a String.
-    ref.child("questions").child(category.name).addValueEventListener(object : ValueEventListener{
+    ref.child("questions").child(category.name.toLowerCase()).addValueEventListener(object : ValueEventListener{
       override fun onCancelled(p0: DatabaseError?) {
         callback.onError()
       }
@@ -23,10 +23,10 @@ class FireQuestionRepository: QuestionRepository {
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val random = Random()
         val numQuestions = dataSnapshot.childrenCount.toInt()
-        var num = random.nextInt(numQuestions - 1)+1
+        var num = random.nextInt(numQuestions)+1
         var question = dataSnapshot.child("q$num").getValue(Question::class.java)
         while (question in questionList) {
-          num = random.nextInt(numQuestions - 1)+1
+          num = random.nextInt(numQuestions)+1
           question = dataSnapshot.child("q$num").getValue(Question::class.java)
         }
         questionList.add(question as Question)

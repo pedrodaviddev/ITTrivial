@@ -10,7 +10,7 @@ class QuestionContract {
   }
 
   interface Presenter {
-    fun init()
+    fun init(category: Category)
     fun setView(view: View)
     fun getQuestion(category: Category)
   }
@@ -22,6 +22,7 @@ class QuestionContract {
   interface InteractorOutput {
     fun onQuestionLoaded(question: Question)
     fun onError()
+    fun loseTurn()
   }
 
   interface Router {
