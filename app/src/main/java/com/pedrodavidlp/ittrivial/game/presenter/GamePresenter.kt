@@ -54,4 +54,8 @@ class GamePresenter(val repository: GameRepository,
     if (!isMyTurn)
       router.goToWait()
   }
+
+  fun leaveGame(){
+
+  }
 }

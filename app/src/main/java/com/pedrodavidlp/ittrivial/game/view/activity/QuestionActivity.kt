@@ -184,9 +184,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       yesButton {
         //TODO
       }
-      noButton {
-        //TODO
-      }
+      noButton {}
     }.show()
   }
 

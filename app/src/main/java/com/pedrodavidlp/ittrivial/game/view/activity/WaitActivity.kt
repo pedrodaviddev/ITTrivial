@@ -41,9 +41,7 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
       yesButton {
         //TODO
       }
-      noButton {
-        //TODO
-      }
+      noButton {}
     }.show()
   }
 }

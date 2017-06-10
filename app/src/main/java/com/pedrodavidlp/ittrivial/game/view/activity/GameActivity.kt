@@ -62,9 +62,7 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
       yesButton {
         //TODO
       }
-      noButton {
-        //TODO
-      }
+      noButton {}
     }.show()
   }
 }
