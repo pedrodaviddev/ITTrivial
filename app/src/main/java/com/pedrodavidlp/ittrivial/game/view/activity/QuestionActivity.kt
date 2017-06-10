@@ -12,6 +12,7 @@ import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
 import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import kotlinx.android.synthetic.main.activity_question.*
+import org.jetbrains.anko.alert
 import java.util.*
 
 class QuestionActivity : AppCompatActivity(), QuestionContract.View {
@@ -177,5 +178,16 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
     fourth.setOnClickListener(null)
   }
 
+  override fun onBackPressed() {
+    alert("Are you sure to leave the game?"){
+      title("Exit")
+      yesButton {
+        //TODO
+      }
+      noButton {
+        //TODO
+      }
+    }.show()
+  }
 
 }

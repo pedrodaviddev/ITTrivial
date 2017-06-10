@@ -14,6 +14,7 @@ import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.Roulette
 import com.pedrodavidlp.ittrivial.login.view.ScoreListAdapter
 import kotlinx.android.synthetic.main.activity_match.*
+import org.jetbrains.anko.alert
 
 class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategorySelected {
 
@@ -53,5 +54,17 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
 
   override fun onCategorySelected(category: Category) {
     presenter.goToQuestion(category, transitionImage)
+  }
+
+  override fun onBackPressed() {
+    alert("Are you sure to leave the game?"){
+      title("Exit")
+      yesButton {
+        //TODO
+      }
+      noButton {
+        //TODO
+      }
+    }.show()
   }
 }

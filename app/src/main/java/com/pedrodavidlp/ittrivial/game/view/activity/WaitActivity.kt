@@ -11,6 +11,7 @@ import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
 import com.pedrodavidlp.ittrivial.game.presenter.WaitPresenter
 import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import kotlinx.android.synthetic.main.activity_wait.*
+import org.jetbrains.anko.alert
 
 class WaitActivity : AppCompatActivity(), WaitContract.View {
   lateinit var presenter: WaitPresenter
@@ -32,5 +33,17 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
   override fun myTurn() {
     waitYourTurnText.text = "ES TU TURNO!!!!"
     router.goToGame()
+  }
+
+  override fun onBackPressed() {
+    alert("Are you sure to leave the game?"){
+      title("Exit")
+      yesButton {
+        //TODO
+      }
+      noButton {
+        //TODO
+      }
+    }.show()
   }
 }
