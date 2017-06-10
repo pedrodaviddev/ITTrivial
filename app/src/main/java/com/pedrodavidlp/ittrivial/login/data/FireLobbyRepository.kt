@@ -55,7 +55,7 @@ class FireLobbyRepository : LobbyRepository {
         ref.child("games").child(name).child("players").child(playerNumber[0]).setValue(admin)
         ref.child("games").child(name).child("numplayers").setValue(1)
         ref.child("games").child(name).child("started").setValue(false)
-        callback.onGameCreated(Game(name, 1))
+        callback.onGameCreated(Game(name, 1, false))
       }
 
     })
@@ -72,7 +72,10 @@ class FireLobbyRepository : LobbyRepository {
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val gameList = ArrayList<Game>()
         dataSnapshot.children.forEach {
-          gameList.add(Game(it.key, it.child("players").childrenCount.toInt()))
+          gameList.add(
+              Game(it.key,
+                  it.child("players").childrenCount.toInt(),
+                  it.child("started").getValue(Boolean::class.java)))
         }
         callback.onFetchGameListSuccess(gameList)
       }

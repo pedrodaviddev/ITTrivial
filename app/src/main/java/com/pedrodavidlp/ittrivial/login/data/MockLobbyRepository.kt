@@ -27,10 +27,10 @@ class MockLobbyRepository : LobbyRepository {
   }
 
   override fun getGames(callback: GameListContract.InteractorOutput) {
-    callback.onFetchGameListSuccess(listOf(Game("Solo hay una partida", 4)))
+    callback.onFetchGameListSuccess(listOf(Game("Solo hay una partida", 4, false)))
     Handler(Looper.getMainLooper()).postDelayed({
-      callback.onFetchGameListSuccess(listOf(Game("Eyy compañeras", 5),
-          Game("Hola prhema", 2), Game("Como estais locos", 1)))
+      callback.onFetchGameListSuccess(listOf(Game("Eyy compañeras", 5, false),
+          Game("Hola prhema", 2, false), Game("Como estais locos", 1, false)))
     }, 15000)
   }
 
