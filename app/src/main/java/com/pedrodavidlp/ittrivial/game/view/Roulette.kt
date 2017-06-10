@@ -62,10 +62,10 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
   }
 
   private fun setQuadrant(angle: Float) {
-    current = if (angle < 72)  HARDWARE
+    current = if (angle < 72) HARDWARE
     else if (angle < 144) NETWORK
-    else if (angle < 216)  SOFTWARE
-    else if (angle < 288)  ENTERPRISE
+    else if (angle < 216) SOFTWARE
+    else if (angle < 288) ENTERPRISE
     else HISTORY
   }
 

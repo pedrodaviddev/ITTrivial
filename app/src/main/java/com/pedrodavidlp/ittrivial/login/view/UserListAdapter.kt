@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
-import com.pedrodavidlp.ittrivial.login.domain.model.User
 import kotlinx.android.synthetic.main.items_player_list.view.*
 
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>(){
-  private var listUsers: List<User> = ArrayList()
+  private var listUsers: List<Player> = ArrayList()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListViewHolder =
       UserListViewHolder(LayoutInflater.from(parent.context)
@@ -25,7 +24,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
   }
 
 
-  fun setList(list: List<User>) {
+  fun setList(list: List<Player>) {
     this.listUsers = list
     notifyDataSetChanged()
   }

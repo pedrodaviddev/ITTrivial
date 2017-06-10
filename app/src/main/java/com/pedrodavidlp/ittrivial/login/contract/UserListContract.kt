@@ -1,13 +1,13 @@
 package com.pedrodavidlp.ittrivial.login.contract
 
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
-import com.pedrodavidlp.ittrivial.login.domain.model.User
+import com.pedrodavidlp.ittrivial.game.domain.model.Player
 
 class UserListContract {
 
   interface View {
     fun showError(message: String)
-    fun onLoadList(list: List<User>)
+    fun onLoadList(list: List<Player>)
     fun initUI()
   }
 
@@ -21,12 +21,13 @@ class UserListContract {
   }
 
   interface InteractorOutput {
-    fun onFetchUserListSuccess(list: List<User>)
+    fun onFetchUserListSuccess(list: List<Player>)
     fun onError()
-    fun onInitGame()
+    fun onInitAndMyTurn()
+    fun onInitAndWait()
   }
 
   interface Router {
-    fun goToGameActivity()
+    fun goToGame(myTurn: Boolean)
   }
 }

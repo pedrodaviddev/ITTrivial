@@ -24,6 +24,10 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
     setContentView(R.layout.activity_match)
     presenter = GamePresenter(MockGameRepository(), GameRouter(this))
     presenter.setView(this)
+    val a = intent.extras
+    val b = intent.getBooleanExtra("a", false)
+    val c = intent.getBooleanExtra("a", true)
+    presenter.manageTurn(intent.getBooleanExtra("a", false))
     presenter.init()
   }
 

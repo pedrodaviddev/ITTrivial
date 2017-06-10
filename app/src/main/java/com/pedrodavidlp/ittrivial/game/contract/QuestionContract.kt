@@ -1,17 +1,19 @@
 package com.pedrodavidlp.ittrivial.game.contract
 
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
+import com.pedrodavidlp.ittrivial.game.view.Category
 
 class QuestionContract {
   interface View {
     fun showError(message: String)
     fun onLoadQuestion(question: Question)
+    fun stopCounter()
   }
 
   interface Presenter {
-    fun init()
+    fun init(category: Category)
     fun setView(view: View)
-    fun getQuestion()
+    fun getQuestion(category: Category)
   }
 
   interface Interactor {
@@ -21,6 +23,7 @@ class QuestionContract {
   interface InteractorOutput {
     fun onQuestionLoaded(question: Question)
     fun onError()
+    fun loseTurn()
   }
 
   interface Router {
