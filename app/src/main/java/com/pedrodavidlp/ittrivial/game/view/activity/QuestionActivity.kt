@@ -1,5 +1,6 @@
 package com.pedrodavidlp.ittrivial.game.view.activity
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -13,6 +14,7 @@ import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import kotlinx.android.synthetic.main.activity_question.*
 import java.util.*
+import kotlin.concurrent.timerTask
 
 class QuestionActivity : AppCompatActivity(), QuestionContract.View {
   lateinit private var presenter: QuestionPresenter
@@ -21,6 +23,8 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_question)
     val category = intent.getSerializableExtra("Category") as Category
+    timeIndicator.max = 200
+    setCategoryUI(category)
     presenter = QuestionPresenter(FireQuestionRepository(), FireGameRepository(), QuestionRouter(this))
     presenter.setView(this)
     presenter.init(category)
@@ -32,6 +36,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
   }
 
   override fun onLoadQuestion(question: Question) {
+    startCountdown()
     questionText.text = question.question
     val random = Random()
     val position = random.nextInt(3) + 1
@@ -145,29 +150,54 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
     }
   }
 
+  private fun startCountdown() {
+    timeIndicator.progress = 200
+    Timer().scheduleAtFixedRate(timerTask {
+      if (timeIndicator.progress > 0) {
+        timeIndicator.progress = timeIndicator.progress - 1
+      } else {
+        this@QuestionActivity.presenter.fail()
+      }
+    }, 0, 50)
+  }
+
   private fun setCategoryUI(category: Category) {
     when (category) {
       Category.HARDWARE -> {
         container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.hardwareDark))
         title = "Hardware"
+        timeIndicator.progressDrawable.setColorFilter(ContextCompat.getColor(applicationContext, R.color.hardware),
+            PorterDuff.Mode.SRC_IN)
       }
       Category.ENTERPRISE -> {
         container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.enterpriseDark))
         title = "Empresa"
+        timeIndicator.progressDrawable.setColorFilter(ContextCompat.getColor(applicationContext, R.color.enterprise),
+            PorterDuff.Mode.SRC_IN)
       }
       Category.HISTORY -> {
         container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.historyDark))
         title = "Historia"
+        timeIndicator.progressDrawable.setColorFilter(
+            ContextCompat.getColor(applicationContext, R.color.history),
+            PorterDuff.Mode.SRC_IN)
       }
       Category.NETWORK -> {
         container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.networkDark))
         title = "Redes"
+        timeIndicator.progressDrawable.setColorFilter(
+            ContextCompat.getColor(applicationContext, R.color.network),
+            PorterDuff.Mode.SRC_IN)
       }
       Category.SOFTWARE -> {
         container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.softwareDark))
         title = "Software"
+        timeIndicator.progressDrawable.setColorFilter(
+            ContextCompat.getColor(applicationContext, R.color.software),
+            PorterDuff.Mode.SRC_IN)
       }
     }
+
   }
 
   private fun removeAllListeners() {
