@@ -17,7 +17,9 @@ import java.util.*
 import kotlin.concurrent.timerTask
 
 class QuestionActivity : AppCompatActivity(), QuestionContract.View {
+
   lateinit private var presenter: QuestionPresenter
+  private val timer = Timer()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -152,7 +154,8 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
 
   private fun startCountdown() {
     timeIndicator.progress = 200
-    Timer().scheduleAtFixedRate(timerTask {
+
+    timer.scheduleAtFixedRate(timerTask {
       if (timeIndicator.progress > 0) {
         timeIndicator.progress = timeIndicator.progress - 1
       } else {
@@ -198,6 +201,10 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       }
     }
 
+  }
+
+  override fun stopCounter() {
+    timer.cancel()
   }
 
   private fun removeAllListeners() {
