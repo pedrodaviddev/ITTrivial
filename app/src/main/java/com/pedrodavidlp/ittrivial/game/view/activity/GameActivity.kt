@@ -1,5 +1,6 @@
 package com.pedrodavidlp.ittrivial.game.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -7,13 +8,17 @@ import android.view.View.VISIBLE
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
+import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
+import com.pedrodavidlp.ittrivial.game.data.MockGameRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
+import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.Roulette
 import com.pedrodavidlp.ittrivial.login.view.PlayerListAdapter
 import kotlinx.android.synthetic.main.activity_match.*
+import org.jetbrains.anko.alert
 
 class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategorySelected {
 
@@ -24,9 +29,6 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
     setContentView(R.layout.activity_match)
     presenter = ServiceLocator.provideGamePresenter(this)
     presenter.setView(this)
-    val a = intent.extras
-    val b = intent.getBooleanExtra("a", false)
-    val c = intent.getBooleanExtra("a", true)
     presenter.manageTurn(intent.getBooleanExtra("a", false))
     presenter.init()
   }
@@ -53,5 +55,19 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
 
   override fun onCategorySelected(category: Category) {
     presenter.goToQuestion(category, transitionImage)
+  }
+
+  override fun onBackPressed() {
+    alert("Are you sure to leave the game?"){
+      title("Exit")
+      yesButton {
+        //TODO
+      }
+      noButton {}
+    }.show()
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    presenter.manageBack(resultCode)
   }
 }

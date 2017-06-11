@@ -33,7 +33,7 @@ class MenuPresenter(private val router: MenuRouter, private val useCase: CreateG
   }
 
   fun createGame() {
-    useCase.createGame(Player(Session.username), this)
+    useCase.createGame(Player(Session.username, true), this)
   }
 
   private fun setWelcome() {

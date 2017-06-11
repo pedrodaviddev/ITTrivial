@@ -11,6 +11,7 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import kotlinx.android.synthetic.main.activity_question.*
+import org.jetbrains.anko.alert
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -215,5 +216,14 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
     fourth.setOnClickListener(null)
   }
 
+  override fun onBackPressed() {
+    alert("Are you sure to leave the game?"){
+      title("Exit")
+      yesButton {
+        //TODO
+      }
+      noButton {}
+    }.show()
+  }
 
 }

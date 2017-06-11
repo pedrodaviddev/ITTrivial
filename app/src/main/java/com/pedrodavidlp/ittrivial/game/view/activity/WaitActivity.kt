@@ -8,10 +8,13 @@ import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
+import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
+import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.presenter.WaitPresenter
 import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.login.view.PlayerListAdapter
 import kotlinx.android.synthetic.main.activity_wait.*
+import org.jetbrains.anko.alert
 
 class WaitActivity : AppCompatActivity(), WaitContract.View {
 
@@ -25,7 +28,7 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
     playerList.adapter = PlayerListAdapter()
     playerList.layoutManager = LinearLayoutManager(applicationContext)
     router = WaitRouter(this)
-    presenter = ServiceLocator.provideWaitPresenter()
+    presenter = ServiceLocator.provideWaitPresenter(this)
     presenter.setView(this)
     presenter.init()
   }
@@ -37,6 +40,16 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
   override fun myTurn() {
     waitYourTurnText.text = "ES TU TURNO!!!!"
     router.goToGame()
+  }
+
+  override fun onBackPressed() {
+    alert("Are you sure to leave the game?"){
+      title("Exit")
+      yesButton {
+        presenter.leaveGame()
+      }
+      noButton {}
+    }.show()
   }
 
   override fun showListPlayers(listPlayer: List<Player>) {

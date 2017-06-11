@@ -4,13 +4,16 @@ import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.data.FireQuestionRepository
 import com.pedrodavidlp.ittrivial.game.data.MockGameRepository
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
+import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
 import com.pedrodavidlp.ittrivial.game.presenter.WaitPresenter
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
 import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
+import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
 import com.pedrodavidlp.ittrivial.game.view.activity.QuestionActivity
+import com.pedrodavidlp.ittrivial.game.view.activity.WaitActivity
 import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 import com.pedrodavidlp.ittrivial.login.domain.usecase.*
 import com.pedrodavidlp.ittrivial.login.presenter.EnterGamePresenter
@@ -28,24 +31,28 @@ import com.pedrodavidlp.ittrivial.login.view.PlayerListGuestActivity
 object ServiceLocator {
 
   //Repositories
-  private val repository = FireLobbyRepository()
+  private val lobby = FireLobbyRepository()
+  private val game = FireGameRepository()
 
   private fun provideGameRepository() = MockGameRepository()
   private fun provideQuestionRepository() = FireQuestionRepository()
   private fun provideFireGameRepository() = FireGameRepository()
 
   //Use Cases
-  private fun provideGetGameListUseCase() = GetGameList(repository)
+  private fun provideGetGameListUseCase() = GetGameList(lobby)
 
-  private fun provideEnterGameListUseCase() = EnterGame(repository)
-  private fun provideCreateGameUseCase() = CreateGame(repository)
-  private fun provideGetUserListUseCase() = GetUserList(repository)
-  private fun provideExitGameUseCase() = ExitGame(repository)
-  private fun provideStartGameUseCase() = StartGame(repository)
+  private fun provideLeaveGameUseCase(): LeaveGame = LeaveGame(game)
+  private fun provideEnterGameListUseCase() = EnterGame(lobby)
+  private fun provideCreateGameUseCase() = CreateGame(lobby)
+  private fun provideGetUserListUseCase() = GetUserList(lobby)
+  private fun provideExitGameUseCase() = ExitGame(lobby)
+  private fun provideStartGameUseCase() = StartGame(lobby)
   private fun provideGetTurnUseCase() = GetTurn(provideFireGameRepository())
 
   //Routers
   private fun provideGameListRouter(activity: GameListActivity) = GameListRouter(activity)
+
+  private fun provideWaitRouter(activity: WaitActivity): WaitRouter = WaitRouter(activity)
 
   private fun provideUserListAdminRouter(activity: PlayerListAdminActivity) = UserListRouter(activity)
   private fun provideUserListGuestRouter(activity: PlayerListGuestActivity) = UserListRouter(activity)
@@ -70,8 +77,11 @@ object ServiceLocator {
       provideStartGameUseCase(),
       provideUserListGuestRouter(activity))
 
-  fun provideGamePresenter(activity: GameActivity) = GamePresenter(provideGameRepository(), provideGameRouter(activity))
+  fun provideGamePresenter(activity: GameActivity) = GamePresenter(provideGameRepository(), provideLeaveGameUseCase(), provideGameRouter(activity))
+
+
   fun provideQuestionPresenter(activity: QuestionActivity) = QuestionPresenter(provideQuestionRepository(), provideFireGameRepository(), provideQuestionRouter(activity))
-  fun provideWaitPresenter() = WaitPresenter(provideGetTurnUseCase(), provideGetUserListUseCase())
+  fun provideWaitPresenter(activity: WaitActivity) = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideGetUserListUseCase(), provideWaitRouter(activity))
+
 
 }

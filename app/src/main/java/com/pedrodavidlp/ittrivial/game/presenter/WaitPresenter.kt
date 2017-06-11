@@ -4,14 +4,22 @@ import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
+import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
+import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.domain.usecase.GetUserList
 
 class WaitPresenter(val turn: GetTurn,
-                    val players: GetUserList) :
+                    val leave: LeaveGame,
+                    val players: GetUserList,
+                    val router: WaitRouter) :
     WaitContract.Presenter,
     WaitContract.InteractorOutput,
     UserListContract.InteractorOutput {
+  override fun onLeaveGame() {
+    router.leaveGame()
+  }
+
   override fun onFetchUserListSuccess(list: List<Player>) {
     v.showListPlayers(list)
   }
@@ -53,5 +61,9 @@ class WaitPresenter(val turn: GetTurn,
 
   override fun onChangeTurn(player: Player) {
     v.changeTurn(player)
+  }
+
+  fun leaveGame() {
+    leave.leaveGame(Player(Session.username, false), Session.game, this)
   }
 }
