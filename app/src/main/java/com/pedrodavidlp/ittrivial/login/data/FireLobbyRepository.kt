@@ -12,7 +12,6 @@ import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import kotlin.properties.Delegates
 
 class FireLobbyRepository : LobbyRepository {
@@ -100,7 +99,7 @@ class FireLobbyRepository : LobbyRepository {
         val userList = ArrayList<Player>()
         val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
         playerMap.entries.forEach {
-          var map = (dataSnapshot.value as HashMap<*, *>)[it.key] as HashMap<*,*>
+          var map = (dataSnapshot.value as HashMap<*, *>)[it.key] as HashMap<*, *>
 
           val player: Player =
               Player(it.key.toString(),
