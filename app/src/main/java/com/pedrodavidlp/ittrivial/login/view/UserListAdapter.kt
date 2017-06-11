@@ -31,7 +31,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
 
   inner class UserListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     fun setData(username: String) {
-      itemView.itemUsername.text = username
+      itemView.username.text = username
     }
 
   }

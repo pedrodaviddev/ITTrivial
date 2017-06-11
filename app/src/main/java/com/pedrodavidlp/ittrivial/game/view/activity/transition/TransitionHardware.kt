@@ -8,6 +8,6 @@ class TransitionHardware(image: android.widget.ImageView, router: com.pedrodavid
   }
 
   override fun setImage() {
-    image.setImageResource(com.pedrodavidlp.ittrivial.R.drawable.ic_hardware)
+    image.setImageResource(com.pedrodavidlp.ittrivial.R.drawable.ic_hardware_gray)
   }
 }
