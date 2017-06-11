@@ -9,10 +9,9 @@ import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
+import com.pedrodavidlp.ittrivial.game.view.Category
 import java.util.HashMap
 import kotlin.collections.ArrayList
-import com.pedrodavidlp.ittrivial.game.view.Category
-import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 
 class FireGameRepository : GameRepository {
 

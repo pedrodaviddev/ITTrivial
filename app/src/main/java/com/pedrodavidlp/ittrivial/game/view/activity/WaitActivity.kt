@@ -8,8 +8,6 @@ import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
-import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
-import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.presenter.WaitPresenter
 import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.login.view.PlayerListAdapter
