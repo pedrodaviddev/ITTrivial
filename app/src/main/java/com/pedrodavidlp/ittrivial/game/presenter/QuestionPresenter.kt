@@ -13,14 +13,14 @@ class QuestionPresenter(val question: QuestionRepository,
                         val router: QuestionRouter) :
     QuestionContract.Presenter, QuestionContract.InteractorOutput {
 
-  lateinit var viper: QuestionContract.View
+  lateinit var vw: QuestionContract.View
 
   override fun init(category: Category) {
     this.getQuestion(category)
   }
 
   override fun setView(view: QuestionContract.View) {
-    this.viper = view
+    this.vw = view
   }
 
   override fun getQuestion(category: Category) {
@@ -28,18 +28,20 @@ class QuestionPresenter(val question: QuestionRepository,
   }
 
   override fun onError() {
-    viper.showError("Error cargando pregunta")
+    vw.showError("Error cargando pregunta")
   }
 
   override fun onQuestionLoaded(question: Question) {
-    viper.onLoadQuestion(question)
+    vw.onLoadQuestion(question)
   }
 
   fun fail() {
+    vw.stopCounter()
     game.loseTurnInGame(Session.game, this)
   }
 
   fun hit() {
+    vw.stopCounter()
     router.goToGame()
   }
 
