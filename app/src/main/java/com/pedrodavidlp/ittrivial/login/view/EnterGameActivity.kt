@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.login.presenter.EnterGamePresenter
-import com.pedrodavidlp.ittrivial.login.view.MenuActivity
 import kotlinx.android.synthetic.main.activity_enter_game.*
 import org.jetbrains.anko.startActivity
 

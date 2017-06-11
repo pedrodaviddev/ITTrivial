@@ -9,11 +9,7 @@ import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
-import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
-import com.pedrodavidlp.ittrivial.login.domain.usecase.EnterGame
-import com.pedrodavidlp.ittrivial.login.domain.usecase.GetGameList
 import com.pedrodavidlp.ittrivial.login.presenter.GameListPresenter
-import com.pedrodavidlp.ittrivial.login.router.GameListRouter
 import kotlinx.android.synthetic.main.activity_games_list.*
 
 class GameListActivity : AppCompatActivity(), GameListContract.View {

@@ -5,10 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.login.contract.MenuContract
-import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
-import com.pedrodavidlp.ittrivial.login.domain.usecase.CreateGame
 import com.pedrodavidlp.ittrivial.login.presenter.MenuPresenter
-import com.pedrodavidlp.ittrivial.login.router.MenuRouter
 import kotlinx.android.synthetic.main.activity_menu.*
 
 class MenuActivity : AppCompatActivity(), MenuContract.View {
