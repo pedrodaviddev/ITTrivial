@@ -7,6 +7,7 @@ class QuestionContract {
   interface View {
     fun showError(message: String)
     fun onLoadQuestion(question: Question)
+    fun stopCounter()
   }
 
   interface Presenter {

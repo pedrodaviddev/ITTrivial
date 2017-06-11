@@ -13,7 +13,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListViewHolder =
       UserListViewHolder(LayoutInflater.from(parent.context)
-      .inflate(R.layout.items_player_list,parent,false))
+          .inflate(R.layout.items_user_list, parent, false))
 
   override fun getItemCount(): Int {
     return listUsers.size
@@ -31,7 +31,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
 
   inner class UserListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     fun setData(username: String) {
-      itemView.itemUsername.text = username
+      itemView.username.text = username
     }
 
   }
