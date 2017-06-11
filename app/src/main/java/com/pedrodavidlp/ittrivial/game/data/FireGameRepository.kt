@@ -11,6 +11,8 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import java.util.HashMap
 import kotlin.collections.ArrayList
+import com.pedrodavidlp.ittrivial.game.view.Category
+import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 
 class FireGameRepository : GameRepository {
 
@@ -71,6 +73,11 @@ class FireGameRepository : GameRepository {
 
 
     })
+  }
+
+  override fun winCategory(game: Game, username: String, category: Category) {
+    ref.child("games").child(game.name).child("players")
+        .child(username).child(category.name.toLowerCase()).setValue(true)
   }
 
   override fun leaveGame(player: Player, game: Game, callback: WaitContract.InteractorOutput) {

@@ -7,6 +7,7 @@ class WaitContract {
   interface View {
     fun changeTurn(player: Player)
     fun myTurn()
+    fun showListPlayers(listPlayer: List<Player>)
   }
 
   interface Presenter {

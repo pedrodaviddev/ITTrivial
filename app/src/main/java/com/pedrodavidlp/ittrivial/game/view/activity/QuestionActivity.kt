@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
-import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
-import com.pedrodavidlp.ittrivial.game.data.FireQuestionRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
-import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import kotlinx.android.synthetic.main.activity_question.*
 import org.jetbrains.anko.alert
@@ -21,14 +19,15 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
 
   lateinit private var presenter: QuestionPresenter
   private val timer = Timer()
+  lateinit private var category: Category
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_question)
-    val category = intent.getSerializableExtra("Category") as Category
+    category = intent.getSerializableExtra("Category") as Category
     timeIndicator.max = 200
     setCategoryUI(category)
-    presenter = QuestionPresenter(FireQuestionRepository(), FireGameRepository(), QuestionRouter(this))
+    presenter = ServiceLocator.provideQuestionPresenter(this)
     presenter.setView(this)
     presenter.init(category)
   }
@@ -52,7 +51,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       first.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
-        presenter.hit()
+        presenter.hit(category)
       }
       second.setOnClickListener {
         removeAllListeners()
@@ -84,7 +83,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       second.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
-        presenter.hit()
+        presenter.hit(category)
       }
       third.setOnClickListener {
         removeAllListeners()
@@ -116,7 +115,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       third.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
-        presenter.hit()
+        presenter.hit(category)
       }
       fourth.setOnClickListener {
         removeAllListeners()
@@ -148,7 +147,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       fourth.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
-        presenter.hit()
+        presenter.hit(category)
       }
     }
   }
@@ -170,13 +169,15 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       Category.HARDWARE -> {
         container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.hardwareDark))
         title = "Hardware"
-        timeIndicator.progressDrawable.setColorFilter(ContextCompat.getColor(applicationContext, R.color.hardware),
+        timeIndicator.progressDrawable.setColorFilter(
+            ContextCompat.getColor(applicationContext, R.color.hardware),
             PorterDuff.Mode.SRC_IN)
       }
       Category.ENTERPRISE -> {
         container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.enterpriseDark))
         title = "Empresa"
-        timeIndicator.progressDrawable.setColorFilter(ContextCompat.getColor(applicationContext, R.color.enterprise),
+        timeIndicator.progressDrawable.setColorFilter(
+            ContextCompat.getColor(applicationContext, R.color.enterprise),
             PorterDuff.Mode.SRC_IN)
       }
       Category.HISTORY -> {
