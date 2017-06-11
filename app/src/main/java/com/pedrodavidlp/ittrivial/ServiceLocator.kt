@@ -66,6 +66,6 @@ object ServiceLocator {
       provideUserListGuestRouter(activity))
   fun provideGamePresenter(activity: GameActivity) = GamePresenter(provideGameRepository(), provideGameRouter(activity))
   fun provideQuestionPresenter(activity: QuestionActivity) = QuestionPresenter(provideQuestionRepository(), provideFireGameRepository(), provideQuestionRouter(activity))
-  fun provideWaitPresenter() = WaitPresenter(provideGetTurnUseCase())
+  fun provideWaitPresenter() = WaitPresenter(provideGetTurnUseCase(), provideGetUserListUseCase())
 
 }

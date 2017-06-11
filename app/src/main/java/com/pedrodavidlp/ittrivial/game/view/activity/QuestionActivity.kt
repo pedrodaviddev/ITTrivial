@@ -21,11 +21,12 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
 
   lateinit private var presenter: QuestionPresenter
   private val timer = Timer()
+  lateinit private var category: Category
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_question)
-    val category = intent.getSerializableExtra("Category") as Category
+    category = intent.getSerializableExtra("Category") as Category
     timeIndicator.max = 200
     setCategoryUI(category)
     presenter = ServiceLocator.provideQuestionPresenter(this)
@@ -52,7 +53,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       first.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
-        presenter.hit()
+        presenter.hit(category)
       }
       second.setOnClickListener {
         removeAllListeners()
@@ -84,7 +85,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       second.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
-        presenter.hit()
+        presenter.hit(category)
       }
       third.setOnClickListener {
         removeAllListeners()
@@ -116,7 +117,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       third.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
-        presenter.hit()
+        presenter.hit(category)
       }
       fourth.setOnClickListener {
         removeAllListeners()
@@ -148,7 +149,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       fourth.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
-        presenter.hit()
+        presenter.hit(category)
       }
     }
   }
@@ -170,13 +171,15 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       Category.HARDWARE -> {
         container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.hardwareDark))
         title = "Hardware"
-        timeIndicator.progressDrawable.setColorFilter(ContextCompat.getColor(applicationContext, R.color.hardware),
+        timeIndicator.progressDrawable.setColorFilter(
+            ContextCompat.getColor(applicationContext, R.color.hardware),
             PorterDuff.Mode.SRC_IN)
       }
       Category.ENTERPRISE -> {
         container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.enterpriseDark))
         title = "Empresa"
-        timeIndicator.progressDrawable.setColorFilter(ContextCompat.getColor(applicationContext, R.color.enterprise),
+        timeIndicator.progressDrawable.setColorFilter(
+            ContextCompat.getColor(applicationContext, R.color.enterprise),
             PorterDuff.Mode.SRC_IN)
       }
       Category.HISTORY -> {
