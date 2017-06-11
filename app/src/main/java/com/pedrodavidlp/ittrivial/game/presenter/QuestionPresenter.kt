@@ -40,8 +40,9 @@ class QuestionPresenter(val question: QuestionRepository,
     game.loseTurnInGame(Session.game, this)
   }
 
-  fun hit() {
+  fun hit(category: Category) {
     vw.stopCounter()
+    game.winCategory(Session.game, Session.username, category)
     router.goToGame()
   }
 
