@@ -2,6 +2,7 @@ package com.pedrodavidlp.ittrivial.login.data
 
 import android.util.Log
 import com.google.firebase.database.*
+import com.pedrodavidlp.ittrivial.base.domain.data.Observer
 import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
@@ -11,11 +12,13 @@ import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.properties.Delegates
 
 class FireLobbyRepository : LobbyRepository {
   companion object {
     val playerNumber: Array<String> = arrayOf("I", "II", "III", "IV", "V", "VI")
   }
+
   val randomNames: Array<String> = arrayOf("Ailurophile", "Assemblage",
       "Becoming", "Beleaguer", "Brood", "Bucolic", "Bungalow", "Chatoyant", "Comely",
       "Conflate", "Cynosure", "Dalliance", "Demesne", "Dominion", "Demure", "Denouement", "Desuetude",
@@ -52,9 +55,9 @@ class FireLobbyRepository : LobbyRepository {
         while (keys.contains(name)) {
           name = selectRandomName()
         }
+        ref.child("games").child(name).child("started").setValue(false)
         ref.child("games").child(name).child("players").child(playerNumber[0]).setValue(admin)
         ref.child("games").child(name).child("numplayers").setValue(1)
-        ref.child("games").child(name).child("started").setValue(false)
         callback.onGameCreated(Game(name, 1, false))
       }
 
@@ -63,11 +66,15 @@ class FireLobbyRepository : LobbyRepository {
   }
 
 
-  override fun getGames(callback: GameListContract.InteractorOutput) {
+  override fun getGames(observer: Observer<List<Game>>): MutableList<Game> {
+    var listGames: MutableList<Game> by Delegates.observable(ArrayList()) {
+      _, old, new ->
+      Log.d("lista", new.size.toString())
+      observer.onValueChange(new, old)
+    }
+
     ref.child("games").addValueEventListener(object : ValueEventListener {
-      override fun onCancelled(p0: DatabaseError?) {
-        callback.onError()
-      }
+      override fun onCancelled(p0: DatabaseError?) {}
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val gameList = ArrayList<Game>()
@@ -77,9 +84,10 @@ class FireLobbyRepository : LobbyRepository {
                   it.child("players").childrenCount.toInt(),
                   it.child("started").getValue(Boolean::class.java)))
         }
-        callback.onFetchGameListSuccess(gameList)
+        listGames = gameList
       }
     })
+    return listGames
   }
 
   override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {

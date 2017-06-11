@@ -2,6 +2,7 @@ package com.pedrodavidlp.ittrivial.login.data
 
 import android.os.Handler
 import android.os.Looper
+import com.pedrodavidlp.ittrivial.base.domain.data.Observer
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
@@ -10,6 +11,10 @@ import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 
 class MockLobbyRepository : LobbyRepository {
+  override fun getGames(observer: Observer<List<Game>>): List<Game> {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
   override fun createGame(admin: Player, callback: MenuContract.InteractorOutput) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
@@ -24,14 +29,6 @@ class MockLobbyRepository : LobbyRepository {
 
   override fun enterGame(game: Game, callback: GameListContract.InteractorOutput) {
 
-  }
-
-  override fun getGames(callback: GameListContract.InteractorOutput) {
-    callback.onFetchGameListSuccess(listOf(Game("Solo hay una partida", 4, false)))
-    Handler(Looper.getMainLooper()).postDelayed({
-      callback.onFetchGameListSuccess(listOf(Game("Eyy compañeras", 5, false),
-          Game("Hola prhema", 2, false), Game("Como estais locos", 1, false)))
-    }, 15000)
   }
 
   override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
