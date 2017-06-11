@@ -21,6 +21,7 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_wait)
+    this.title = "Lista de jugadores"
     playerList.adapter = PlayerListAdapter()
     playerList.layoutManager = LinearLayoutManager(applicationContext)
     router = WaitRouter(this)
@@ -39,3 +40,4 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
   }
 
 }
+
