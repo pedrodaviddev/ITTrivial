@@ -7,11 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
-import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
-import com.pedrodavidlp.ittrivial.game.data.FireQuestionRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
-import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import kotlinx.android.synthetic.main.activity_question.*
 import java.util.*

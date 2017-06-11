@@ -8,11 +8,7 @@ import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
-import com.pedrodavidlp.ittrivial.login.domain.usecase.ExitGame
-import com.pedrodavidlp.ittrivial.login.domain.usecase.GetUserList
-import com.pedrodavidlp.ittrivial.login.domain.usecase.StartGame
 import com.pedrodavidlp.ittrivial.login.presenter.UserListPresenter
-import com.pedrodavidlp.ittrivial.login.router.UserListRouter
 import kotlinx.android.synthetic.main.activity_player_list_admin.*
 
 class PlayerListAdminActivity : AppCompatActivity(), UserListContract.View {
