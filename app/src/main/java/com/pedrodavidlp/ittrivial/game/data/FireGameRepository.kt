@@ -11,8 +11,6 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import java.util.HashMap
 import kotlin.collections.ArrayList
-import kotlin.collections.forEach
-import kotlin.collections.get
 
 class FireGameRepository : GameRepository {
 
@@ -102,6 +100,7 @@ class FireGameRepository : GameRepository {
           ref.child("games").child(game.name).child("turn").setValue(turn - 1)
         }
         ref.child("games").child(game.name).child("players").child(player.username).removeValue()
+        callback.onLeaveGame()
       }
     })
   }

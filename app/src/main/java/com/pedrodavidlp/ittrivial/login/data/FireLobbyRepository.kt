@@ -111,7 +111,7 @@ class FireLobbyRepository : LobbyRepository {
               )
           userList.add(player)
         }
-        if (!userList.filter { it.username == Session.username }.first().admin) {
+        if (userList.filter { it.username == Session.username && it.admin }.isEmpty()) {
           this@FireLobbyRepository.setListenerToStartGame(game, callback)
         }
         callback.onFetchUserListSuccess(userList)

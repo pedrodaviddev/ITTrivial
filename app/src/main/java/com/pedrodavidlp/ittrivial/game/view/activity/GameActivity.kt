@@ -1,5 +1,6 @@
 package com.pedrodavidlp.ittrivial.game.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -27,9 +28,6 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
     setContentView(R.layout.activity_match)
     presenter = GamePresenter(MockGameRepository(), LeaveGame(FireGameRepository()), GameRouter(this))
     presenter.setView(this)
-    val a = intent.extras
-    val b = intent.getBooleanExtra("a", false)
-    val c = intent.getBooleanExtra("a", true)
     presenter.manageTurn(intent.getBooleanExtra("a", false))
     presenter.init()
   }
@@ -66,5 +64,9 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
       }
       noButton {}
     }.show()
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    presenter.manageBack(resultCode)
   }
 }

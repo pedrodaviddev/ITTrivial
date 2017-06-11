@@ -27,6 +27,7 @@ class WaitContract {
 
   interface Router {
     fun goToGame()
+    fun leaveGame()
   }
 
 }

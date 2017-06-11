@@ -11,7 +11,7 @@ class WaitPresenter(val turn: GetTurn,
                     val leave: LeaveGame,
                     val router: WaitRouter) : WaitContract.Presenter, WaitContract.InteractorOutput {
   override fun onLeaveGame() {
-
+    router.leaveGame()
   }
 
   lateinit var v: WaitContract.View

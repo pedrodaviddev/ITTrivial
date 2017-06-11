@@ -7,6 +7,7 @@ import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
 import com.pedrodavidlp.ittrivial.game.view.activity.QuestionActivity
 import com.pedrodavidlp.ittrivial.game.view.activity.WaitActivity
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.startActivityForResult
 
 class GameRouter(val activity: GameActivity) : GameContract.Router {
 
@@ -21,6 +22,6 @@ class GameRouter(val activity: GameActivity) : GameContract.Router {
   }
 
   override fun goToWait() {
-    activity.startActivity<WaitActivity>()
+    activity.startActivityForResult<WaitActivity>(2)
   }
 }
