@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
 import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.data.FireQuestionRepository
@@ -28,7 +29,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
     category = intent.getSerializableExtra("Category") as Category
     timeIndicator.max = 200
     setCategoryUI(category)
-    presenter = QuestionPresenter(FireQuestionRepository(), FireGameRepository(), QuestionRouter(this))
+    presenter = ServiceLocator.provideQuestionPresenter(this)
     presenter.setView(this)
     presenter.init(category)
   }

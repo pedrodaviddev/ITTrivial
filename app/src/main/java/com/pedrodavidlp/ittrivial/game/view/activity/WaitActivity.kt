@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
@@ -28,7 +29,7 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
     playerList.adapter = PlayerListAdapter()
     playerList.layoutManager = LinearLayoutManager(applicationContext)
     router = WaitRouter(this)
-    presenter = WaitPresenter(GetTurn(FireGameRepository()), GetUserList(FireLobbyRepository()))
+    presenter = ServiceLocator.provideWaitPresenter()
     presenter.setView(this)
     presenter.init()
   }

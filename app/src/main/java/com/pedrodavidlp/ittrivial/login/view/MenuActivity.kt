@@ -3,6 +3,7 @@ package com.pedrodavidlp.ittrivial.login.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.login.contract.MenuContract
 import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 import com.pedrodavidlp.ittrivial.login.domain.usecase.CreateGame
@@ -17,7 +18,7 @@ class MenuActivity : AppCompatActivity(), MenuContract.View {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_menu)
-    presenter = MenuPresenter(MenuRouter(this), CreateGame(FireLobbyRepository()))
+    presenter = ServiceLocator.provideMenuPresenter(this)
     presenter.setView(this)
     presenter.init()
 
