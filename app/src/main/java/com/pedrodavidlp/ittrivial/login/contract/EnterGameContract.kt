@@ -3,6 +3,7 @@ package com.pedrodavidlp.ittrivial.login.contract
 class EnterGameContract {
   interface View {
     fun showError(message: String)
+    fun usernameSelected()
   }
 
   interface Presenter {

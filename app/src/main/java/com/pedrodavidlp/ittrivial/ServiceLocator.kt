@@ -20,13 +20,11 @@ import com.pedrodavidlp.ittrivial.login.presenter.EnterGamePresenter
 import com.pedrodavidlp.ittrivial.login.presenter.GameListPresenter
 import com.pedrodavidlp.ittrivial.login.presenter.MenuPresenter
 import com.pedrodavidlp.ittrivial.login.presenter.UserListPresenter
+import com.pedrodavidlp.ittrivial.login.router.EnterGameRouter
 import com.pedrodavidlp.ittrivial.login.router.GameListRouter
 import com.pedrodavidlp.ittrivial.login.router.MenuRouter
 import com.pedrodavidlp.ittrivial.login.router.UserListRouter
-import com.pedrodavidlp.ittrivial.login.view.GameListActivity
-import com.pedrodavidlp.ittrivial.login.view.MenuActivity
-import com.pedrodavidlp.ittrivial.login.view.PlayerListAdminActivity
-import com.pedrodavidlp.ittrivial.login.view.PlayerListGuestActivity
+import com.pedrodavidlp.ittrivial.login.view.*
 
 object ServiceLocator {
 
@@ -52,6 +50,8 @@ object ServiceLocator {
 
   //Routers
   private fun provideGameListRouter(activity: GameListActivity) = GameListRouter(activity)
+
+  fun provideEnterGameRouter(activity: EnterGameActivity): EnterGameRouter = EnterGameRouter(activity)
 
   private fun provideWaitRouter(activity: WaitActivity): WaitRouter = WaitRouter(activity)
 
@@ -84,6 +84,5 @@ object ServiceLocator {
 
   fun provideQuestionPresenter(activity: QuestionActivity) = QuestionPresenter(provideQuestionRepository(), provideFireGameRepository(), provideQuestionRouter(activity))
   fun provideWaitPresenter(activity: WaitActivity) = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideGetUserListUseCase(), provideWaitRouter(activity))
-
 
 }

@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.pedrodavidlp.ittrivial.login.view.EnterGameActivity">
-
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:background="@color/mainBackground"
+                                             tools:context="com.pedrodavidlp.ittrivial.login.view.EnterGameActivity">
 
     <Button
         android:id="@+id/playButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/playButton"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        />
-
-    <EditText
-        android:id="@+id/usernameInput"
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/username"
-        android:inputType="textPersonName"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/buttonstyle"
+        android:elevation="0dp"
+        android:text="Jugar"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/usernameLayout"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/playButton"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.506">
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de usuario"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textSize="24sp"/>
+    </android.support.design.widget.TextInputLayout>
+
 </android.support.constraint.ConstraintLayout>

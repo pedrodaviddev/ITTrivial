@@ -4,23 +4,28 @@ import com.pedrodavidlp.ittrivial.login.contract.EnterGameContract
 import com.pedrodavidlp.ittrivial.login.domain.usecase.SelectUsername
 
 class EnterGamePresenter(private val select: SelectUsername) : EnterGameContract.InteractorOutput {
+  lateinit private var vw: EnterGameContract.View
   fun pickUsername(username: String) {
-    select.selectUsername(username)
+    select.selectUsername(username, this)
+  }
+
+  fun setView(view: EnterGameContract.View) {
+    vw = view
   }
 
   override fun usernameIsBlank() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    vw.showError("Por favor, escriba un nombre de usuario")
   }
 
   override fun usernameContainsSymbols() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    vw.showError("El nombre de usuario solo puede contener caracteres alfanumericos")
   }
 
   override fun usernameHasLessThanFiveCharacters() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    vw.showError("El nombre de usuario debe tener mas de 4 caracteres")
   }
 
   override fun onUsernameSelected() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    vw.usernameSelected()
   }
 }
