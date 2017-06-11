@@ -12,9 +12,10 @@ class EnterGameContract {
   }
 
   interface InteractorOutput {
-    fun onLoginSuccess()
-    fun onLoginError()
-    fun onEnterGame()
+    fun usernameIsBlank()
+    fun usernameContainsSymbols()
+    fun usernameHasLessThanFiveCharacters()
+    fun onUsernameSelected()
   }
 
   interface Router {

@@ -1,20 +1,26 @@
 package com.pedrodavidlp.ittrivial.login.presenter
 
-import com.pedrodavidlp.ittrivial.base.domain.data.Session
-import java.util.regex.Matcher
-import java.util.regex.Pattern
+import com.pedrodavidlp.ittrivial.login.contract.EnterGameContract
+import com.pedrodavidlp.ittrivial.login.domain.usecase.SelectUsername
 
-class EnterGamePresenter {
-  fun pickUsername(username: String){
-    val pattern = Pattern.compile("[^A-Za-z0-9]")
-    val match = pattern.matcher(username)
-    val ok = match.find() && username.isNotEmpty()
-    if(ok)
-      Session.username = username
-    else usernameError()
+class EnterGamePresenter(private val select: SelectUsername) : EnterGameContract.InteractorOutput {
+  fun pickUsername(username: String) {
+    select.selectUsername(username)
   }
 
-  fun usernameError(){
-    //TO-DO
+  override fun usernameIsBlank() {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun usernameContainsSymbols() {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun usernameHasLessThanFiveCharacters() {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onUsernameSelected() {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 }

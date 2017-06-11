@@ -48,6 +48,7 @@ object ServiceLocator {
   private fun provideExitGameUseCase() = ExitGame(lobby)
   private fun provideStartGameUseCase() = StartGame(lobby)
   private fun provideGetTurnUseCase() = GetTurn(provideFireGameRepository())
+  private fun provideSelectUsernameUseCase() = SelectUsername()
 
   //Routers
   private fun provideGameListRouter(activity: GameListActivity) = GameListRouter(activity)
@@ -61,7 +62,8 @@ object ServiceLocator {
   private fun provideMenuRouter(activity: MenuActivity) = MenuRouter(activity)
 
   //Presenters
-  fun provideEnterGamePresenter() = EnterGamePresenter()
+  fun provideEnterGamePresenter() = EnterGamePresenter(provideSelectUsernameUseCase())
+
 
   fun provideGameListPresenter(activity: GameListActivity) = GameListPresenter(provideGetGameListUseCase(), provideEnterGameListUseCase(), provideGameListRouter(activity))
   fun provideMenuPresenter(activity: MenuActivity) = MenuPresenter(provideMenuRouter(activity), provideCreateGameUseCase())
