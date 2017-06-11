@@ -34,29 +34,29 @@ class PlayerListAdapter : RecyclerView.Adapter<PlayerListAdapter.PlayerListViewH
     fun setData(player: Player) {
       itemView.username.text = player.username
       if (player.history) {
-        itemView.historyMedal.setImageResource(R.drawable.ic_history_gray)
-      } else {
         itemView.historyMedal.setImageResource(R.drawable.ic_history)
+      } else {
+        itemView.historyMedal.setImageResource(R.drawable.ic_history_gray)
       }
       if (player.enterprise) {
-        itemView.enterpriseMedal.setImageResource(R.drawable.ic_enterprise_gray)
-      } else {
         itemView.enterpriseMedal.setImageResource(R.drawable.ic_enterprise)
+      } else {
+        itemView.enterpriseMedal.setImageResource(R.drawable.ic_enterprise_gray)
       }
       if (player.network) {
-        itemView.networkMedal.setImageResource(R.drawable.ic_network_gray)
-      } else {
         itemView.networkMedal.setImageResource(R.drawable.ic_network)
+      } else {
+        itemView.networkMedal.setImageResource(R.drawable.ic_network_gray)
       }
       if (player.hardware) {
-        itemView.hardwareMedal.setImageResource(R.drawable.ic_hardware_gray)
-      } else {
         itemView.hardwareMedal.setImageResource(R.drawable.ic_hardware)
+      } else {
+        itemView.hardwareMedal.setImageResource(R.drawable.ic_hardware_gray)
       }
       if (player.software) {
-        itemView.softwareMedal.setImageResource(R.drawable.ic_software_gray)
-      } else {
         itemView.softwareMedal.setImageResource(R.drawable.ic_software)
+      } else {
+        itemView.softwareMedal.setImageResource(R.drawable.ic_software_gray)
       }
     }
   }

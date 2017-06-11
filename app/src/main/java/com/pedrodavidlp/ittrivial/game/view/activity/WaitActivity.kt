@@ -11,10 +11,13 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
 import com.pedrodavidlp.ittrivial.game.presenter.WaitPresenter
 import com.pedrodavidlp.ittrivial.game.router.WaitRouter
+import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
+import com.pedrodavidlp.ittrivial.login.domain.usecase.GetUserList
 import com.pedrodavidlp.ittrivial.login.view.PlayerListAdapter
 import kotlinx.android.synthetic.main.activity_wait.*
 
 class WaitActivity : AppCompatActivity(), WaitContract.View {
+
   lateinit var presenter: WaitPresenter
   lateinit var router: WaitRouter
 
@@ -25,7 +28,7 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
     playerList.adapter = PlayerListAdapter()
     playerList.layoutManager = LinearLayoutManager(applicationContext)
     router = WaitRouter(this)
-    presenter = WaitPresenter(GetTurn(FireGameRepository()))
+    presenter = WaitPresenter(GetTurn(FireGameRepository()), GetUserList(FireLobbyRepository()))
     presenter.setView(this)
     presenter.init()
   }
@@ -39,5 +42,8 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
     router.goToGame()
   }
 
+  override fun showListPlayers(listPlayer: List<Player>) {
+    (playerList.adapter as PlayerListAdapter).listPlayers = listPlayer
+  }
 }
 
