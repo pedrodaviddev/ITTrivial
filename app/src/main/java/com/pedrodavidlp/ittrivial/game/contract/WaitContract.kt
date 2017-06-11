@@ -22,6 +22,7 @@ class WaitContract {
   interface InteractorOutput {
     fun onMyTurn()
     fun onChangeTurn(player: Player)
+    fun onLeaveGame()
   }
 
   interface Router {

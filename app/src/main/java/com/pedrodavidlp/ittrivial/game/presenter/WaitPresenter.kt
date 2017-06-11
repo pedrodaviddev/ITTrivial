@@ -4,8 +4,16 @@ import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
+import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
+import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 
-class WaitPresenter(val useCase: GetTurn) : WaitContract.Presenter, WaitContract.InteractorOutput {
+class WaitPresenter(val turn: GetTurn,
+                    val leave: LeaveGame,
+                    val router: WaitRouter) : WaitContract.Presenter, WaitContract.InteractorOutput {
+  override fun onLeaveGame() {
+
+  }
+
   lateinit var v: WaitContract.View
 
   override fun init() {
@@ -17,7 +25,7 @@ class WaitPresenter(val useCase: GetTurn) : WaitContract.Presenter, WaitContract
   }
 
   override fun getTurn() {
-    useCase.getTurn(Session.game, this)
+    turn.getTurn(Session.game, this)
   }
 
   override fun onMyTurn() {
@@ -26,5 +34,9 @@ class WaitPresenter(val useCase: GetTurn) : WaitContract.Presenter, WaitContract
 
   override fun onChangeTurn(player: Player) {
     v.changeTurn(player)
+  }
+
+  fun leaveGame() {
+    leave.leaveGame(Player(Session.username), Session.game, this)
   }
 }

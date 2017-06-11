@@ -6,8 +6,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View.VISIBLE
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
+import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.data.MockGameRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
+import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
@@ -23,7 +25,7 @@ class GameActivity : AppCompatActivity(), GameContract.View, Roulette.OnCategory
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_match)
-    presenter = GamePresenter(MockGameRepository(), GameRouter(this))
+    presenter = GamePresenter(MockGameRepository(), LeaveGame(FireGameRepository()), GameRouter(this))
     presenter.setView(this)
     val a = intent.extras
     val b = intent.getBooleanExtra("a", false)

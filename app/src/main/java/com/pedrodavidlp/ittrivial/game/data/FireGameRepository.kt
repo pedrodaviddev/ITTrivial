@@ -12,6 +12,7 @@ import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 
 class FireGameRepository : GameRepository {
+
   val database: FirebaseDatabase = FirebaseDatabase.getInstance()
   val ref: DatabaseReference = database.reference
   override fun getPlayersOnGame(game: Game, callback: GameContract.InteractorOutput) {
@@ -58,6 +59,23 @@ class FireGameRepository : GameRepository {
     })
   }
 
+  override fun leaveGame(player: Player, game: Game, callback: WaitContract.InteractorOutput) {
+    ref.child("games").child(game.name).child("players").addListenerForSingleValueEvent(object : ValueEventListener {
+      override fun onCancelled(databaseError: DatabaseError) {}
+
+      override fun onDataChange(dataSnapshot: DataSnapshot) {
+        val playerLeaving: Int = dataSnapshot.children.map {
+          it.getValue(Player::class.java)
+        }.indexOf(player)
+        ref.child("games").child(game.name).child("players")
+            .child(FireLobbyRepository.playerNumber[playerLeaving])
+            .removeValue()
+
+      }
+
+    })
+  }
+
   private fun selectNextTurn(numberPlayers: Int, turn: Int): Int {
     if (turn < numberPlayers - 1) {
       return turn + 1
@@ -65,4 +83,5 @@ class FireGameRepository : GameRepository {
       return 0
     }
   }
+
 }

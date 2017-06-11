@@ -8,6 +8,7 @@ import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
+import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.presenter.WaitPresenter
 import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import kotlinx.android.synthetic.main.activity_wait.*
@@ -21,7 +22,7 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_wait)
     router = WaitRouter(this)
-    presenter = WaitPresenter(GetTurn(FireGameRepository()))
+    presenter = WaitPresenter(GetTurn(FireGameRepository()), LeaveGame(FireGameRepository()), WaitRouter(this))
     presenter.setView(this)
     presenter.init()
   }
@@ -39,7 +40,7 @@ class WaitActivity : AppCompatActivity(), WaitContract.View {
     alert("Are you sure to leave the game?"){
       title("Exit")
       yesButton {
-        //TODO
+        presenter.leaveGame()
       }
       noButton {}
     }.show()

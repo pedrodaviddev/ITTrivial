@@ -10,6 +10,10 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 
 class MockGameRepository : GameRepository {
+  override fun leaveGame(player: Player, game: Game, callback: WaitContract.InteractorOutput) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
   override fun loseTurnInGame(game: Game, callback: QuestionContract.InteractorOutput) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
