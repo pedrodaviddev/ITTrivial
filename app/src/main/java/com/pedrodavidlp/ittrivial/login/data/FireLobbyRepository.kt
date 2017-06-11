@@ -56,8 +56,7 @@ class FireLobbyRepository : LobbyRepository {
           name = selectRandomName()
         }
         ref.child("games").child(name).child("started").setValue(false)
-        ref.child("games").child(name).child("players").child(playerNumber[0]).setValue(admin)
-        ref.child("games").child(name).child("numplayers").setValue(1)
+        ref.child("games").child(name).child("players").child(admin.username).setValue(admin)
         callback.onGameCreated(Game(name, 1, false))
       }
 
@@ -98,11 +97,19 @@ class FireLobbyRepository : LobbyRepository {
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val userList = ArrayList<Player>()
-        (0..dataSnapshot.childrenCount.toInt() - 1).forEach {
-          val dsnap = dataSnapshot.child(playerNumber[it])
-          userList.add(dsnap.getValue(Player::class.java))
+        val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
+        playerMap.entries.forEach {
+          val map = dataSnapshot.value as HashMap<*, *>
+          val player: Player =
+              Player(it.key.toString(),
+                  map["history"].toString() == "true",
+                  map["hardware"].toString() == "true",
+                  map["network"].toString() == "true",
+                  map["software"].toString() == "true",
+                  map["enterprise"].toString() == "true"
+              )
+          userList.add(player)
         }
-        Log.d("Mi nombre de user", "${Session.username} y el otro ${userList[0].username}")
         if (userList[0].username != Session.username) {
           this@FireLobbyRepository.setListenerToStartGame(game, callback)
         }
@@ -181,9 +188,9 @@ class FireLobbyRepository : LobbyRepository {
       }
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
-        val numPlayers = dataSnapshot.childrenCount.toInt()
         ref.child("games").child(game.name).child("players")
-            .child(playerNumber[numPlayers]).setValue(Player(Session.username))
+            .child(Session.username).setValue(Player(Session.username))
+
         callback.onJoinGame(game)
       }
     })
