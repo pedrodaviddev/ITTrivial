@@ -9,7 +9,7 @@ import com.pedrodavidlp.ittrivial.login.router.GameListRouter
 
 class GameListPresenter(private val gameList: GetGameList,
                         private val enterGame: EnterGame,
-                        private var router: GameListRouter) :
+                        private val router: GameListRouter) :
     GameListContract.Presenter,
     GameListContract.InteractorOutput {
 
