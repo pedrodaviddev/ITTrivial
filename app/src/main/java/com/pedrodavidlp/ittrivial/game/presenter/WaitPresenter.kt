@@ -37,6 +37,6 @@ class WaitPresenter(val turn: GetTurn,
   }
 
   fun leaveGame() {
-    leave.leaveGame(Player(Session.username), Session.game, this)
+    leave.leaveGame(Player(Session.username, false), Session.game, this)
   }
 }

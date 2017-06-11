@@ -102,6 +102,7 @@ class FireLobbyRepository : LobbyRepository {
           val map = dataSnapshot.value as HashMap<*, *>
           val player: Player =
               Player(it.key.toString(),
+                  map["admin"].toString() == "true",
                   map["history"].toString() == "true",
                   map["hardware"].toString() == "true",
                   map["network"].toString() == "true",
@@ -110,7 +111,7 @@ class FireLobbyRepository : LobbyRepository {
               )
           userList.add(player)
         }
-        if (userList[0].username != Session.username) {
+        if (!userList.filter { it.username == Session.username }.first().admin) {
           this@FireLobbyRepository.setListenerToStartGame(game, callback)
         }
         callback.onFetchUserListSuccess(userList)
@@ -128,7 +129,6 @@ class FireLobbyRepository : LobbyRepository {
           if (isMyTurn(dataSnapshot, turn.toInt())) {
             callback.onInitAndMyTurn()
           } else {
-            Log.d("APAREZCO AQUI?", "UG")
             callback.onInitAndWait()
           }
         } else {
@@ -157,10 +157,27 @@ class FireLobbyRepository : LobbyRepository {
             val randomTurn = this@FireLobbyRepository
                 .selectRandomTurn(dataSnapshot.childrenCount.toInt())
             ref.child("games")
-                .child(game.name).child("turn")
-                .setValue(randomTurn)
+                .child(game.name).child("turn").setValue(randomTurn)
             ref.child("games").child(game.name).child("started").setValue(true)
-            if (randomTurn == 0)
+
+            val userList = ArrayList<Player>()
+            val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
+            playerMap.entries.forEach {
+              val map = dataSnapshot.value as HashMap<*, *>
+              val player: Player =
+                  Player(it.key.toString(),
+                      map["admin"].toString() == "true",
+                      map["history"].toString() == "true",
+                      map["hardware"].toString() == "true",
+                      map["network"].toString() == "true",
+                      map["software"].toString() == "true",
+                      map["enterprise"].toString() == "true"
+                  )
+              userList.add(player)
+            }
+
+
+            if (userList[randomTurn].admin)
               callback.onInitAndMyTurn()
             else
               callback.onInitAndWait()
@@ -189,8 +206,7 @@ class FireLobbyRepository : LobbyRepository {
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         ref.child("games").child(game.name).child("players")
-            .child(Session.username).setValue(Player(Session.username))
-
+            .child(Session.username).setValue(Player(Session.username, false))
         callback.onJoinGame(game)
       }
     })
