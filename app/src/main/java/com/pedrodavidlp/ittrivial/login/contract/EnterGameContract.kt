@@ -3,6 +3,7 @@ package com.pedrodavidlp.ittrivial.login.contract
 class EnterGameContract {
   interface View {
     fun showError(message: String)
+    fun usernameSelected()
   }
 
   interface Presenter {
@@ -12,9 +13,11 @@ class EnterGameContract {
   }
 
   interface InteractorOutput {
-    fun onLoginSuccess()
-    fun onLoginError()
-    fun onEnterGame()
+    fun usernameIsBlank()
+    fun usernameContainsSymbols()
+    fun usernameHasLessThanFiveCharacters()
+    fun onUsernameSelected()
+    fun usernameHasSpacesBetweenWords()
   }
 
   interface Router {

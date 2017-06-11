@@ -6,12 +6,15 @@ import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
+import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
+import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.Category.*
 import com.pedrodavidlp.ittrivial.game.view.activity.transition.*
 
 class GamePresenter(val repository: GameRepository,
+                    val leaveGame: LeaveGame,
                     val router: GameRouter) : GameContract.Presenter, GameContract.InteractorOutput {
 
   lateinit var vw: GameContract.View
@@ -53,5 +56,11 @@ class GamePresenter(val repository: GameRepository,
   fun manageTurn(isMyTurn: Boolean) {
     if (!isMyTurn)
       router.goToWait()
+  }
+
+  fun manageBack(resultCode: Int) {
+    when (resultCode) {
+      WaitRouter.RESULT_LEAVE -> router.goToMenu()
+    }
   }
 }
