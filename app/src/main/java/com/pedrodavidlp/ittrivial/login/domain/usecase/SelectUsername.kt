@@ -10,12 +10,18 @@ class SelectUsername {
       callback.usernameIsBlank()
     } else if (haveLessThanFiveCharacters(username)) {
       callback.usernameHasLessThanFiveCharacters()
+    } else if (haveSpacesBetweenWords(username)) {
+      callback.usernameHasSpacesBetweenWords()
     } else if (haveNotAllowedSymbols(username)) {
       callback.usernameContainsSymbols()
     } else {
       Session.username = username
       callback.onUsernameSelected()
     }
+  }
+
+  private fun haveSpacesBetweenWords(username: String): Boolean {
+    return username.contains(" ")
   }
 
   private fun haveNotAllowedSymbols(username: String): Boolean {

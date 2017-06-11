@@ -4,6 +4,7 @@ import com.pedrodavidlp.ittrivial.login.contract.EnterGameContract
 import com.pedrodavidlp.ittrivial.login.domain.usecase.SelectUsername
 
 class EnterGamePresenter(private val select: SelectUsername) : EnterGameContract.InteractorOutput {
+
   lateinit private var vw: EnterGameContract.View
   fun pickUsername(username: String) {
     select.selectUsername(username, this)
@@ -27,5 +28,9 @@ class EnterGamePresenter(private val select: SelectUsername) : EnterGameContract
 
   override fun onUsernameSelected() {
     vw.usernameSelected()
+  }
+
+  override fun usernameHasSpacesBetweenWords() {
+    vw.showError("El nombre de usuario no puede tener espacios en blanco")
   }
 }

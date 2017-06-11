@@ -17,6 +17,7 @@ class EnterGameContract {
     fun usernameContainsSymbols()
     fun usernameHasLessThanFiveCharacters()
     fun onUsernameSelected()
+    fun usernameHasSpacesBetweenWords()
   }
 
   interface Router {
