@@ -35,7 +35,7 @@ class RouletteFragment : Fragment(), RouletteContract.View, Roulette.OnCategoryS
     roulette.setWheelChangeListener(object : Roulette.RouletteChangeListener {
       override fun onSelectionChange(category: Category) {
         selectedCategoryText.visibility = VISIBLE
-        selectedCategoryText.text = category.name
+        selectedCategoryText.text = getCategoryName(category)
         selectedCategoryText.setTextColor(getCategoryColor(category))
       }
     })
@@ -83,6 +83,15 @@ class RouletteFragment : Fragment(), RouletteContract.View, Roulette.OnCategoryS
       Category.ENTERPRISE -> return ContextCompat.getColor(context, R.color.enterprise)
       Category.NETWORK -> return ContextCompat.getColor(context, R.color.network)
     }
+  }
 
+  private fun getCategoryName(category: Category): String {
+    when (category) {
+      Category.HISTORY -> return "Historia"
+      Category.HARDWARE -> return "Hardware"
+      Category.SOFTWARE -> return "Software"
+      Category.ENTERPRISE -> return "Empresas"
+      Category.NETWORK -> return "Redes"
+    }
   }
 }

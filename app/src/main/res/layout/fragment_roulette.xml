@@ -54,7 +54,7 @@
         android:singleLine="false"
         android:text="CATEGORIA"
         android:textAlignment="center"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         android:textColor="@android:color/holo_orange_light"
         android:textStyle="bold"
