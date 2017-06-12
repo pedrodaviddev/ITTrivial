@@ -9,9 +9,6 @@ import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
 import com.pedrodavidlp.ittrivial.game.presenter.RoulettePresenter
 import com.pedrodavidlp.ittrivial.game.presenter.WaitPresenter
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
-import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
-import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
-import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
 import com.pedrodavidlp.ittrivial.game.view.activity.QuestionFragment
 import com.pedrodavidlp.ittrivial.game.view.activity.RouletteFragment

@@ -12,7 +12,6 @@ import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.RouletteContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.presenter.RoulettePresenter
-import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.Roulette
 import com.pedrodavidlp.ittrivial.login.view.PlayerListAdapter
@@ -21,7 +20,6 @@ import kotlinx.android.synthetic.main.fragment_roulette.*
 class RouletteFragment : Fragment(), RouletteContract.View, Roulette.OnCategorySelected {
 
   lateinit var presenter: RoulettePresenter
-  lateinit var router: RouletteRouter
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     presenter = ServiceLocator.provideRoulettePresenter(this)

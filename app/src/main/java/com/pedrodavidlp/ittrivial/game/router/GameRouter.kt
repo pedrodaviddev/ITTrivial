@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
 import com.pedrodavidlp.ittrivial.game.view.activity.QuestionFragment
@@ -26,9 +27,10 @@ class GameRouter(private val activity: GameActivity) {
   }
 
   fun goToQuestion(category: Category) {
-
     this.updateFragment(QuestionFragment(category))
+  }
 
+  fun goToFinish(player: Player) {
 
   }
 

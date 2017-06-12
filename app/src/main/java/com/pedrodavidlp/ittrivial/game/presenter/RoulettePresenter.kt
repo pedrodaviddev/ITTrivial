@@ -4,7 +4,6 @@ import android.widget.ImageView
 import com.pedrodavidlp.ittrivial.game.contract.RouletteContract
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
-import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.Category.*
 import com.pedrodavidlp.ittrivial.game.view.activity.transition.*

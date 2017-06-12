@@ -6,7 +6,6 @@ import android.view.View.VISIBLE
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
-import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 
 class TransitionHistory(image: ImageView, router: RouletteRouter) : TransitionTemplate(image, router) {
