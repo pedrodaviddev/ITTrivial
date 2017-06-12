@@ -3,13 +3,15 @@ package com.pedrodavidlp.ittrivial.game.presenter
 import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
-import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
-import com.pedrodavidlp.ittrivial.game.domain.repository.QuestionRepository
+import com.pedrodavidlp.ittrivial.game.domain.usecase.GetQuestion
+import com.pedrodavidlp.ittrivial.game.domain.usecase.LoseTurn
+import com.pedrodavidlp.ittrivial.game.domain.usecase.WinCategory
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 
-class QuestionPresenter(val question: QuestionRepository,
-                        val game: GameRepository,
+class QuestionPresenter(val question: GetQuestion,
+                        val win: WinCategory,
+                        val lose: LoseTurn,
                         val router: GameRouter) :
     QuestionContract.Presenter, QuestionContract.InteractorOutput {
 
@@ -37,14 +39,13 @@ class QuestionPresenter(val question: QuestionRepository,
 
   fun fail() {
     vw.stopCounter()
-    game.loseTurnInGame(Session.game, this)
+    lose.loseTurnInGame(Session.game, this)
     router.goToWait()
   }
 
   fun hit(category: Category) {
     vw.stopCounter()
-    Session.player.winCategory(category)
-    game.winCategory(Session.game, Session.player.username, category)
+    win.winCategory(Session.game, Session.player.username, category)
     router.goToRoulette()
   }
 

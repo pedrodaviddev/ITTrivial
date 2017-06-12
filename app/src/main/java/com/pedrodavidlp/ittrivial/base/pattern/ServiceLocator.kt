@@ -4,8 +4,7 @@ import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.data.FireQuestionRepository
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.domain.repository.QuestionRepository
-import com.pedrodavidlp.ittrivial.game.domain.usecase.GetPlayerList
-import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
+import com.pedrodavidlp.ittrivial.game.domain.usecase.*
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
 import com.pedrodavidlp.ittrivial.game.presenter.RoulettePresenter
@@ -31,6 +30,9 @@ object ServiceLocator {
     object Interactor {
       internal fun provideGetPlayerList() = GetPlayerList(Lobby.Repository.provideLobby())
       internal fun provideGetTurn() = GetTurn(Game.Repository.provideGame())
+      internal fun provideGetQuestion() = GetQuestion(Game.Repository.provideQuestion())
+      internal fun provideWinCategory() = WinCategory(Game.Repository.provideGame())
+      internal fun provideLoseTurn() = LoseTurn(Game.Repository.provideGame())
     }
 
     object Presenter {
@@ -39,8 +41,9 @@ object ServiceLocator {
               Game.Router.provideGame(GameActivity.instance))
 
       fun provideQuestion() =
-          QuestionPresenter(Game.Repository.provideQuestion(),
-              Game.Repository.provideGame(),
+          QuestionPresenter(Game.Interactor.provideGetQuestion(),
+              Game.Interactor.provideWinCategory(),
+              Game.Interactor.provideLoseTurn(),
               Game.Router.provideGame(GameActivity.instance))
 
       fun provideWait() =
