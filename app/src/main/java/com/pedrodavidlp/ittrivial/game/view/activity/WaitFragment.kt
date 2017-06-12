@@ -44,5 +44,6 @@ class WaitFragment : Fragment(), WaitContract.View {
   override fun showListPlayers(listPlayer: List<Player>) {
     (playerList?.adapter as PlayerListAdapter?)?.listPlayers = listPlayer
   }
+
 }
 

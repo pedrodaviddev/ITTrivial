@@ -1,13 +1,11 @@
 package com.pedrodavidlp.ittrivial.game.contract
 
-import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.view.Category
 
 class RouletteContract {
   interface View {
     fun initUi()
-    fun loadList(playerList: List<Player>)
-    fun finishedGame()
+    fun initMedals(hw: Boolean, sw: Boolean, net: Boolean, entrpr: Boolean, hstry: Boolean)
   }
 
   interface Presenter {
