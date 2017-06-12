@@ -1,12 +1,13 @@
 package com.pedrodavidlp.ittrivial.game.view.activity
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.ServiceLocator
+import com.pedrodavidlp.ittrivial.base.pattern.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
-import org.jetbrains.anko.alert
+import org.jetbrains.anko.contentView
 
 class GameActivity : AppCompatActivity(), GameContract.View {
   companion object {
@@ -29,12 +30,8 @@ class GameActivity : AppCompatActivity(), GameContract.View {
 
 
   override fun onBackPressed() {
-    alert("Are you sure to leave the game?") {
-      title("Exit")
-      yesButton {
-        finish()
-      }
-      noButton {}
-    }.show()
+    Snackbar
+        .make(contentView!!, "No puedes abandonar una partida mientras esta en marcha", Snackbar.LENGTH_SHORT)
+        .show()
   }
 }

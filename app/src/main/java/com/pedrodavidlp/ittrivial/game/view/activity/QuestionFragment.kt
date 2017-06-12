@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.ServiceLocator
+import com.pedrodavidlp.ittrivial.base.pattern.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
