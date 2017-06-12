@@ -17,6 +17,10 @@ import android.support.test.InstrumentationRegistry.getTargetContext
 import android.content.ComponentName
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
+import android.view.WindowManager
+import org.junit.Before
+
+
 
 
 @RunWith(AndroidJUnit4::class)
@@ -27,6 +31,16 @@ class EnterGameTest {
   @Rule @JvmField
   val activity = ActivityTestRule<EnterGameActivity>(EnterGameActivity::class.java)
 
+  @Before
+  fun unlockScreen() {
+    val activity = activity.getActivity()
+    val wakeUpDevice = Runnable {
+      activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+          WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+          WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    }
+    activity.runOnUiThread(wakeUpDevice)
+  }
 
   @Test
   fun testWhenTypeUserAndEnterGame() {
