@@ -2,8 +2,8 @@ package com.pedrodavidlp.ittrivial.login.data
 
 import android.util.Log
 import com.google.firebase.database.*
-import com.pedrodavidlp.ittrivial.base.domain.data.Observer
 import com.pedrodavidlp.ittrivial.base.domain.data.Session
+import com.pedrodavidlp.ittrivial.base.pattern.Observer
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
@@ -136,12 +136,10 @@ class FireLobbyRepository : LobbyRepository {
       override fun onCancelled(p0: DatabaseError?) {}
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
-        Log.d("VECES ACIVADO GETUSER", "UNA MAS")
         val userList = ArrayList<Player>()
         val playerMap: HashMap<*, *> = dataSnapshot.child("players").value as HashMap<*, *>
         playerMap.entries.forEach {
           val map = (dataSnapshot.child("players").value as HashMap<*, *>)[it.key] as HashMap<*, *>
-          val mapaaa = map["id"].toString()
           val player: Player =
               Player(it.key.toString(),
                   map["admin"].toString() == "true",

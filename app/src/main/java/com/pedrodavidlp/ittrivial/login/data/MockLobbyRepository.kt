@@ -1,6 +1,6 @@
 package com.pedrodavidlp.ittrivial.login.data
 
-import com.pedrodavidlp.ittrivial.base.domain.data.Observer
+import com.pedrodavidlp.ittrivial.base.pattern.Observer
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract

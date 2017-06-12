@@ -1,9 +1,9 @@
-package com.pedrodavidlp.ittrivial
+package com.pedrodavidlp.ittrivial.base.pattern
 
 import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.data.FireQuestionRepository
+import com.pedrodavidlp.ittrivial.game.domain.usecase.GetPlayerList
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
-import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
 import com.pedrodavidlp.ittrivial.game.presenter.RoulettePresenter
@@ -33,7 +33,6 @@ object ServiceLocator {
   private fun provideGetGameListUseCase() = GetGameList(provideLobbyRepository())
 
   private fun provideNotifyStartGameUseCase(): NotifyStartGame = NotifyStartGame(provideLobbyRepository())
-  private fun provideLeaveGameUseCase(): LeaveGame = LeaveGame(provideGameRepository())
   private fun provideGetPlayerListUseCase(): GetPlayerList = GetPlayerList(provideLobbyRepository())
   private fun provideEnterGameListUseCase() = EnterGame(provideLobbyRepository())
   private fun provideCreateGameUseCase() = CreateGame(provideLobbyRepository())
@@ -77,9 +76,9 @@ object ServiceLocator {
       provideUserListGuestRouter(activity))
 
 
-  fun provideRoulettePresenter(fragment: RouletteFragment) = RoulettePresenter(provideGameRepository(), provideLeaveGameUseCase(), provideGameRouter(GameActivity.instance))
-  fun provideQuestionPresenter(fragment: QuestionFragment) = QuestionPresenter(provideQuestionRepository(), provideGameRepository(), provideGameRouter(GameActivity.instance))
-  fun provideWaitPresenter(fragment: WaitFragment) = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideGetPlayerListUseCase(), provideGameRouter(GameActivity.instance))
+  fun provideRoulettePresenter(fragment: RouletteFragment) = RoulettePresenter(provideGameRepository(), provideGameRouter(GameActivity.Companion.instance))
+  fun provideQuestionPresenter(fragment: QuestionFragment) = QuestionPresenter(provideQuestionRepository(), provideGameRepository(), provideGameRouter(GameActivity.Companion.instance))
+  fun provideWaitPresenter(fragment: WaitFragment) = WaitPresenter(provideGetTurnUseCase(), provideGetPlayerListUseCase(), provideGameRouter(GameActivity.Companion.instance))
 
 
   fun provideGamePresenter(activity: GameActivity): GamePresenter = GamePresenter(provideGameRouter(activity))

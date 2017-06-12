@@ -1,7 +1,7 @@
 package com.pedrodavidlp.ittrivial.game.domain.usecase
 
-import com.pedrodavidlp.ittrivial.base.domain.data.Observer
 import com.pedrodavidlp.ittrivial.base.domain.data.Session
+import com.pedrodavidlp.ittrivial.base.pattern.Observer
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player

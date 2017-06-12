@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.ServiceLocator
+import com.pedrodavidlp.ittrivial.base.pattern.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.presenter.UserListPresenter

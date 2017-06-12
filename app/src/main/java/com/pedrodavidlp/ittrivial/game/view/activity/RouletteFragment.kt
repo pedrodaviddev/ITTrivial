@@ -8,7 +8,7 @@ import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.ServiceLocator
+import com.pedrodavidlp.ittrivial.base.pattern.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.RouletteContract
 import com.pedrodavidlp.ittrivial.game.presenter.RoulettePresenter
 import com.pedrodavidlp.ittrivial.game.view.Category

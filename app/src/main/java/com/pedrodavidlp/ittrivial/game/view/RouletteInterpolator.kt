@@ -1,7 +1,6 @@
 package com.pedrodavidlp.ittrivial.game.view
 
 import android.view.animation.BaseInterpolator
-import android.view.animation.Interpolator
 
 
 class RouletteInterpolator : BaseInterpolator() {

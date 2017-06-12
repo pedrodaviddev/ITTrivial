@@ -1,6 +1,6 @@
 package com.pedrodavidlp.ittrivial.login.domain.usecase
 
-import com.pedrodavidlp.ittrivial.base.domain.data.Observer
+import com.pedrodavidlp.ittrivial.base.pattern.Observer
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.login.contract.GameListContract
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository

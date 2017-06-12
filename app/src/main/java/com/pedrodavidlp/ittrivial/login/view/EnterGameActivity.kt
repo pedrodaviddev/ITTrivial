@@ -3,7 +3,7 @@ package com.pedrodavidlp.ittrivial.login.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.ServiceLocator
+import com.pedrodavidlp.ittrivial.base.pattern.ServiceLocator
 import com.pedrodavidlp.ittrivial.login.contract.EnterGameContract
 import com.pedrodavidlp.ittrivial.login.presenter.EnterGamePresenter
 import kotlinx.android.synthetic.main.activity_enter_game.*
