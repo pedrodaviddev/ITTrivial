@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "892011272113",
+    "firebase_url": "https://ittrivial-98e38.firebaseio.com",
+    "project_id": "ittrivial-98e38",
+    "storage_bucket": "ittrivial-98e38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892011272113:android:e56c1be08507b6b7",
+        "android_client_info": {
+          "package_name": "com.pedrodavidlp.ittrivial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892011272113-13k843ttk2aul5a7a66jqumktv7p5143.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmnhWViWJruLdujhcTnqywbrgtnh4T67Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

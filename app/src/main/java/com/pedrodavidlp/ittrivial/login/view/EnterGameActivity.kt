@@ -20,7 +20,11 @@ class EnterGameActivity : AppCompatActivity(), EnterGameContract.View {
     router = ServiceLocator.provideEnterGameRouter(this)
     presenter.setView(this)
     playButton.setOnClickListener {
-      presenter.pickUsername(username.text.toString())
+      if(!usernameInput.text.isEmpty()){
+        startActivity<MenuActivity>()
+        presenter.pickUsername(usernameInput.text.toString())
+        finish()
+      }
     }
   }
 
