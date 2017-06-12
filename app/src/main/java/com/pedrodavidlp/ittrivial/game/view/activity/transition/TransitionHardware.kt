@@ -15,7 +15,7 @@ class TransitionHardware(image: ImageView, router: GameRouter) : TransitionTempl
   }
 
   override fun setImage() {
-    image.setImageResource(R.drawable.ic_hardware_gray)
+    image.setImageResource(R.drawable.ic_hardware)
   }
 
   override fun animate() {

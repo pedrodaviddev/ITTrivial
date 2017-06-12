@@ -13,73 +13,76 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:text="Username"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintVertical_bias="0.5"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/networkMedal"
-        android:layout_marginRight="8dp"
-        app:layout_constraintHorizontal_bias="0.0"/>
+        />
 
     <ImageView
+        android:id="@+id/hardwareMedal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_hardware_gray"
-        android:id="@+id/hardwareMedal"
-        app:layout_constraintRight_toLeftOf="@+id/historyMedal"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintVertical_bias="0.444"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/historyMedal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_hardware_gray"/>
 
     <ImageView
         android:id="@+id/historyMedal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/enterpriseMedal"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/ic_history_gray"/>
+        app:srcCompat="@drawable/ic_history_gray"
+        app:layout_constraintVertical_bias="0.5"/>
 
     <ImageView
         android:id="@+id/enterpriseMedal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/softwareMedal"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.444"
-        app:srcCompat="@drawable/ic_enterprise_gray"/>
+        app:srcCompat="@drawable/ic_enterprise_gray"
+        app:layout_constraintVertical_bias="0.5"/>
 
     <ImageView
         android:id="@+id/softwareMedal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.444"
-        app:srcCompat="@drawable/ic_software_gray"/>
+        app:srcCompat="@drawable/ic_software_gray"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <ImageView
         android:id="@+id/networkMedal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/hardwareMedal"
