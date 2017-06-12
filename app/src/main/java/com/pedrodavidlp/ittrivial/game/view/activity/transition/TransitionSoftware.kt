@@ -1,13 +1,16 @@
 package com.pedrodavidlp.ittrivial.game.view.activity.transition
 
+import android.widget.ImageView
+import com.pedrodavidlp.ittrivial.R
+import com.pedrodavidlp.ittrivial.game.router.GameRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 
-class TransitionSoftware(image: android.widget.ImageView, router: com.pedrodavidlp.ittrivial.game.router.RouletteRouter) : TransitionTemplate(image, router) {
+class TransitionSoftware(image: ImageView, router: GameRouter) : TransitionTemplate(image, router) {
   override fun goToQuestion() {
     router.goToQuestion(Category.SOFTWARE)
   }
 
   override fun setImage() {
-    image.setImageResource(com.pedrodavidlp.ittrivial.R.drawable.ic_software)
+    image.setImageResource(R.drawable.ic_software)
   }
 }

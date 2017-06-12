@@ -222,13 +222,13 @@ class FireLobbyRepository : LobbyRepository {
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         ref.child("games").child(game.name).child("players")
-            .child(Session.username).setValue(Player(Session.username, false))
+            .child(Session.player.username).setValue(Player(Session.player.username, false))
         callback.onJoinGame(game)
       }
     })
   }
 
   override fun exitGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).child("players").child(Session.username).removeValue()
+    ref.child("games").child(game.name).child("players").child(Session.player.username).removeValue()
   }
 }

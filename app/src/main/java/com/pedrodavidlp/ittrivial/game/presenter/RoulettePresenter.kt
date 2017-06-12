@@ -1,22 +1,27 @@
 package com.pedrodavidlp.ittrivial.game.presenter
 
 import android.widget.ImageView
+import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.contract.RouletteContract
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
-import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
+import com.pedrodavidlp.ittrivial.game.router.GameRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.Category.*
 import com.pedrodavidlp.ittrivial.game.view.activity.transition.*
 
 class RoulettePresenter(val repository: GameRepository,
                         val leaveGame: LeaveGame,
-                        val router: RouletteRouter) : RouletteContract.Presenter, RouletteContract.InteractorOutput {
+                        val router: GameRouter) : RouletteContract.Presenter, RouletteContract.InteractorOutput {
 
   lateinit var vw: RouletteContract.View
 
   override fun init() {
-    vw.initUi()
+    if (Session.player.isWinner()) {
+      router.goToFinish(Session.player)
+    } else {
+      vw.initUi()
+    }
   }
 
   override fun setView(view: RouletteContract.View) {

@@ -13,7 +13,7 @@ class GetTurn(val repository: GameRepository) : WaitContract.Interactor {
     thread {
       repository.getTurnInGame(game, object : Observer<Player> {
         override fun onValueChange(newValue: Player, oldValue: Player) {
-          if (newValue.username == Session.username) {
+          if (newValue.username == Session.player.username) {
             callback.onMyTurn()
           } else if (newValue.username != oldValue.username) {
             callback.onChangeTurn(newValue)

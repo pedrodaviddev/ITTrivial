@@ -5,12 +5,12 @@ import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.domain.repository.QuestionRepository
-import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
+import com.pedrodavidlp.ittrivial.game.router.GameRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 
 class QuestionPresenter(val question: QuestionRepository,
                         val game: GameRepository,
-                        val router: QuestionRouter) :
+                        val router: GameRouter) :
     QuestionContract.Presenter, QuestionContract.InteractorOutput {
 
   lateinit var vw: QuestionContract.View
@@ -43,8 +43,9 @@ class QuestionPresenter(val question: QuestionRepository,
 
   fun hit(category: Category) {
     vw.stopCounter()
-    game.winCategory(Session.game, Session.username, category)
-    router.goToGame()
+    Session.player.winCategory(category)
+    game.winCategory(Session.game, Session.player.username, category)
+    router.goToRoulette()
   }
 
   override fun loseTurn() {

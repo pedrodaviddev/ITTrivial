@@ -70,7 +70,7 @@ class FireGameRepository : GameRepository {
           userList.add(player)
         }
         val turn = dataSnapshot.child("turn").getValue(Int::class.java)
-        if (userList[turn].username == Session.username) {
+        if (userList[turn].player == Session.player) {
           this@FireGameRepository.removeListeners(game)
           callback.onMyTurn()
         } else {

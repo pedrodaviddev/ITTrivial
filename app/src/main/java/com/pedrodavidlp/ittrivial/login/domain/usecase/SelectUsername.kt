@@ -15,7 +15,7 @@ class SelectUsername {
     } else if (haveNotAllowedSymbols(username)) {
       callback.usernameContainsSymbols()
     } else {
-      Session.username = username
+      Session.player.username = username
       callback.onUsernameSelected()
     }
   }
