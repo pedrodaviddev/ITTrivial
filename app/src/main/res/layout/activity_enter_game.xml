@@ -16,7 +16,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="10dp"
-        android:background="@drawable/buttonstyle"
+        android:background="@color/ButtonColor"
         android:elevation="0dp"
         android:text="Jugar"
         android:textColor="@android:color/white"
@@ -32,6 +32,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:textColorHint="@color/colorPrimaryDark"
         app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
         app:layout_constraintBottom_toTopOf="@+id/playButton"
         app:layout_constraintHorizontal_bias="0.0"
@@ -45,9 +46,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre de usuario"
+            android:shadowColor="@color/colorPrimaryDark"
             android:maxLines="1"
-            android:textColor="@android:color/white"
-            android:textColorHighlight="@android:color/white"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHighlight="@color/colorPrimaryDark"
             android:textSize="24sp"/>
     </android.support.design.widget.TextInputLayout>
 

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mainBackground"
     tools:context="com.pedrodavidlp.ittrivial.game.view.activity.FinishGameActivity">
 
     <TextView
@@ -17,6 +18,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/colorAccent"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
         android:textSize="64sp"
