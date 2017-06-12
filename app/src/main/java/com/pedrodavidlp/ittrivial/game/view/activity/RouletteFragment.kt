@@ -20,7 +20,7 @@ class RouletteFragment : Fragment(), RouletteContract.View, Roulette.OnCategoryS
   lateinit var presenter: RoulettePresenter
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    presenter = ServiceLocator.provideRoulettePresenter(this)
+    presenter = ServiceLocator.Game.Presenter.provideRoulette()
     return inflater?.inflate(R.layout.fragment_roulette, container, false)
   }
 

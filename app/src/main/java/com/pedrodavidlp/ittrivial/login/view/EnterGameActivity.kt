@@ -14,7 +14,7 @@ class EnterGameActivity : AppCompatActivity(), EnterGameContract.View {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_enter_game)
-    presenter = ServiceLocator.provideEnterGamePresenter(this)
+    presenter = ServiceLocator.Lobby.Presenter.provideEnterGame(this)
     presenter.setView(this)
     playButton.setOnClickListener {
       presenter.pickUsername(username.text.toString())

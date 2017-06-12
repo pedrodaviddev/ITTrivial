@@ -15,7 +15,7 @@ class MenuActivity : AppCompatActivity(), MenuContract.View {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_menu)
-    presenter = ServiceLocator.provideMenuPresenter(this)
+    presenter = ServiceLocator.Lobby.Presenter.provideMenu(this)
     presenter.setView(this)
     presenter.init()
 

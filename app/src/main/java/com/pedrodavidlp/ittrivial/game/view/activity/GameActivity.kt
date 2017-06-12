@@ -18,7 +18,7 @@ class GameActivity : AppCompatActivity(), GameContract.View {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     val turn = intent.getBooleanExtra("turn", false)
-    presenter = ServiceLocator.provideGamePresenter(this)
+    presenter = ServiceLocator.Game.Presenter.provideGame(this)
     presenter.setView(this)
     instance = this
     presenter.init(turn)
