@@ -16,6 +16,9 @@ class FinishGameFragment(private val player: Player) : Fragment() {
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    winner.text = "Ganador = ${player.username}"
+    backToMenu.setOnClickListener {
+      activity.finish()
+    }
+    winner.text = "El ganador es: \n\n ${player.username}"
   }
 }
