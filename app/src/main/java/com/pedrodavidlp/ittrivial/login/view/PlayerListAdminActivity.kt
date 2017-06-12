@@ -29,6 +29,7 @@ class PlayerListAdminActivity : AppCompatActivity(), UserListContract.View {
 
   override fun initUI() {
     this.title = presenter.getCurrentGame().name
+    gameMessage.text = "¡Invita a tus amigos a la partida ${presenter.getCurrentGame().name}!"
     adminPlayerList.adapter = UserListAdapter()
     adminPlayerList.layoutManager = LinearLayoutManager(applicationContext)
     startGameButton.setOnClickListener {
