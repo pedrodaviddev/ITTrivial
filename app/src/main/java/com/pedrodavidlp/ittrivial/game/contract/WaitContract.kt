@@ -22,7 +22,7 @@ class WaitContract {
 
   interface Router {
     fun goToRoulette()
-    fun goToFinishGame(winner: Player)
+    fun goToFinishGame(winner: String?)
   }
 
 }

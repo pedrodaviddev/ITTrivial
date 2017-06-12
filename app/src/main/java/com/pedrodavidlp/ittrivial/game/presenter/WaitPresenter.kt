@@ -17,7 +17,7 @@ class WaitPresenter(private val turn: GetTurn,
     PlayerListContract.InteractorOutput {
 
   override fun gameFinished(winner: Player) {
-    router.goToFinishGame(winner)
+    router.goToFinishGame(winner.username)
   }
 
   override fun onFetchPlayerList(list: List<Player>) {

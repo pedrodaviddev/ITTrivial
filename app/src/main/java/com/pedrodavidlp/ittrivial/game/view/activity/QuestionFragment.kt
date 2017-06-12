@@ -60,16 +60,19 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       second.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        first.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
       third.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        first.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
       fourth.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        first.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
     }
@@ -82,6 +85,7 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       first.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        second.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
       second.setOnClickListener {
@@ -92,11 +96,13 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       third.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        second.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
       fourth.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        second.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
     }
@@ -109,11 +115,13 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       first.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        third.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
       second.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        third.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
       third.setOnClickListener {
@@ -124,6 +132,7 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       fourth.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        third.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
     }
@@ -136,16 +145,19 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       first.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        fourth.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
       second.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        fourth.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
       third.setOnClickListener {
         removeAllListeners()
         it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        fourth.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.fail()
       }
       fourth.setOnClickListener {
