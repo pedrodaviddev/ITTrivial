@@ -12,7 +12,7 @@ class NotifyStartGame(private val repository: LobbyRepository) {
     repository.getCurrentActivePlayer(game, object : Observer<Player?> {
       override fun onValueChange(newValue: Player?, oldValue: Player?) {
         newValue?.let {
-          if (Session.username == it.username) {
+          if (Session.player.username == it.username) {
             callback.onInitAndMyTurn()
           } else {
             callback.onInitAndWait()

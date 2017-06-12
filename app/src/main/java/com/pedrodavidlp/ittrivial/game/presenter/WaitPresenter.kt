@@ -6,12 +6,13 @@ import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
 import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
+import com.pedrodavidlp.ittrivial.game.router.GameRouter
 import com.pedrodavidlp.ittrivial.login.domain.usecase.GetPlayerList
 
 class WaitPresenter(private val turn: GetTurn,
                     private val leave: LeaveGame,
                     private val players: GetPlayerList,
-                    private val router: WaitRouter) :
+                    private val router: GameRouter) :
     WaitContract.InteractorOutput,
     PlayerListContract.InteractorOutput {
 
@@ -46,7 +47,7 @@ class WaitPresenter(private val turn: GetTurn,
 
 
   override fun gameFinished(winner: Player) {
-    router.goToFinishGame(winner.username)
+    router.goToFinish(winner)
   }
 
   override fun onFetchPlayerList(newValue: List<Player>) {

@@ -5,8 +5,9 @@ import android.view.View.VISIBLE
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.ImageView
+import com.pedrodavidlp.ittrivial.game.router.GameRouter
 
-abstract class TransitionTemplate(val image: ImageView, val router: RouletteRouter) {
+abstract class TransitionTemplate(val image: ImageView, val router: GameRouter) {
 
   fun makeTransition() {
     setImage()

@@ -50,11 +50,9 @@ object ServiceLocator {
 
   fun provideGameRouter(activity: GameActivity) = GameRouter(activity)
 
-  private fun provideWaitRouter(fragment: WaitFragment): WaitRouter = WaitRouter(fragment)
+
   private fun provideUserListAdminRouter(activity: PlayerListAdminActivity) = UserListRouter(activity)
   private fun provideUserListGuestRouter(activity: PlayerListGuestActivity) = UserListRouter(activity)
-  private fun provideRouletteRouter(fragment: RouletteFragment) = RouletteRouter(fragment)
-  private fun provideQuestionRouter(fragment: QuestionFragment) = QuestionRouter(fragment)
 
   private fun provideMenuRouter(activity: MenuActivity) = MenuRouter(activity)
 
@@ -79,9 +77,9 @@ object ServiceLocator {
       provideUserListGuestRouter(activity))
 
 
-  fun provideRoulettePresenter(fragment: RouletteFragment) = RoulettePresenter(provideGameRepository(), provideLeaveGameUseCase(), provideRouletteRouter(fragment))
-  fun provideQuestionPresenter(fragment: QuestionFragment) = QuestionPresenter(provideQuestionRepository(), provideGameRepository(), provideQuestionRouter(fragment))
-  fun provideWaitPresenter(fragment: WaitFragment) = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideGetPlayerListUseCase(), provideWaitRouter(fragment))
+  fun provideRoulettePresenter(fragment: RouletteFragment) = RoulettePresenter(provideGameRepository(), provideLeaveGameUseCase(), provideGameRouter(GameActivity.instance))
+  fun provideQuestionPresenter(fragment: QuestionFragment) = QuestionPresenter(provideQuestionRepository(), provideGameRepository(), provideGameRouter(GameActivity.instance))
+  fun provideWaitPresenter(fragment: WaitFragment) = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideGetPlayerListUseCase(), provideGameRouter(GameActivity.instance))
 
 
   fun provideGamePresenter(activity: GameActivity): GamePresenter = GamePresenter(provideGameRouter(activity))
