@@ -1,10 +1,7 @@
 package com.pedrodavidlp.ittrivial.game.presenter
 
 import android.widget.ImageView
-import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.contract.RouletteContract
-import com.pedrodavidlp.ittrivial.game.domain.model.Game
-import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
@@ -20,19 +17,10 @@ class RoulettePresenter(val repository: GameRepository,
 
   override fun init() {
     vw.initUi()
-    this.getScores()
   }
 
   override fun setView(view: RouletteContract.View) {
     vw = view
-  }
-
-  override fun getScores() {
-
-  }
-
-  override fun onGetScores(playerList: List<Player>) {
-    vw.loadList(playerList)
   }
 
   fun goToQuestion(category: Category, image: ImageView) {
@@ -45,10 +33,5 @@ class RoulettePresenter(val repository: GameRepository,
           NETWORK -> TransitionNetwork(image, router)
         }
     transition.makeTransition()
-  }
-
-
-  private fun getCurrentGame(): Game {
-    return Session.game
   }
 }

@@ -16,14 +16,6 @@ class WaitPresenter(private val turn: GetTurn,
     WaitContract.InteractorOutput,
     PlayerListContract.InteractorOutput {
 
-  override fun gameFinished(winner: Player) {
-    router.goToFinishGame(winner.username)
-  }
-
-  override fun onFetchPlayerList(list: List<Player>) {
-    v.showListPlayers(list)
-  }
-
   lateinit private var v: WaitContract.View
 
 
@@ -51,6 +43,15 @@ class WaitPresenter(private val turn: GetTurn,
 
   private fun getPlayers() {
     players.getUserList(Session.game, this)
+  }
+
+
+  override fun gameFinished(winner: Player) {
+    router.goToFinishGame(winner.username)
+  }
+
+  override fun onFetchPlayerList(newValue: List<Player>) {
+    v.showListPlayers(newValue)
   }
 
   override fun onLeaveGame() {

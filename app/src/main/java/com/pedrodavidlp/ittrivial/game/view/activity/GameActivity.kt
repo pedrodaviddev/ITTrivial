@@ -9,6 +9,9 @@ import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
 import org.jetbrains.anko.alert
 
 class GameActivity : AppCompatActivity(), GameContract.View {
+  companion object {
+    lateinit var instance: GameActivity
+  }
   lateinit private var presenter: GamePresenter
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -16,6 +19,7 @@ class GameActivity : AppCompatActivity(), GameContract.View {
     val turn = intent.getBooleanExtra("turn", false)
     presenter = ServiceLocator.provideGamePresenter(this)
     presenter.setView(this)
+    instance = this
     presenter.init(turn)
   }
 
