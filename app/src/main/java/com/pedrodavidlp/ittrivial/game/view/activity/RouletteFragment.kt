@@ -28,6 +28,7 @@ class RouletteFragment : Fragment(), RouletteContract.View, Roulette.OnCategoryS
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    activity.title = "¡Toca para girar la ruleta!"
     presenter.setView(this)
     presenter.init()
   }

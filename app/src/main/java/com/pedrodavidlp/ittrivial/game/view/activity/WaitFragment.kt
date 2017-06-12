@@ -27,6 +27,7 @@ class WaitFragment : Fragment(), WaitContract.View {
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     playerList.adapter = PlayerListAdapter()
     playerList.layoutManager = LinearLayoutManager(context)
+    activity.title = "Espera a tu turno"
     presenter.setView(this)
     presenter.init()
     super.onViewCreated(view, savedInstanceState)
