@@ -7,7 +7,7 @@ import com.pedrodavidlp.ittrivial.login.contract.MenuContract
 import com.pedrodavidlp.ittrivial.login.domain.usecase.CreateGame
 import com.pedrodavidlp.ittrivial.login.router.MenuRouter
 
-class MenuPresenter(private val router: MenuRouter, private val useCase: CreateGame) :
+class MenuPresenter(private val useCase: CreateGame, private val router: MenuRouter) :
     MenuContract.Presenter,
     MenuContract.InteractorOutput {
 

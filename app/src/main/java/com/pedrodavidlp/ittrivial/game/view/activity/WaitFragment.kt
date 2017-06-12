@@ -20,7 +20,7 @@ class WaitFragment : Fragment(), WaitContract.View {
   lateinit var presenter: WaitPresenter
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    presenter = ServiceLocator.provideWaitPresenter(this)
+    presenter = ServiceLocator.Game.Presenter.provideWait()
     return inflater?.inflate(R.layout.fragment_wait, container, false)
   }
 

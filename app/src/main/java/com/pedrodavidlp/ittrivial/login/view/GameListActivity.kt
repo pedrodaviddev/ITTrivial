@@ -29,7 +29,7 @@ class GameListActivity : AppCompatActivity(), GameListContract.View {
         presenter.enterGame(game)
       }
     })
-    presenter = ServiceLocator.provideGameListPresenter(this)
+    presenter = ServiceLocator.Lobby.Presenter.provideGameList(this)
     presenter.setView(this)
     presenter.init()
   }

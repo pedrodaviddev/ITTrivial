@@ -2,6 +2,8 @@ package com.pedrodavidlp.ittrivial.base.pattern
 
 import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.data.FireQuestionRepository
+import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
+import com.pedrodavidlp.ittrivial.game.domain.repository.QuestionRepository
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetPlayerList
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
@@ -10,9 +12,6 @@ import com.pedrodavidlp.ittrivial.game.presenter.RoulettePresenter
 import com.pedrodavidlp.ittrivial.game.presenter.WaitPresenter
 import com.pedrodavidlp.ittrivial.game.router.GameRouter
 import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
-import com.pedrodavidlp.ittrivial.game.view.activity.QuestionFragment
-import com.pedrodavidlp.ittrivial.game.view.activity.RouletteFragment
-import com.pedrodavidlp.ittrivial.game.view.activity.WaitFragment
 import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 import com.pedrodavidlp.ittrivial.login.domain.usecase.*
 import com.pedrodavidlp.ittrivial.login.presenter.*
@@ -23,65 +22,92 @@ import com.pedrodavidlp.ittrivial.login.router.UserListRouter
 import com.pedrodavidlp.ittrivial.login.view.*
 
 object ServiceLocator {
+  object Game {
+    object Repository {
+      internal fun provideGame(): GameRepository = FireGameRepository()
+      internal fun provideQuestion(): QuestionRepository = FireQuestionRepository()
+    }
 
-  //Repositories
-  private fun provideGameRepository() = FireGameRepository()
-  private fun provideQuestionRepository() = FireQuestionRepository()
-  private fun provideLobbyRepository() = FireLobbyRepository()
+    object Interactor {
+      internal fun provideGetPlayerList() = GetPlayerList(Lobby.Repository.provideLobby())
+      internal fun provideGetTurn() = GetTurn(Game.Repository.provideGame())
+    }
 
-  //Use Cases
-  private fun provideGetGameListUseCase() = GetGameList(provideLobbyRepository())
+    object Presenter {
+      fun provideRoulette() =
+          RoulettePresenter(Game.Repository.provideGame(),
+              Game.Router.provideGame(GameActivity.instance))
 
-  private fun provideNotifyStartGameUseCase(): NotifyStartGame = NotifyStartGame(provideLobbyRepository())
-  private fun provideGetPlayerListUseCase(): GetPlayerList = GetPlayerList(provideLobbyRepository())
-  private fun provideEnterGameListUseCase() = EnterGame(provideLobbyRepository())
-  private fun provideCreateGameUseCase() = CreateGame(provideLobbyRepository())
-  private fun provideGetUserListUseCase() = GetUserList(provideLobbyRepository())
-  private fun provideExitGameUseCase() = ExitGame(provideLobbyRepository())
-  private fun provideStartGameUseCase() = StartGame(provideLobbyRepository())
-  private fun provideGetTurnUseCase() = GetTurn(provideGameRepository())
-  private fun provideSelectUsernameUseCase() = SelectUsername()
+      fun provideQuestion() =
+          QuestionPresenter(Game.Repository.provideQuestion(),
+              Game.Repository.provideGame(),
+              Game.Router.provideGame(GameActivity.instance))
 
-  //Routers
-  private fun provideGameListRouter(activity: GameListActivity) = GameListRouter(activity)
+      fun provideWait() =
+          WaitPresenter(Game.Interactor.provideGetTurn(),
+              Game.Interactor.provideGetPlayerList(),
+              Game.Router.provideGame(GameActivity.instance))
 
-  fun provideEnterGameRouter(activity: EnterGameActivity): EnterGameRouter = EnterGameRouter(activity)
+      fun provideGame(activity: GameActivity): GamePresenter =
+          GamePresenter(Game.Router.provideGame(activity))
+    }
 
-  fun provideGameRouter(activity: GameActivity) = GameRouter(activity)
+    object Router {
+      fun provideGame(activity: GameActivity) = GameRouter(activity)
+    }
+  }
 
+  object Lobby {
+    object Repository {
+      internal fun provideLobby() = FireLobbyRepository()
 
-  private fun provideUserListAdminRouter(activity: PlayerListAdminActivity) = UserListRouter(activity)
-  private fun provideUserListGuestRouter(activity: PlayerListGuestActivity) = UserListRouter(activity)
+    }
 
-  private fun provideMenuRouter(activity: MenuActivity) = MenuRouter(activity)
+    object Interactor {
+      internal fun provideGetGameList() = GetGameList(Repository.provideLobby())
+      internal fun provideNotifyStartGame() = NotifyStartGame(Lobby.Repository.provideLobby())
+      internal fun provideSelectUsername() = SelectUsername()
+      internal fun provideEnterGameList() = EnterGame(Lobby.Repository.provideLobby())
+      internal fun provideCreateGame() = CreateGame(Lobby.Repository.provideLobby())
+      internal fun provideGetUserList() = GetUserList(Lobby.Repository.provideLobby())
+      internal fun provideExitGame() = ExitGame(Lobby.Repository.provideLobby())
+      internal fun provideStartGame() = StartGame(Lobby.Repository.provideLobby())
+    }
 
+    object Presenter {
+      fun provideEnterGame(activity: EnterGameActivity) =
+          EnterGamePresenter(Lobby.Interactor.provideSelectUsername(),
+              Lobby.Router.provideEnterGame(activity))
 
-  //Presenters
-  fun provideEnterGamePresenter(activity: EnterGameActivity) = EnterGamePresenter(provideSelectUsernameUseCase(), provideEnterGameRouter(activity))
+      fun provideGameList(activity: GameListActivity) =
+          GameListPresenter(Lobby.Interactor.provideGetGameList(),
+              Lobby.Interactor.provideEnterGameList(),
+              Lobby.Router.provideGameList(activity))
 
-  fun provideGameListPresenter(activity: GameListActivity) = GameListPresenter(provideGetGameListUseCase(), provideEnterGameListUseCase(), provideGameListRouter(activity))
-  fun provideMenuPresenter(activity: MenuActivity) = MenuPresenter(provideMenuRouter(activity), provideCreateGameUseCase())
+      fun provideMenu(activity: MenuActivity) =
+          MenuPresenter(Lobby.Interactor.provideCreateGame(),
+              Lobby.Router.provideMenu(activity))
 
-  fun providePlayerListAdmintPresenter(activity: PlayerListAdminActivity) = UserListPresenter(
-      provideGetUserListUseCase(),
-      provideExitGameUseCase(),
-      provideStartGameUseCase(),
-      provideUserListAdminRouter(activity))
+      fun providePlayerListAdmin(activity: PlayerListAdminActivity) = UserListPresenter(
+          Lobby.Interactor.provideGetUserList(),
+          Lobby.Interactor.provideExitGame(),
+          Lobby.Interactor.provideStartGame(),
+          Lobby.Router.provideUserListAdmin(activity))
 
-  fun providePlayerListGuestPresenter(activity: PlayerListGuestActivity) = UserListGuestPresenter(
-      provideGetUserListUseCase(),
-      provideExitGameUseCase(),
-      provideStartGameUseCase(),
-      provideNotifyStartGameUseCase(),
-      provideUserListGuestRouter(activity))
+      fun providePlayerListGuest(activity: PlayerListGuestActivity) = UserListGuestPresenter(
+          Lobby.Interactor.provideGetUserList(),
+          Lobby.Interactor.provideExitGame(),
+          Lobby.Interactor.provideStartGame(),
+          Lobby.Interactor.provideNotifyStartGame(),
+          Lobby.Router.provideUserListGuest(activity))
+    }
 
-
-  fun provideRoulettePresenter(fragment: RouletteFragment) = RoulettePresenter(provideGameRepository(), provideGameRouter(GameActivity.Companion.instance))
-  fun provideQuestionPresenter(fragment: QuestionFragment) = QuestionPresenter(provideQuestionRepository(), provideGameRepository(), provideGameRouter(GameActivity.Companion.instance))
-  fun provideWaitPresenter(fragment: WaitFragment) = WaitPresenter(provideGetTurnUseCase(), provideGetPlayerListUseCase(), provideGameRouter(GameActivity.Companion.instance))
-
-
-  fun provideGamePresenter(activity: GameActivity): GamePresenter = GamePresenter(provideGameRouter(activity))
-
-
+    object Router {
+      internal fun provideGameList(activity: GameListActivity) = GameListRouter(activity)
+      internal fun provideEnterGame(activity: EnterGameActivity): EnterGameRouter = EnterGameRouter(activity)
+      internal fun provideUserListAdmin(activity: PlayerListAdminActivity) = UserListRouter(activity)
+      internal fun provideUserListGuest(activity: PlayerListGuestActivity) = UserListRouter(activity)
+      internal fun provideMenu(activity: MenuActivity) = MenuRouter(activity)
+    }
+  }
 }
