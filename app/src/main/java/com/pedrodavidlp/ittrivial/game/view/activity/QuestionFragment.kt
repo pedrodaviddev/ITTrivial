@@ -15,7 +15,7 @@ import org.jetbrains.anko.alert
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class QuestionActivity : AppCompatActivity(), QuestionContract.View {
+class QuestionFragment : AppCompatActivity(), QuestionContract.View {
 
   lateinit private var presenter: QuestionPresenter
   private val timer = Timer()
@@ -159,7 +159,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       if (timeIndicator.progress > 0) {
         timeIndicator.progress = timeIndicator.progress - 1
       } else {
-        this@QuestionActivity.presenter.fail()
+        this@QuestionFragment.presenter.fail()
       }
     }, 0, 50)
   }

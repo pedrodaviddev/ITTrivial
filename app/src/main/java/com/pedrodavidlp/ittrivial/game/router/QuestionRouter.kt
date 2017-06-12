@@ -2,21 +2,21 @@ package com.pedrodavidlp.ittrivial.game.router
 
 import android.os.Handler
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
-import com.pedrodavidlp.ittrivial.game.view.activity.QuestionActivity
+import com.pedrodavidlp.ittrivial.game.view.activity.QuestionFragment
 import com.pedrodavidlp.ittrivial.game.view.activity.WaitActivity
 import org.jetbrains.anko.startActivity
 
-class QuestionRouter(val activity: QuestionActivity) : QuestionContract.Router {
+class QuestionRouter(val fragment: QuestionFragment) : QuestionContract.Router {
   override fun goToGame() {
     Handler().postDelayed({
-      activity.finish()
+      fragment.finish()
     }, 500)
   }
 
   override fun goToWait() {
     Handler().postDelayed({
-      activity.startActivity<WaitActivity>()
-      activity.finish()
+      fragment.startActivity<WaitActivity>()
+      fragment.finish()
     }, 500)
   }
 }

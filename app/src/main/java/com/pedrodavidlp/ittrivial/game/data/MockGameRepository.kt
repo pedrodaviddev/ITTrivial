@@ -1,7 +1,7 @@
 package com.pedrodavidlp.ittrivial.game.data
 
-import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
+import com.pedrodavidlp.ittrivial.game.contract.RouletteContract
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
@@ -21,7 +21,7 @@ class MockGameRepository : GameRepository {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
-  override fun getPlayersOnGame(game: Game, callback: GameContract.InteractorOutput) {
+  override fun getPlayersOnGame(game: Game, callback: RouletteContract.InteractorOutput) {
 
   }
 

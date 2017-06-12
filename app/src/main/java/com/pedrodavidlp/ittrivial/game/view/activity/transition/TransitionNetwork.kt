@@ -6,10 +6,10 @@ import android.support.animation.SpringForce
 import android.view.View
 import android.widget.ImageView
 import com.pedrodavidlp.ittrivial.R
-import com.pedrodavidlp.ittrivial.game.router.GameRouter
+import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 
-class TransitionNetwork(image: ImageView, router: GameRouter) : TransitionTemplate(image, router) {
+class TransitionNetwork(image: ImageView, router: RouletteRouter) : TransitionTemplate(image, router) {
   override fun goToQuestion() {
     router.goToQuestion(Category.NETWORK)
   }

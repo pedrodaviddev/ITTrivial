@@ -3,8 +3,8 @@ package com.pedrodavidlp.ittrivial.game.data
 import android.util.Log
 import com.google.firebase.database.*
 import com.pedrodavidlp.ittrivial.base.domain.data.Session
-import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
+import com.pedrodavidlp.ittrivial.game.contract.RouletteContract
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
@@ -17,7 +17,7 @@ class FireGameRepository : GameRepository {
 
   val database: FirebaseDatabase = FirebaseDatabase.getInstance()
   val ref: DatabaseReference = database.reference
-  override fun getPlayersOnGame(game: Game, callback: GameContract.InteractorOutput) {
+  override fun getPlayersOnGame(game: Game, callback: RouletteContract.InteractorOutput) {
 
   }
 
