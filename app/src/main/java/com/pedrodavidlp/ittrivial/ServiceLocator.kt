@@ -15,6 +15,7 @@ import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
 import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
 import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
+import com.pedrodavidlp.ittrivial.game.view.activity.QuestionFragment
 import com.pedrodavidlp.ittrivial.game.view.activity.RouletteFragment
 import com.pedrodavidlp.ittrivial.game.view.activity.WaitFragment
 import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
@@ -63,7 +64,7 @@ object ServiceLocator {
   private fun provideUserListAdminRouter(activity: PlayerListAdminActivity) = UserListRouter(activity)
   private fun provideUserListGuestRouter(activity: PlayerListGuestActivity) = UserListRouter(activity)
   private fun provideRouletteRouter(fragment: RouletteFragment) = RouletteRouter(fragment)
-  private fun provideQuestionRouter() = QuestionRouter()
+  private fun provideQuestionRouter(fragment: QuestionFragment) = QuestionRouter(fragment)
 
   private fun provideMenuRouter(activity: MenuActivity) = MenuRouter(activity)
 
@@ -88,7 +89,7 @@ object ServiceLocator {
 
 
   fun provideRoulettePresenter(fragment: RouletteFragment) = RoulettePresenter(provideGameRepository(), provideLeaveGameUseCase(), provideRouletteRouter(fragment))
-  fun provideQuestionPresenter() = QuestionPresenter(provideQuestionRepository(), provideFireGameRepository(), provideQuestionRouter())
+  fun provideQuestionPresenter(fragment: QuestionFragment) = QuestionPresenter(provideQuestionRepository(), provideFireGameRepository(), provideQuestionRouter(fragment))
   fun provideWaitPresenter(fragment: WaitFragment) = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideEndGameUseCase(), provideGetUserListUseCase(), provideWaitRouter(fragment))
 
   fun provideGamePresenter(activity: GameActivity): GamePresenter = GamePresenter(provideGameRouter(activity))

@@ -24,7 +24,7 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
 
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    presenter = ServiceLocator.provideQuestionPresenter()
+    presenter = ServiceLocator.provideQuestionPresenter(this)
     return inflater?.inflate(R.layout.fragment_question, container, false)
   }
 

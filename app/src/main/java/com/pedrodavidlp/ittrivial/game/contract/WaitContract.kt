@@ -28,6 +28,7 @@ class WaitContract {
   }
 
   interface Router {
+    fun goToRoulette()
   }
 
 }

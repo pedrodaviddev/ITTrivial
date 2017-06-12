@@ -8,7 +8,6 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
-import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.Category.*
 import com.pedrodavidlp.ittrivial.game.view.activity.transition.*
@@ -51,16 +50,5 @@ class RoulettePresenter(val repository: GameRepository,
 
   private fun getCurrentGame(): Game {
     return Session.game
-  }
-
-  fun manageTurn(isMyTurn: Boolean) {
-    if (!isMyTurn)
-      router.goToWait()
-  }
-
-  fun manageBack(resultCode: Int) {
-    when (resultCode) {
-      WaitRouter.RESULT_LEAVE -> router.goToMenu()
-    }
   }
 }

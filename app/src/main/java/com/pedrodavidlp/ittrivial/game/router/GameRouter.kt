@@ -1,5 +1,7 @@
 package com.pedrodavidlp.ittrivial.game.router
 
+import android.os.Handler
+import android.os.Looper
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -12,15 +14,22 @@ import com.pedrodavidlp.ittrivial.game.view.activity.WaitFragment
 
 class GameRouter(private val activity: GameActivity) {
   fun goToRoulette() {
-    this.updateFragment(RouletteFragment())
+    Handler().postDelayed({
+      this.updateFragment(RouletteFragment())
+    }, 400)
   }
 
   fun goToWait() {
-    this.updateFragment(WaitFragment())
+    Handler(Looper.getMainLooper()).postDelayed({
+      this.updateFragment(WaitFragment())
+    }, 400)
   }
 
   fun goToQuestion(category: Category) {
+
     this.updateFragment(QuestionFragment(category))
+
+
   }
 
   private fun updateFragment(fragment: Fragment) {

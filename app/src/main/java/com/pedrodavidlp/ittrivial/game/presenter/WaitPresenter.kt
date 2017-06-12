@@ -63,6 +63,7 @@ class WaitPresenter(private val turn: GetTurn,
 
   override fun onMyTurn() {
     v.myTurn()
+    router.goToRoulette()
   }
 
   override fun onChangeTurn(player: Player) {

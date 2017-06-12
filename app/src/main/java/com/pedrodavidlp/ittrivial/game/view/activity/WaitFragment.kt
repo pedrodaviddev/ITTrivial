@@ -33,15 +33,15 @@ class WaitFragment : Fragment(), WaitContract.View {
   }
 
   override fun changeTurn(player: Player) {
-    playerTurnIndicator.text = "Turno de @${player.username}"
+    playerTurnIndicator?.text = "Turno de @${player.username}"
   }
 
   override fun myTurn() {
-    waitYourTurnText.text = "ES TU TURNO!!!!"
+    waitYourTurnText?.text = "ES TU TURNO!!!!"
   }
 
   override fun showListPlayers(listPlayer: List<Player>) {
-    (playerList.adapter as PlayerListAdapter).listPlayers = listPlayer
+    (playerList?.adapter as PlayerListAdapter?)?.listPlayers = listPlayer
   }
 }
 

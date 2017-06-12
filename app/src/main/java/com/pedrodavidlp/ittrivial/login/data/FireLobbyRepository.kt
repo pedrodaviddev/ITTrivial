@@ -39,6 +39,7 @@ class FireLobbyRepository : LobbyRepository {
 
   val firebase: FirebaseDatabase = FirebaseDatabase.getInstance()
   val ref: DatabaseReference = firebase.reference
+  lateinit var listener: ValueEventListener
 
   override fun createGame(admin: Player, callback: MenuContract.InteractorOutput) {
     ref.child("games").addListenerForSingleValueEvent(object : ValueEventListener {
@@ -90,7 +91,7 @@ class FireLobbyRepository : LobbyRepository {
   }
 
   override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).addValueEventListener(object : ValueEventListener {
+    listener = object : ValueEventListener {
       override fun onCancelled(p0: DatabaseError?) {
         callback.onError()
       }
@@ -123,7 +124,8 @@ class FireLobbyRepository : LobbyRepository {
         }
         callback.onFetchUserListSuccess(userList)
       }
-    })
+    }
+    ref.child("games").child(game.name).addValueEventListener(listener)
   }
 
   private fun isMyTurn(dataSnapshot: DataSnapshot, turn: Int): Boolean {
@@ -135,44 +137,44 @@ class FireLobbyRepository : LobbyRepository {
 
 
   override fun startGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).child("players")
-        .addListenerForSingleValueEvent(object : ValueEventListener {
-          override fun onDataChange(dataSnapshot: DataSnapshot) {
-            val randomTurn = this@FireLobbyRepository
-                .selectRandomTurn(dataSnapshot.childrenCount.toInt())
-            ref.child("games")
-                .child(game.name).child("turn").setValue(randomTurn)
-            ref.child("games").child(game.name).child("started").setValue(true)
+    listener = object : ValueEventListener {
+      override fun onDataChange(dataSnapshot: DataSnapshot) {
+        val randomTurn = this@FireLobbyRepository
+            .selectRandomTurn(dataSnapshot.childrenCount.toInt())
+        ref.child("games")
+            .child(game.name).child("turn").setValue(randomTurn)
+        ref.child("games").child(game.name).child("started").setValue(true)
 
-            val userList = ArrayList<Player>()
-            val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
-            playerMap.entries.forEach {
-              var map = (dataSnapshot.value as HashMap<*, *>)[it.key] as HashMap<*, *>
-
-              val player: Player =
-                  Player(it.key.toString(),
-                      map["admin"].toString() == "true",
-                      map["history"].toString() == "true",
-                      map["hardware"].toString() == "true",
-                      map["network"].toString() == "true",
-                      map["software"].toString() == "true",
-                      map["enterprise"].toString() == "true"
-                  )
-              userList.add(player)
-            }
+        val userList = ArrayList<Player>()
+        val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
+        playerMap.entries.forEach {
+          val map = (dataSnapshot.value as HashMap<*, *>)[it.key] as HashMap<*, *>
+          val player: Player =
+              Player(it.key.toString(),
+                  map["admin"].toString() == "true",
+                  map["history"].toString() == "true",
+                  map["hardware"].toString() == "true",
+                  map["network"].toString() == "true",
+                  map["software"].toString() == "true",
+                  map["enterprise"].toString() == "true"
+              )
+          userList.add(player)
+        }
 
 
-            if (userList[randomTurn].admin)
-              callback.onInitAndMyTurn()
-            else
-              callback.onInitAndWait()
+        if (userList[randomTurn].admin)
+          callback.onInitAndMyTurn()
+        else
+          callback.onInitAndWait()
 
-          }
+      }
 
-          override fun onCancelled(p0: DatabaseError?) {
-            callback.onError()
-          }
-        })
+      override fun onCancelled(p0: DatabaseError?) {
+        callback.onError()
+      }
+    }
+    ref.child("games").child(game.name).child("players").addValueEventListener(listener)
+
   }
 
   private fun selectRandomTurn(numberPlayers: Int): Int {
