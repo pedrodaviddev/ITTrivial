@@ -1,7 +1,7 @@
 package com.pedrodavidlp.ittrivial.game.domain.model
 
 data class Player(var username: String = "Error",
-                  val admin: Boolean,
+                  val admin: Boolean = false,
                   var history: Boolean = false,
                   var hardware: Boolean = false,
                   var network: Boolean = false,

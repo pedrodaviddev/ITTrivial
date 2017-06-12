@@ -38,6 +38,7 @@ class QuestionPresenter(val question: QuestionRepository,
   fun fail() {
     vw.stopCounter()
     game.loseTurnInGame(Session.game, this)
+    router.goToWait()
   }
 
   fun hit(category: Category) {

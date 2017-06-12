@@ -3,7 +3,6 @@ package com.pedrodavidlp.ittrivial.game.data
 import android.util.Log
 import com.google.firebase.database.*
 import com.pedrodavidlp.ittrivial.base.domain.data.Session
-import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
@@ -14,15 +13,12 @@ import java.util.HashMap
 import kotlin.collections.ArrayList
 
 class FireGameRepository : GameRepository {
-
   val database: FirebaseDatabase = FirebaseDatabase.getInstance()
   val ref: DatabaseReference = database.reference
-  override fun getPlayersOnGame(game: Game, callback: GameContract.InteractorOutput) {
-
-  }
+  lateinit var listener: ValueEventListener
 
   override fun getTurnInGame(game: Game, callback: WaitContract.InteractorOutput) {
-    ref.child("games").child(game.name).addValueEventListener(object : ValueEventListener {
+    listener = object : ValueEventListener {
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val userList = ArrayList<Player>()
         val playerMap: HashMap<*, *> = dataSnapshot.child("players").value as HashMap<*, *>
@@ -41,6 +37,7 @@ class FireGameRepository : GameRepository {
         }
         val turn = dataSnapshot.child("turn").getValue(Int::class.java)
         if (userList[turn].username == Session.username) {
+          this@FireGameRepository.removeListeners(game)
           callback.onMyTurn()
         } else {
           callback.onChangeTurn(userList[turn])
@@ -51,7 +48,8 @@ class FireGameRepository : GameRepository {
 
       }
 
-    })
+    }
+    ref.child("games").child(game.name).addValueEventListener(listener)
   }
 
   override fun loseTurnInGame(game: Game, callback: QuestionContract.InteractorOutput) {
@@ -119,4 +117,7 @@ class FireGameRepository : GameRepository {
     }
   }
 
+  override fun removeListeners(game: Game) {
+    ref.child("games").child(game.name).removeEventListener(listener)
+  }
 }

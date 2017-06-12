@@ -1,27 +1,43 @@
 package com.pedrodavidlp.ittrivial.game.router
 
 import android.os.Handler
-import com.pedrodavidlp.ittrivial.game.contract.GameContract
+import android.os.Looper
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
+import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
-import com.pedrodavidlp.ittrivial.game.view.activity.QuestionActivity
-import com.pedrodavidlp.ittrivial.game.view.activity.WaitActivity
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
+import com.pedrodavidlp.ittrivial.game.view.activity.QuestionFragment
+import com.pedrodavidlp.ittrivial.game.view.activity.RouletteFragment
+import com.pedrodavidlp.ittrivial.game.view.activity.WaitFragment
 
-class GameRouter(val activity: GameActivity) : GameContract.Router {
-
-  override fun goToQuestion(category: Category) {
+class GameRouter(private val activity: GameActivity) {
+  fun goToRoulette() {
     Handler().postDelayed({
-      activity.startActivity<QuestionActivity>(Pair("Category", category))
-    }, 1000)
+      this.updateFragment(RouletteFragment())
+    }, 400)
   }
 
-  override fun goToMenu() {
-    activity.finish()
+  fun goToWait() {
+    Handler(Looper.getMainLooper()).postDelayed({
+      this.updateFragment(WaitFragment())
+    }, 400)
   }
 
-  override fun goToWait() {
-    activity.startActivityForResult<WaitActivity>(2)
+  fun goToQuestion(category: Category) {
+
+    this.updateFragment(QuestionFragment(category))
+
+
   }
+
+  private fun updateFragment(fragment: Fragment) {
+    val manager: FragmentManager = activity.supportFragmentManager
+    val transaction: FragmentTransaction? = manager.beginTransaction()
+    transaction?.replace(R.id.container, fragment)
+    transaction?.commitAllowingStateLoss()
+  }
+
+
 }

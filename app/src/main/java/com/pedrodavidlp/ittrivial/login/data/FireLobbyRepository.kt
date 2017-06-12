@@ -13,8 +13,10 @@ import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
+import kotlin.reflect.KProperty
 
 class FireLobbyRepository : LobbyRepository {
+
   companion object {
     val playerNumber: Array<String> = arrayOf("I", "II", "III", "IV", "V", "VI")
   }
@@ -39,6 +41,7 @@ class FireLobbyRepository : LobbyRepository {
 
   val firebase: FirebaseDatabase = FirebaseDatabase.getInstance()
   val ref: DatabaseReference = firebase.reference
+  lateinit var listener: ValueEventListener
 
   override fun createGame(admin: Player, callback: MenuContract.InteractorOutput) {
     ref.child("games").addListenerForSingleValueEvent(object : ValueEventListener {
@@ -62,6 +65,43 @@ class FireLobbyRepository : LobbyRepository {
 
     })
 
+  }
+
+
+  override fun getCurrentActivePlayer(game: Game, observer: Observer<Player?>): Player? {
+    var playerPlaying: Player? by Delegates.observable(null) {
+      _: KProperty<*>, old: Player?, new: Player? ->
+      observer.onValueChange(new, old)
+    }
+
+
+    ref.child("games").child(game.name).addValueEventListener(object : ValueEventListener {
+      override fun onCancelled(p0: DatabaseError?) {}
+
+      override fun onDataChange(dataSnapshot: DataSnapshot) {
+        if (dataSnapshot.child("started").getValue(Boolean::class.java)) {
+          val turn = dataSnapshot.child("turn").getValue(Int::class.java)
+          val userList = ArrayList<Player>()
+          val playerMap: HashMap<*, *> = dataSnapshot.child("players").value as HashMap<*, *>
+          playerMap.entries.forEach {
+            val map = dataSnapshot.value as HashMap<*, *>
+            val player: Player =
+                Player(it.key.toString(),
+                    map["admin"].toString() == "true",
+                    map["history"].toString() == "true",
+                    map["hardware"].toString() == "true",
+                    map["network"].toString() == "true",
+                    map["software"].toString() == "true",
+                    map["enterprise"].toString() == "true"
+                )
+            userList.add(player)
+          }
+          playerPlaying = userList[turn]
+        }
+      }
+
+    })
+    return playerPlaying
   }
 
 
@@ -89,18 +129,20 @@ class FireLobbyRepository : LobbyRepository {
     return listGames
   }
 
-  override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).child("players").addValueEventListener(object : ValueEventListener {
-      override fun onCancelled(p0: DatabaseError?) {
-        callback.onError()
-      }
+  override fun getUsersInGame(game: Game, observer: Observer<List<Player>>): List<Player> {
+    var listPlayers: MutableList<Player> by Delegates.observable(ArrayList()) {
+      _, old, new ->
+      observer.onValueChange(new, old)
+    }
+
+    listener = object : ValueEventListener {
+      override fun onCancelled(p0: DatabaseError?) {}
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val userList = ArrayList<Player>()
-        val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
+        val playerMap: HashMap<*, *> = dataSnapshot.child("players").value as HashMap<*, *>
         playerMap.entries.forEach {
-          var map = (dataSnapshot.value as HashMap<*, *>)[it.key] as HashMap<*, *>
-
+          val map = (dataSnapshot.child("players").value as HashMap<*, *>)[it.key] as HashMap<*, *>
           val player: Player =
               Player(it.key.toString(),
                   map["admin"].toString() == "true",
@@ -112,35 +154,13 @@ class FireLobbyRepository : LobbyRepository {
               )
           userList.add(player)
         }
-        if (userList.filter { it.username == Session.username && it.admin }.isEmpty()) {
-          this@FireLobbyRepository.setListenerToStartGame(game, callback)
-        }
-        callback.onFetchUserListSuccess(userList)
+
+        listPlayers = userList
       }
-    })
-  }
+    }
+    ref.child("games").child(game.name).addValueEventListener(listener)
 
-  private fun setListenerToStartGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).addListenerForSingleValueEvent(object : ValueEventListener {
-
-      override fun onDataChange(dataSnapshot: DataSnapshot) {
-        if (dataSnapshot.child("started").getValue(Boolean::class.java)) {
-          val turn = dataSnapshot.child("players").childrenCount
-          ref.child("games").child(game.name).removeEventListener(this)
-          if (isMyTurn(dataSnapshot, turn.toInt())) {
-            callback.onInitAndMyTurn()
-          } else {
-            callback.onInitAndWait()
-          }
-        } else {
-          ref.child("games").child(game.name).addListenerForSingleValueEvent(this)
-        }
-      }
-
-      override fun onCancelled(p0: DatabaseError?) {
-      }
-
-    })
+    return listPlayers
   }
 
   private fun isMyTurn(dataSnapshot: DataSnapshot, turn: Int): Boolean {
@@ -150,45 +170,45 @@ class FireLobbyRepository : LobbyRepository {
         .getValue(String::class.java) == Session.username
   }
 
-
   override fun startGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).child("players")
-        .addListenerForSingleValueEvent(object : ValueEventListener {
-          override fun onDataChange(dataSnapshot: DataSnapshot) {
-            val randomTurn = this@FireLobbyRepository
-                .selectRandomTurn(dataSnapshot.childrenCount.toInt())
-            ref.child("games")
-                .child(game.name).child("turn").setValue(randomTurn)
-            ref.child("games").child(game.name).child("started").setValue(true)
+    listener = object : ValueEventListener {
+      override fun onDataChange(dataSnapshot: DataSnapshot) {
+        val randomTurn = this@FireLobbyRepository
+            .selectRandomTurn(dataSnapshot.childrenCount.toInt())
+        ref.child("games")
+            .child(game.name).child("turn").setValue(randomTurn)
+        ref.child("games").child(game.name).child("started").setValue(true)
 
-            val userList = ArrayList<Player>()
-            val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
-            playerMap.entries.forEach {
-              val map = dataSnapshot.value as HashMap<*, *>
-              val player: Player =
-                  Player(it.key.toString(),
-                      map["admin"].toString() == "true",
-                      map["history"].toString() == "true",
-                      map["hardware"].toString() == "true",
-                      map["network"].toString() == "true",
-                      map["software"].toString() == "true",
-                      map["enterprise"].toString() == "true"
-                  )
-              userList.add(player)
-            }
+        val userList = ArrayList<Player>()
+        val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
+        playerMap.entries.forEach {
+          val map = (dataSnapshot.value as HashMap<*, *>)[it.key] as HashMap<*, *>
+          val player: Player =
+              Player(it.key.toString(),
+                  map["admin"].toString() == "true",
+                  map["history"].toString() == "true",
+                  map["hardware"].toString() == "true",
+                  map["network"].toString() == "true",
+                  map["software"].toString() == "true",
+                  map["enterprise"].toString() == "true"
+              )
+          userList.add(player)
+        }
 
 
-            if (userList[randomTurn].admin)
-              callback.onInitAndMyTurn()
-            else
-              callback.onInitAndWait()
+        if (userList[randomTurn].admin)
+          callback.onInitAndMyTurn()
+        else
+          callback.onInitAndWait()
 
-          }
+      }
 
-          override fun onCancelled(p0: DatabaseError?) {
-            callback.onError()
-          }
-        })
+      override fun onCancelled(p0: DatabaseError?) {
+        callback.onError()
+      }
+    }
+    ref.child("games").child(game.name).child("players").addValueEventListener(listener)
+
   }
 
   private fun selectRandomTurn(numberPlayers: Int): Int {

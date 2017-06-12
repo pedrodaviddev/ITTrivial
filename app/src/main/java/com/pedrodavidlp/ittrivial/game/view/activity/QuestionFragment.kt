@@ -2,33 +2,37 @@ package com.pedrodavidlp.ittrivial.game.view.activity
 
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Question
 import com.pedrodavidlp.ittrivial.game.presenter.QuestionPresenter
 import com.pedrodavidlp.ittrivial.game.view.Category
-import kotlinx.android.synthetic.main.activity_question.*
-import org.jetbrains.anko.alert
+import kotlinx.android.synthetic.main.fragment_question.*
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class QuestionActivity : AppCompatActivity(), QuestionContract.View {
+class QuestionFragment(private val category: Category) : Fragment(), QuestionContract.View {
 
   lateinit private var presenter: QuestionPresenter
   private val timer = Timer()
-  lateinit private var category: Category
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_question)
-    category = intent.getSerializableExtra("Category") as Category
-    timeIndicator.max = 200
-    setCategoryUI(category)
+
+  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     presenter = ServiceLocator.provideQuestionPresenter(this)
+    return inflater?.inflate(R.layout.fragment_question, container, false)
+  }
+
+  override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
     presenter.setView(this)
+    setCategoryUI(category)
+    timeIndicator.max = 200
     presenter.init(category)
   }
 
@@ -50,22 +54,22 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
 
       first.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.hit(category)
       }
       second.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
       third.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
       fourth.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
     }
@@ -77,22 +81,22 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
 
       first.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
       second.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.hit(category)
       }
       third.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
       fourth.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
     }
@@ -104,22 +108,22 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
 
       first.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
       second.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
       third.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.hit(category)
       }
       fourth.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
     }
@@ -131,22 +135,22 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
 
       first.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
       second.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
       third.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_red_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
         presenter.fail()
       }
       fourth.setOnClickListener {
         removeAllListeners()
-        it.setBackgroundColor(ContextCompat.getColor(applicationContext, android.R.color.holo_green_dark))
+        it.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
         presenter.hit(category)
       }
     }
@@ -159,7 +163,7 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
       if (timeIndicator.progress > 0) {
         timeIndicator.progress = timeIndicator.progress - 1
       } else {
-        this@QuestionActivity.presenter.fail()
+        this@QuestionFragment.presenter.fail()
       }
     }, 0, 50)
   }
@@ -167,38 +171,38 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
   private fun setCategoryUI(category: Category) {
     when (category) {
       Category.HARDWARE -> {
-        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.hardwareDark))
-        title = "Hardware"
+        container.setBackgroundColor(ContextCompat.getColor(context, R.color.hardwareDark))
+        activity.title = "Hardware"
         timeIndicator.progressDrawable.setColorFilter(
-            ContextCompat.getColor(applicationContext, R.color.hardware),
+            ContextCompat.getColor(context, R.color.hardware),
             PorterDuff.Mode.SRC_IN)
       }
       Category.ENTERPRISE -> {
-        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.enterpriseDark))
-        title = "Empresa"
+        container.setBackgroundColor(ContextCompat.getColor(context, R.color.enterpriseDark))
+        activity.title = "Empresa"
         timeIndicator.progressDrawable.setColorFilter(
-            ContextCompat.getColor(applicationContext, R.color.enterprise),
+            ContextCompat.getColor(context, R.color.enterprise),
             PorterDuff.Mode.SRC_IN)
       }
       Category.HISTORY -> {
-        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.historyDark))
-        title = "Historia"
+        container.setBackgroundColor(ContextCompat.getColor(context, R.color.historyDark))
+        activity.title = "Historia"
         timeIndicator.progressDrawable.setColorFilter(
-            ContextCompat.getColor(applicationContext, R.color.history),
+            ContextCompat.getColor(context, R.color.history),
             PorterDuff.Mode.SRC_IN)
       }
       Category.NETWORK -> {
-        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.networkDark))
-        title = "Redes"
+        container.setBackgroundColor(ContextCompat.getColor(context, R.color.networkDark))
+        activity.title = "Redes"
         timeIndicator.progressDrawable.setColorFilter(
-            ContextCompat.getColor(applicationContext, R.color.network),
+            ContextCompat.getColor(context, R.color.network),
             PorterDuff.Mode.SRC_IN)
       }
       Category.SOFTWARE -> {
-        container.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.softwareDark))
-        title = "Software"
+        container.setBackgroundColor(ContextCompat.getColor(context, R.color.softwareDark))
+        activity.title = "Software"
         timeIndicator.progressDrawable.setColorFilter(
-            ContextCompat.getColor(applicationContext, R.color.software),
+            ContextCompat.getColor(context, R.color.software),
             PorterDuff.Mode.SRC_IN)
       }
     }
@@ -215,15 +219,4 @@ class QuestionActivity : AppCompatActivity(), QuestionContract.View {
     third.setOnClickListener(null)
     fourth.setOnClickListener(null)
   }
-
-  override fun onBackPressed() {
-    alert("Are you sure to leave the game?"){
-      title("Exit")
-      yesButton {
-        //TODO
-      }
-      noButton {}
-    }.show()
-  }
-
 }
