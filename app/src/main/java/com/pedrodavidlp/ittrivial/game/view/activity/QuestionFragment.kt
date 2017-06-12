@@ -42,6 +42,14 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
   }
 
   override fun onLoadQuestion(question: Question) {
+    questionLoader.visibility = View.GONE
+    questionText.visibility = View.VISIBLE
+    first.visibility = View.VISIBLE
+    second.visibility = View.VISIBLE
+    third.visibility = View.VISIBLE
+    fourth.visibility = View.VISIBLE
+    timeIndicator.visibility = View.VISIBLE
+
     startCountdown()
     questionText.text = question.question
     val random = Random()
@@ -184,6 +192,9 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
     when (category) {
       Category.HARDWARE -> {
         container.setBackgroundColor(ContextCompat.getColor(context, R.color.hardwareDark))
+        questionLoader.indeterminateDrawable.setColorFilter(
+            ContextCompat.getColor(context, R.color.hardware),
+            PorterDuff.Mode.SRC_IN)
         activity.title = "Hardware"
         timeIndicator.progressDrawable.setColorFilter(
             ContextCompat.getColor(context, R.color.hardware),
@@ -192,6 +203,9 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       Category.ENTERPRISE -> {
         container.setBackgroundColor(ContextCompat.getColor(context, R.color.enterpriseDark))
         activity.title = "Empresa"
+        questionLoader.indeterminateDrawable.setColorFilter(
+            ContextCompat.getColor(context, R.color.enterprise),
+            PorterDuff.Mode.SRC_IN)
         timeIndicator.progressDrawable.setColorFilter(
             ContextCompat.getColor(context, R.color.enterprise),
             PorterDuff.Mode.SRC_IN)
@@ -199,6 +213,9 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       Category.HISTORY -> {
         container.setBackgroundColor(ContextCompat.getColor(context, R.color.historyDark))
         activity.title = "Historia"
+        questionLoader.indeterminateDrawable.setColorFilter(
+            ContextCompat.getColor(context, R.color.history),
+            PorterDuff.Mode.SRC_IN)
         timeIndicator.progressDrawable.setColorFilter(
             ContextCompat.getColor(context, R.color.history),
             PorterDuff.Mode.SRC_IN)
@@ -206,6 +223,9 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       Category.NETWORK -> {
         container.setBackgroundColor(ContextCompat.getColor(context, R.color.networkDark))
         activity.title = "Redes"
+        questionLoader.indeterminateDrawable.setColorFilter(
+            ContextCompat.getColor(context, R.color.network),
+            PorterDuff.Mode.SRC_IN)
         timeIndicator.progressDrawable.setColorFilter(
             ContextCompat.getColor(context, R.color.network),
             PorterDuff.Mode.SRC_IN)
@@ -213,6 +233,9 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
       Category.SOFTWARE -> {
         container.setBackgroundColor(ContextCompat.getColor(context, R.color.softwareDark))
         activity.title = "Software"
+        questionLoader.indeterminateDrawable.setColorFilter(
+            ContextCompat.getColor(context, R.color.software),
+            PorterDuff.Mode.SRC_IN)
         timeIndicator.progressDrawable.setColorFilter(
             ContextCompat.getColor(context, R.color.software),
             PorterDuff.Mode.SRC_IN)
