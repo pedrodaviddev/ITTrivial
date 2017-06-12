@@ -12,23 +12,23 @@ import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.game.presenter.WaitPresenter
-import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.login.view.PlayerListAdapter
 import kotlinx.android.synthetic.main.fragment_wait.*
 
 class WaitFragment : Fragment(), WaitContract.View {
 
   lateinit var presenter: WaitPresenter
-  lateinit var router: WaitRouter
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    presenter = ServiceLocator.provideWaitPresenter()
+    presenter = ServiceLocator.provideWaitPresenter(this)
     return inflater?.inflate(R.layout.fragment_wait, container, false)
   }
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     playerList.adapter = PlayerListAdapter()
     playerList.layoutManager = LinearLayoutManager(context)
+    presenter.setView(this)
+    presenter.init()
     super.onViewCreated(view, savedInstanceState)
   }
 

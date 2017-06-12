@@ -10,14 +10,21 @@ import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.login.contract.UserListContract
 import com.pedrodavidlp.ittrivial.login.domain.usecase.GetUserList
 
-class WaitPresenter(val turn: GetTurn,
-                    val leave: LeaveGame,
-                    val end: EndGame,
-                    val players: GetUserList,
-                    val router: WaitRouter) :
+class WaitPresenter(private val turn: GetTurn,
+                    private val leave: LeaveGame,
+                    private val end: EndGame,
+                    private val players: GetUserList,
+                    private val router: WaitRouter) :
     WaitContract.Presenter,
     WaitContract.InteractorOutput,
     UserListContract.InteractorOutput {
+  override fun onInitAndMyTurn() {
+
+  }
+
+  override fun onInitAndWait() {
+
+  }
 
   override fun onLeaveGame() {
   }
@@ -30,15 +37,7 @@ class WaitPresenter(val turn: GetTurn,
 
   }
 
-  override fun onInitAndMyTurn() {
-
-  }
-
-  override fun onInitAndWait() {
-
-  }
-
-  lateinit var v: WaitContract.View
+  lateinit private var v: WaitContract.View
 
   override fun init() {
     this.getTurn()

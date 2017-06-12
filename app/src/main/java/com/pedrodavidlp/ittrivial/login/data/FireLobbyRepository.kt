@@ -90,17 +90,16 @@ class FireLobbyRepository : LobbyRepository {
   }
 
   override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).child("players").addValueEventListener(object : ValueEventListener {
+    ref.child("games").child(game.name).addValueEventListener(object : ValueEventListener {
       override fun onCancelled(p0: DatabaseError?) {
         callback.onError()
       }
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val userList = ArrayList<Player>()
-        val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
+        val playerMap: HashMap<*, *> = dataSnapshot.child("players").value as HashMap<*, *>
         playerMap.entries.forEach {
-          var map = (dataSnapshot.value as HashMap<*, *>)[it.key] as HashMap<*, *>
-
+          val map = (dataSnapshot.child("players").value as HashMap<*, *>)[it.key] as HashMap<*, *>
           val player: Player =
               Player(it.key.toString(),
                   map["admin"].toString() == "true",
@@ -113,33 +112,17 @@ class FireLobbyRepository : LobbyRepository {
           userList.add(player)
         }
         if (userList.filter { it.username == Session.username && it.admin }.isEmpty()) {
-          this@FireLobbyRepository.setListenerToStartGame(game, callback)
+          if (dataSnapshot.child("started").getValue(Boolean::class.java)) {
+            val turn = dataSnapshot.child("turn").getValue(Int::class.java)
+            if (userList[turn].username == Session.username) {
+              callback.onInitAndMyTurn()
+            } else {
+              callback.onInitAndWait()
+            }
+          }
         }
         callback.onFetchUserListSuccess(userList)
       }
-    })
-  }
-
-  private fun setListenerToStartGame(game: Game, callback: UserListContract.InteractorOutput) {
-    ref.child("games").child(game.name).addListenerForSingleValueEvent(object : ValueEventListener {
-
-      override fun onDataChange(dataSnapshot: DataSnapshot) {
-        if (dataSnapshot.child("started").getValue(Boolean::class.java)) {
-          val turn = dataSnapshot.child("players").childrenCount
-          ref.child("games").child(game.name).removeEventListener(this)
-          if (isMyTurn(dataSnapshot, turn.toInt())) {
-            callback.onInitAndMyTurn()
-          } else {
-            callback.onInitAndWait()
-          }
-        } else {
-          ref.child("games").child(game.name).addListenerForSingleValueEvent(this)
-        }
-      }
-
-      override fun onCancelled(p0: DatabaseError?) {
-      }
-
     })
   }
 
