@@ -63,7 +63,7 @@ object ServiceLocator {
 
 
   //Presenters
-  fun provideEnterGamePresenter() = EnterGamePresenter(provideSelectUsernameUseCase())
+  fun provideEnterGamePresenter(activity: EnterGameActivity) = EnterGamePresenter(provideSelectUsernameUseCase(), provideEnterGameRouter(activity))
 
   fun provideGameListPresenter(activity: GameListActivity) = GameListPresenter(provideGetGameListUseCase(), provideEnterGameListUseCase(), provideGameListRouter(activity))
   fun provideMenuPresenter(activity: MenuActivity) = MenuPresenter(provideMenuRouter(activity), provideCreateGameUseCase())

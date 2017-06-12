@@ -2,8 +2,10 @@ package com.pedrodavidlp.ittrivial.login.presenter
 
 import com.pedrodavidlp.ittrivial.login.contract.EnterGameContract
 import com.pedrodavidlp.ittrivial.login.domain.usecase.SelectUsername
+import com.pedrodavidlp.ittrivial.login.router.EnterGameRouter
 
-class EnterGamePresenter(private val select: SelectUsername) : EnterGameContract.InteractorOutput {
+class EnterGamePresenter(private val select: SelectUsername,
+                         private val router: EnterGameRouter) : EnterGameContract.InteractorOutput {
 
   lateinit private var vw: EnterGameContract.View
   fun pickUsername(username: String) {
@@ -27,7 +29,7 @@ class EnterGamePresenter(private val select: SelectUsername) : EnterGameContract
   }
 
   override fun onUsernameSelected() {
-    vw.usernameSelected()
+    router.goToMenu()
   }
 
   override fun usernameHasSpacesBetweenWords() {
