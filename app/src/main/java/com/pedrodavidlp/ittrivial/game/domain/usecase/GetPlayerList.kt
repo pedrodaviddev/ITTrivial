@@ -7,7 +7,7 @@ import com.pedrodavidlp.ittrivial.game.domain.model.Player
 import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 import kotlin.concurrent.thread
 
-class GetPlayerList(val repository: LobbyRepository) : PlayerListContract.Interactor {
+open class GetPlayerList(val repository: LobbyRepository) : PlayerListContract.Interactor {
   override fun getUserList(game: Game, callback: PlayerListContract.InteractorOutput) {
     thread {
       repository.getUsersInGame(game, object : Observer<List<Player>> {
@@ -23,7 +23,7 @@ class GetPlayerList(val repository: LobbyRepository) : PlayerListContract.Intera
     }
   }
 
-  private fun getWinnerPlayer(listPlayers: List<Player>): Player? {
+  protected fun getWinnerPlayer(listPlayers: List<Player>): Player? {
     return listPlayers
         .filter {
           it.enterprise &&

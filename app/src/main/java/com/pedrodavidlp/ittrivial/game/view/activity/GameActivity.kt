@@ -5,11 +5,10 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.base.pattern.ServiceLocator
-import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
 import org.jetbrains.anko.contentView
 
-class GameActivity : AppCompatActivity(), GameContract.View {
+class GameActivity : AppCompatActivity() {
   companion object {
     lateinit var instance: GameActivity
   }
@@ -19,13 +18,8 @@ class GameActivity : AppCompatActivity(), GameContract.View {
     setContentView(R.layout.activity_main)
     val turn = intent.getBooleanExtra("turn", false)
     presenter = ServiceLocator.Game.Presenter.provideGame(this)
-    presenter.setView(this)
     instance = this
     presenter.init(turn)
-  }
-
-  override fun initUI() {
-
   }
 
 

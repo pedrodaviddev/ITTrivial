@@ -1,47 +1,41 @@
-package com.pedrodavidlp.ittrivial
+package com.pedrodavidlp.ittrivial.usecases
 
-import com.pedrodavidlp.ittrivial.login.contract.EnterGameContract
-import com.pedrodavidlp.ittrivial.login.domain.usecase.SelectUsername
-import org.junit.Before
-import org.junit.Test
-import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.mockito.MockitoAnnotations
 
 class SelectUsernameShould {
-  @Mock lateinit var callback: EnterGameContract.InteractorOutput
-  private val selectUsername = SelectUsername()
+  @org.mockito.Mock lateinit var callback: com.pedrodavidlp.ittrivial.login.contract.EnterGameContract.InteractorOutput
+  private val selectUsername = com.pedrodavidlp.ittrivial.login.domain.usecase.SelectUsername()
 
-  @Before
+  @org.junit.Before
   fun setUp() {
-    MockitoAnnotations.initMocks(this)
+    org.mockito.MockitoAnnotations.initMocks(this)
   }
 
-  @Test
+  @org.junit.Test
   fun `Reject username if is blank`() {
     selectUsername.selectUsername("     ", callback)
     verify(callback).usernameIsBlank()
   }
 
-  @Test
+  @org.junit.Test
   fun `Reject username if have less than 5 characters`() {
     selectUsername.selectUsername("hola", callback)
     verify(callback).usernameHasLessThanFiveCharacters()
   }
 
-  @Test
+  @org.junit.Test
   fun `Reject username if have not alphanumeric symbols`() {
     selectUsername.selectUsername("soy_el_4", callback)
     verify(callback).usernameContainsSymbols()
   }
 
-  @Test
+  @org.junit.Test
   fun `Reject username if have spaces between words`() {
     selectUsername.selectUsername("en europa soy un don", callback)
     verify(callback).usernameHasSpacesBetweenWords()
   }
 
-  @Test
+  @org.junit.Test
   fun `Accept username if all requirements are correct`() {
     selectUsername.selectUsername("nhemesy", callback)
     verify(callback).onUsernameSelected()
