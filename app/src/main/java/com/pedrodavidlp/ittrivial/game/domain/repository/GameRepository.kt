@@ -13,4 +13,5 @@ interface GameRepository {
   fun loseTurnInGame(game: Game, callback: QuestionContract.InteractorOutput)
   fun winCategory(game: Game, username: String, category: Category)
   fun leaveGame(player: Player, game: Game, callback: WaitContract.InteractorOutput)
+  fun listenEndGame(callback: WaitContract.InteractorOutput)
 }

@@ -111,6 +111,10 @@ class FireGameRepository : GameRepository {
     })
   }
 
+  override fun listenEndGame(callback: WaitContract.InteractorOutput) {
+
+  }
+
   private fun selectNextTurn(numberPlayers: Int, turn: Int): Int {
     if (turn < numberPlayers - 1) {
       return turn + 1

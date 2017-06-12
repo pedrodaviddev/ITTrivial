@@ -24,6 +24,7 @@ class WaitContract {
     fun onMyTurn()
     fun onChangeTurn(player: Player)
     fun onLeaveGame()
+    fun onGameEnds()
   }
 
   interface Router {
