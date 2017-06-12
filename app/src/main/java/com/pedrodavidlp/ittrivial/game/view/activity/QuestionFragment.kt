@@ -49,9 +49,15 @@ class QuestionFragment(private val category: Category) : Fragment(), QuestionCon
     third.visibility = View.VISIBLE
     fourth.visibility = View.VISIBLE
     timeIndicator.visibility = View.VISIBLE
-
     startCountdown()
     questionText.text = question.question
+
+
+    setListenersToButtons(question)
+
+  }
+
+  private fun setListenersToButtons(question: Question) {
     val random = Random()
     val position = random.nextInt(3) + 1
     if (position == 1) {
