@@ -13,15 +13,9 @@ class RouletteContract {
   interface Presenter {
     fun init()
     fun setView(view: View)
-    fun getScores()
-  }
-
-  interface Interactor {
-    fun getScores()
   }
 
   interface InteractorOutput {
-    fun onGetScores(playerList: List<Player>)
   }
 
   interface Router {

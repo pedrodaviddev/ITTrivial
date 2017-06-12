@@ -6,5 +6,4 @@ data class Player(var username: String = "Error",
                   var hardware: Boolean = false,
                   var network: Boolean = false,
                   var software: Boolean = false,
-                  var enterprise: Boolean = false
-)
+                  var enterprise: Boolean = false)

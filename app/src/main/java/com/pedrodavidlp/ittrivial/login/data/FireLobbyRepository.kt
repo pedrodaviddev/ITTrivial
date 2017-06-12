@@ -16,11 +16,6 @@ import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
 class FireLobbyRepository : LobbyRepository {
-
-  companion object {
-    val playerNumber: Array<String> = arrayOf("I", "II", "III", "IV", "V", "VI")
-  }
-
   val randomNames: Array<String> = arrayOf("Ailurophile", "Assemblage",
       "Becoming", "Beleaguer", "Brood", "Bucolic", "Bungalow", "Chatoyant", "Comely",
       "Conflate", "Cynosure", "Dalliance", "Demesne", "Dominion", "Demure", "Denouement", "Desuetude",
@@ -79,6 +74,8 @@ class FireLobbyRepository : LobbyRepository {
       override fun onCancelled(p0: DatabaseError?) {}
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
+        Log.d("VECES ACIVADO GETTURN", "UNA MAS")
+
         if (dataSnapshot.child("started").getValue(Boolean::class.java)) {
           val turn = dataSnapshot.child("turn").getValue(Int::class.java)
           val userList = ArrayList<Player>()
@@ -139,10 +136,12 @@ class FireLobbyRepository : LobbyRepository {
       override fun onCancelled(p0: DatabaseError?) {}
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
+        Log.d("VECES ACIVADO GETUSER", "UNA MAS")
         val userList = ArrayList<Player>()
         val playerMap: HashMap<*, *> = dataSnapshot.child("players").value as HashMap<*, *>
         playerMap.entries.forEach {
           val map = (dataSnapshot.child("players").value as HashMap<*, *>)[it.key] as HashMap<*, *>
+          val mapaaa = map["id"].toString()
           val player: Player =
               Player(it.key.toString(),
                   map["admin"].toString() == "true",
@@ -154,20 +153,13 @@ class FireLobbyRepository : LobbyRepository {
               )
           userList.add(player)
         }
-
+        userList.sortBy { it.username }
         listPlayers = userList
       }
     }
     ref.child("games").child(game.name).addValueEventListener(listener)
 
     return listPlayers
-  }
-
-  private fun isMyTurn(dataSnapshot: DataSnapshot, turn: Int): Boolean {
-    return dataSnapshot.child("players")
-        .child(playerNumber[turn])
-        .child("nickname")
-        .getValue(String::class.java) == Session.username
   }
 
   override fun startGame(game: Game, callback: UserListContract.InteractorOutput) {
@@ -178,7 +170,7 @@ class FireLobbyRepository : LobbyRepository {
         ref.child("games")
             .child(game.name).child("turn").setValue(randomTurn)
         ref.child("games").child(game.name).child("started").setValue(true)
-
+        Log.d("Esto no debe aparecer", "UNA MAS")
         val userList = ArrayList<Player>()
         val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
         playerMap.entries.forEach {
@@ -196,10 +188,13 @@ class FireLobbyRepository : LobbyRepository {
         }
 
 
-        if (userList[randomTurn].admin)
+        if (userList[randomTurn].admin) {
           callback.onInitAndMyTurn()
-        else
+          ref.child("games").child(game.name).child("players").removeEventListener(listener)
+        } else {
           callback.onInitAndWait()
+          ref.child("games").child(game.name).child("players").removeEventListener(listener)
+        }
 
       }
 

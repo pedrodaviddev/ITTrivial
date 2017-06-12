@@ -15,7 +15,7 @@ class WaitRouter(private val fragment: WaitFragment) : WaitContract.Router {
   }
 
   override fun goToRoulette() {
-    val parentRouter: GameRouter = ServiceLocator.provideGameRouter(fragment.activity as GameActivity)
+    val parentRouter: GameRouter = ServiceLocator.provideGameRouter(GameActivity.instance)
     parentRouter.goToRoulette()
   }
 }
