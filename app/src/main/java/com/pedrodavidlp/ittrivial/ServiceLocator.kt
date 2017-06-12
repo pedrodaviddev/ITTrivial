@@ -2,7 +2,6 @@ package com.pedrodavidlp.ittrivial
 
 import com.pedrodavidlp.ittrivial.game.data.FireGameRepository
 import com.pedrodavidlp.ittrivial.game.data.FireQuestionRepository
-import com.pedrodavidlp.ittrivial.game.data.MockGameRepository
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
 import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
@@ -29,24 +28,22 @@ import com.pedrodavidlp.ittrivial.login.view.*
 object ServiceLocator {
 
   //Repositories
-  private val lobby = FireLobbyRepository()
-  private val game = FireGameRepository()
-
-  private fun provideGameRepository() = MockGameRepository()
+  private fun provideGameRepository() = FireGameRepository()
   private fun provideQuestionRepository() = FireQuestionRepository()
-  private fun provideFireGameRepository() = FireGameRepository()
+  private fun provideLobbyRepository() = FireLobbyRepository()
 
   //Use Cases
-  private fun provideGetGameListUseCase() = GetGameList(lobby)
+  private fun provideGetGameListUseCase() = GetGameList(provideLobbyRepository())
 
-  private fun provideNotifyStartGameUseCase(): NotifyStartGame = NotifyStartGame(lobby)
-  private fun provideLeaveGameUseCase(): LeaveGame = LeaveGame(game)
-  private fun provideEnterGameListUseCase() = EnterGame(lobby)
-  private fun provideCreateGameUseCase() = CreateGame(lobby)
-  private fun provideGetUserListUseCase() = GetUserList(lobby)
-  private fun provideExitGameUseCase() = ExitGame(lobby)
-  private fun provideStartGameUseCase() = StartGame(lobby)
-  private fun provideGetTurnUseCase() = GetTurn(provideFireGameRepository())
+  private fun provideNotifyStartGameUseCase(): NotifyStartGame = NotifyStartGame(provideLobbyRepository())
+  private fun provideLeaveGameUseCase(): LeaveGame = LeaveGame(provideGameRepository())
+  private fun provideGetPlayerListUseCase(): GetPlayerList = GetPlayerList(provideLobbyRepository())
+  private fun provideEnterGameListUseCase() = EnterGame(provideLobbyRepository())
+  private fun provideCreateGameUseCase() = CreateGame(provideLobbyRepository())
+  private fun provideGetUserListUseCase() = GetUserList(provideLobbyRepository())
+  private fun provideExitGameUseCase() = ExitGame(provideLobbyRepository())
+  private fun provideStartGameUseCase() = StartGame(provideLobbyRepository())
+  private fun provideGetTurnUseCase() = GetTurn(provideGameRepository())
   private fun provideSelectUsernameUseCase() = SelectUsername()
 
   //Routers
@@ -85,10 +82,10 @@ object ServiceLocator {
       provideUserListGuestRouter(activity))
 
 
-
   fun provideRoulettePresenter(fragment: RouletteFragment) = RoulettePresenter(provideGameRepository(), provideLeaveGameUseCase(), provideRouletteRouter(fragment))
-  fun provideQuestionPresenter(fragment: QuestionFragment) = QuestionPresenter(provideQuestionRepository(), provideFireGameRepository(), provideQuestionRouter(fragment))
-  fun provideWaitPresenter(fragment: WaitFragment) = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideGetUserListUseCase(), provideWaitRouter(fragment))
+  fun provideQuestionPresenter(fragment: QuestionFragment) = QuestionPresenter(provideQuestionRepository(), provideGameRepository(), provideQuestionRouter(fragment))
+  fun provideWaitPresenter(fragment: WaitFragment) = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideGetPlayerListUseCase(), provideWaitRouter(fragment))
+
 
   fun provideGamePresenter(activity: GameActivity): GamePresenter = GamePresenter(provideGameRouter(activity))
 

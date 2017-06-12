@@ -24,9 +24,9 @@
         </activity>
         <activity android:name=".login.view.GameListActivity">
         </activity>
-        <activity android:name=".game.view.activity.WaitFragment">
-        </activity>
         <activity android:name=".game.view.activity.GameActivity">
+        </activity>
+        <activity android:name=".game.view.activity.FinishGameActivity">
         </activity>
     </application>
 

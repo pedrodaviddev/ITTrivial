@@ -10,12 +10,6 @@ class WaitContract {
     fun showListPlayers(listPlayer: List<Player>)
   }
 
-  interface Presenter {
-    fun init()
-    fun setView(view: View)
-    fun getTurn()
-  }
-
   interface Interactor {
     fun getTurn(game: Game, callback: WaitContract.InteractorOutput)
   }
@@ -24,11 +18,11 @@ class WaitContract {
     fun onMyTurn()
     fun onChangeTurn(player: Player)
     fun onLeaveGame()
-    fun onGameEnds()
   }
 
   interface Router {
     fun goToRoulette()
+    fun goToFinishGame(winner: Player)
   }
 
 }
