@@ -17,10 +17,17 @@ class RoulettePresenter(val repository: GameRepository,
   lateinit var vw: RouletteContract.View
 
   override fun init() {
+
     if (Session.player.isWinner()) {
       router.goToFinish(Session.player)
     } else {
       vw.initUi()
+
+      vw.initMedals(Session.player.hardware,
+          Session.player.software,
+          Session.player.network,
+          Session.player.enterprise,
+          Session.player.history)
     }
   }
 

@@ -2,6 +2,7 @@ package com.pedrodavidlp.ittrivial.game.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 
 import android.view.MotionEvent
 import android.view.View
@@ -62,10 +63,11 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
   }
 
   private fun setQuadrant(angle: Float) {
-    current = if (angle < 72) HARDWARE
+    Log.d("AHORA HA SALIDO", angle.toString())
+    current = if (angle < 72) ENTERPRISE
     else if (angle < 144) NETWORK
-    else if (angle < 216) SOFTWARE
-    else if (angle < 288) ENTERPRISE
+    else if (angle < 216) HARDWARE
+    else if (angle < 288) SOFTWARE
     else HISTORY
   }
 

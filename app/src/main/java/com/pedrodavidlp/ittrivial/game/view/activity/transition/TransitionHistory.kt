@@ -17,7 +17,7 @@ class TransitionHistory(image: ImageView, router: GameRouter) : TransitionTempla
 
   override fun animate() {
     image.visibility = VISIBLE
-    val animation = RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f)
+    val animation = RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
     animation.duration = 2000
     image.startAnimation(animation)
     animation.setAnimationListener(object : Animation.AnimationListener {
