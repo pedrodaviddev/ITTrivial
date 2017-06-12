@@ -2,6 +2,7 @@ package com.pedrodavidlp.ittrivial.game.view.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
@@ -35,10 +36,12 @@ class RouletteFragment : Fragment(), RouletteContract.View, Roulette.OnCategoryS
       override fun onSelectionChange(category: Category) {
         selectedCategoryText.visibility = VISIBLE
         selectedCategoryText.text = category.name
+        selectedCategoryText.setTextColor(getCategoryColor(category))
       }
     })
     roulette.setOnCategorySelectedListener(this)
   }
+
 
   override fun onCategorySelected(category: Category) {
     presenter.goToQuestion(category, transitionImage)
@@ -72,4 +75,14 @@ class RouletteFragment : Fragment(), RouletteContract.View, Roulette.OnCategoryS
     }
   }
 
+  private fun getCategoryColor(category: Category): Int {
+    when (category) {
+      Category.HISTORY -> return ContextCompat.getColor(context, R.color.history)
+      Category.HARDWARE -> return ContextCompat.getColor(context, R.color.hardware)
+      Category.SOFTWARE -> return ContextCompat.getColor(context, R.color.software)
+      Category.ENTERPRISE -> return ContextCompat.getColor(context, R.color.enterprise)
+      Category.NETWORK -> return ContextCompat.getColor(context, R.color.network)
+    }
+
+  }
 }

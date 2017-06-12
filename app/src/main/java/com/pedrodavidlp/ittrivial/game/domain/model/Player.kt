@@ -12,8 +12,8 @@ data class Player(var username: String = "Error",
   fun winCategory(category: Category) {
     when (category) {
       Category.HISTORY -> history = true
-      Category.SOFTWARE -> network = true
-      Category.NETWORK -> software = true
+      Category.SOFTWARE -> software = true
+      Category.NETWORK -> network = true
       Category.ENTERPRISE -> enterprise = true
       Category.HARDWARE -> hardware = true
     }

@@ -1,5 +1,6 @@
 package com.pedrodavidlp.ittrivial.game.view.activity.transition
 
+import android.os.Handler
 import android.support.animation.DynamicAnimation
 import android.support.animation.SpringAnimation
 import android.support.animation.SpringForce
@@ -11,7 +12,9 @@ import com.pedrodavidlp.ittrivial.game.view.Category
 
 class TransitionNetwork(image: ImageView, router: GameRouter) : TransitionTemplate(image, router) {
   override fun goToQuestion() {
-    router.goToQuestion(Category.NETWORK)
+    Handler().postDelayed({
+      router.goToQuestion(Category.NETWORK)
+    }, 700)
   }
 
   override fun setImage() {
@@ -20,14 +23,15 @@ class TransitionNetwork(image: ImageView, router: GameRouter) : TransitionTempla
 
   override fun animate() {
     val animation = SpringAnimation(image, DynamicAnimation.ROTATION_Y)
-    animation.setStartVelocity(0.00000000000001f)
     val force = SpringForce()
     force.dampingRatio = SpringForce.DAMPING_RATIO_HIGH_BOUNCY
-    force.stiffness = SpringForce.STIFFNESS_VERY_LOW
+    force.stiffness = SpringForce.STIFFNESS_LOW
     animation.spring = force
     animation.addEndListener { _, _, _, _ ->
-      image.visibility = View.GONE
       goToQuestion()
+      Handler().postDelayed({
+        image.visibility = View.GONE
+      }, 2000)
     }
     animation.animateToFinalPosition(360.0f)
   }
