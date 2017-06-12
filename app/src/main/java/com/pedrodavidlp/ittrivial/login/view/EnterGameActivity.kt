@@ -16,9 +16,12 @@ class EnterGameActivity : AppCompatActivity() {
     presenter = EnterGamePresenter()
 
     playButton.setOnClickListener {
-      startActivity<MenuActivity>()
-      presenter.pickUsername(usernameInput.text.toString())
-      finish()
+      if(!usernameInput.text.isEmpty()){
+        startActivity<MenuActivity>()
+        presenter.pickUsername(usernameInput.text.toString())
+        finish()
+      }
+
     }
   }
 
