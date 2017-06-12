@@ -4,7 +4,7 @@
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
-                                             android:background="@color/historyDark"
+                                             android:background="@color/mainBackground"
                                              android:orientation="vertical">
 
     <Button
@@ -15,7 +15,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/buttonstyle"
+        android:background="@color/ButtonColor"
         android:text="Crear partida"
         android:textColor="@color/cardview_light_background"
         app:layout_constraintBottom_toTopOf="@+id/joinMatchButton"
@@ -54,7 +54,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/buttonstyle"
+        android:background="@color/ButtonColor"
         android:text="Unirse a partida"
         android:textColor="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="parent"

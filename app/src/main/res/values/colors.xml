@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="mainBackground">#99ffa726</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#a2b0f1</color>
+    <color name="colorPrimaryDark">#b2b0f1</color>
+    <color name="mainBackground">#D6E0EB</color>
+    <color name="colorAccent">#fccdd3</color>
     <color name="history">#ffea00</color>
     <color name="historyDark">#66827717</color>
     <color name="network">#42a5f5</color>
     <color name="networkDark">#661a237e</color>
-    <color name="enterprise">#ff9800</color>
+    <color name="enterprise">#5f9800</color>
     <color name="enterpriseDark">#666d4c41</color>
     <color name="hardware">#aa00ff</color>
     <color name="hardwareDark">#664a148c</color>
     <color name="software">#f44336</color>
     <color name="softwareDark">#66b71c1c</color>
     <color name="bigCapacity">#689F38</color>
-    <color name="bigCapacityAlpha">#55689F38</color>
-    <color name="mediumCapacity">#FF8F00</color>
+    <color name="bigCapacityAlpha">#25689F38</color>
+    <color name="mediumCapacity">#5F8F00</color>
     <color name="mediumCapacityAlpha">#55FF8F00</color>
     <color name="littleCapacity">#D84315</color>
     <color name="littleCapacityAlpha">#55D84315</color>
+    <color name="ConriStyle">#e3e3e3</color>
+    <color name="ConriStyleDark">#c9c9c9</color>
+    <color name="ButtonColor">#6ed3cf</color>
 </resources>

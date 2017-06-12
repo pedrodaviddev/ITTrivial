@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pedrodavidlp.ittrivial.PlayerListGuestActivity">
+    android:background="@color/mainBackground"
+    tools:context="com.pedrodavidlp.ittrivial.login.view.PlayerListGuestActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -17,6 +18,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center_vertical|center_horizontal"
         android:text="Esperando al jugador principal"
+        android:textColor="@color/colorAccent"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintHorizontal_bias="0.0"
