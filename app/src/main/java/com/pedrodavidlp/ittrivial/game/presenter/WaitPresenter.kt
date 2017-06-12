@@ -3,7 +3,6 @@ package com.pedrodavidlp.ittrivial.game.presenter
 import com.pedrodavidlp.ittrivial.base.domain.data.Session
 import com.pedrodavidlp.ittrivial.game.contract.WaitContract
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
-import com.pedrodavidlp.ittrivial.game.domain.usecase.EndGame
 import com.pedrodavidlp.ittrivial.game.domain.usecase.GetTurn
 import com.pedrodavidlp.ittrivial.game.domain.usecase.LeaveGame
 import com.pedrodavidlp.ittrivial.game.router.WaitRouter
@@ -12,12 +11,12 @@ import com.pedrodavidlp.ittrivial.login.domain.usecase.GetUserList
 
 class WaitPresenter(private val turn: GetTurn,
                     private val leave: LeaveGame,
-                    private val end: EndGame,
                     private val players: GetUserList,
                     private val router: WaitRouter) :
     WaitContract.Presenter,
     WaitContract.InteractorOutput,
     UserListContract.InteractorOutput {
+
   override fun onInitAndMyTurn() {
 
   }
@@ -29,7 +28,7 @@ class WaitPresenter(private val turn: GetTurn,
   override fun onLeaveGame() {
   }
 
-  override fun onFetchUserListSuccess(list: List<Player>) {
+  override fun onFetchUserList(list: List<Player>) {
     v.showListPlayers(list)
   }
 
@@ -42,11 +41,6 @@ class WaitPresenter(private val turn: GetTurn,
   override fun init() {
     this.getTurn()
     this.getPlayers()
-    this.listenGameEnds()
-  }
-
-  private fun listenGameEnds() {
-    end.addListenerToEndGame(this)
   }
 
   private fun getPlayers() {

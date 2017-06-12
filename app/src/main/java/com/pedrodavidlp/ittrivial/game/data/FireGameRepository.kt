@@ -13,7 +13,6 @@ import java.util.HashMap
 import kotlin.collections.ArrayList
 
 class FireGameRepository : GameRepository {
-
   val database: FirebaseDatabase = FirebaseDatabase.getInstance()
   val ref: DatabaseReference = database.reference
   lateinit var listener: ValueEventListener
@@ -108,10 +107,6 @@ class FireGameRepository : GameRepository {
         callback.onLeaveGame()
       }
     })
-  }
-
-  override fun listenEndGame(callback: WaitContract.InteractorOutput) {
-
   }
 
   private fun selectNextTurn(numberPlayers: Int, turn: Int): Int {

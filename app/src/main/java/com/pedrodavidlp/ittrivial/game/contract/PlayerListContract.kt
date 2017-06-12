@@ -1,9 +1,9 @@
-package com.pedrodavidlp.ittrivial.login.contract
+package com.pedrodavidlp.ittrivial.game.contract
 
 import com.pedrodavidlp.ittrivial.game.domain.model.Game
 import com.pedrodavidlp.ittrivial.game.domain.model.Player
 
-class UserListContract {
+class PlayerListContract {
 
   interface View {
     fun showError(message: String)
@@ -17,14 +17,13 @@ class UserListContract {
   }
 
   interface Interactor {
-    fun getUserList(game: Game, callback: UserListContract.InteractorOutput)
+    fun getUserList(game: Game, callback: PlayerListContract.InteractorOutput)
   }
 
   interface InteractorOutput {
-    fun onFetchUserList(list: List<Player>)
     fun onError()
-    fun onInitAndMyTurn()
-    fun onInitAndWait()
+    fun gameFinished(winner: Player)
+    fun onFetchPlayerList(newValue: List<Player>)
   }
 
   interface Router {

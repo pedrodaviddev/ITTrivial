@@ -13,8 +13,10 @@ import com.pedrodavidlp.ittrivial.login.domain.repository.LobbyRepository
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
+import kotlin.reflect.KProperty
 
 class FireLobbyRepository : LobbyRepository {
+
   companion object {
     val playerNumber: Array<String> = arrayOf("I", "II", "III", "IV", "V", "VI")
   }
@@ -66,6 +68,43 @@ class FireLobbyRepository : LobbyRepository {
   }
 
 
+  override fun getCurrentActivePlayer(game: Game, observer: Observer<Player?>): Player? {
+    var playerPlaying: Player? by Delegates.observable(null) {
+      _: KProperty<*>, old: Player?, new: Player? ->
+      observer.onValueChange(new, old)
+    }
+
+
+    ref.child("games").child(game.name).addValueEventListener(object : ValueEventListener {
+      override fun onCancelled(p0: DatabaseError?) {}
+
+      override fun onDataChange(dataSnapshot: DataSnapshot) {
+        if (dataSnapshot.child("started").getValue(Boolean::class.java)) {
+          val turn = dataSnapshot.child("turn").getValue(Int::class.java)
+          val userList = ArrayList<Player>()
+          val playerMap: HashMap<*, *> = dataSnapshot.child("players").value as HashMap<*, *>
+          playerMap.entries.forEach {
+            val map = dataSnapshot.value as HashMap<*, *>
+            val player: Player =
+                Player(it.key.toString(),
+                    map["admin"].toString() == "true",
+                    map["history"].toString() == "true",
+                    map["hardware"].toString() == "true",
+                    map["network"].toString() == "true",
+                    map["software"].toString() == "true",
+                    map["enterprise"].toString() == "true"
+                )
+            userList.add(player)
+          }
+          playerPlaying = userList[turn]
+        }
+      }
+
+    })
+    return playerPlaying
+  }
+
+
   override fun getGames(observer: Observer<List<Game>>): MutableList<Game> {
     var listGames: MutableList<Game> by Delegates.observable(ArrayList()) {
       _, old, new ->
@@ -90,11 +129,14 @@ class FireLobbyRepository : LobbyRepository {
     return listGames
   }
 
-  override fun getUsersInGame(game: Game, callback: UserListContract.InteractorOutput) {
+  override fun getUsersInGame(game: Game, observer: Observer<List<Player>>): List<Player> {
+    var listPlayers: MutableList<Player> by Delegates.observable(ArrayList()) {
+      _, old, new ->
+      observer.onValueChange(new, old)
+    }
+
     listener = object : ValueEventListener {
-      override fun onCancelled(p0: DatabaseError?) {
-        callback.onError()
-      }
+      override fun onCancelled(p0: DatabaseError?) {}
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         val userList = ArrayList<Player>()
@@ -112,20 +154,13 @@ class FireLobbyRepository : LobbyRepository {
               )
           userList.add(player)
         }
-        if (userList.filter { it.username == Session.username && it.admin }.isEmpty()) {
-          if (dataSnapshot.child("started").getValue(Boolean::class.java)) {
-            val turn = dataSnapshot.child("turn").getValue(Int::class.java)
-            if (userList[turn].username == Session.username) {
-              callback.onInitAndMyTurn()
-            } else {
-              callback.onInitAndWait()
-            }
-          }
-        }
-        callback.onFetchUserListSuccess(userList)
+
+        listPlayers = userList
       }
     }
     ref.child("games").child(game.name).addValueEventListener(listener)
+
+    return listPlayers
   }
 
   private fun isMyTurn(dataSnapshot: DataSnapshot, turn: Int): Boolean {
@@ -134,7 +169,6 @@ class FireLobbyRepository : LobbyRepository {
         .child("nickname")
         .getValue(String::class.java) == Session.username
   }
-
 
   override fun startGame(game: Game, callback: UserListContract.InteractorOutput) {
     listener = object : ValueEventListener {
