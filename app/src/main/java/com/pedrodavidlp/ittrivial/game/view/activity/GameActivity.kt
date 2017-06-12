@@ -6,18 +6,31 @@ import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.GameContract
 import com.pedrodavidlp.ittrivial.game.presenter.GamePresenter
+import org.jetbrains.anko.alert
 
 class GameActivity : AppCompatActivity(), GameContract.View {
   lateinit private var presenter: GamePresenter
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
+    val turn = intent.getBooleanExtra("turn", false)
     presenter = ServiceLocator.provideGamePresenter(this)
     presenter.setView(this)
-    presenter.init()
+    presenter.init(turn)
   }
 
   override fun initUI() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+  }
+
+
+  override fun onBackPressed() {
+    alert("Are you sure to leave the game?") {
+      title("Exit")
+      yesButton {
+        finish()
+      }
+      noButton {}
+    }.show()
   }
 }

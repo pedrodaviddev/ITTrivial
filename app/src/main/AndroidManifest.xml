@@ -9,28 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <fragment android:name=".login.view.MenuActivity">
-        </fragment>
-        <fragment android:name=".game.view.fragment.RouletteFragment">
-        </fragment>
-        <fragment android:name=".login.view.EnterGameActivity">
+        <activity android:name=".login.view.MenuActivity">
+        </activity>
+        <activity android:name=".login.view.EnterGameActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </fragment>
-        <fragment android:name=".game.view.fragment.QuestionFragment">
-        </fragment>
-        <fragment android:name=".login.view.PlayerListAdminActivity">
-        </fragment>
-        <fragment android:name=".login.view.PlayerListGuestActivity">
-        </fragment>
-        <fragment android:name=".login.view.GameListActivity">
-        </fragment>
-        <fragment android:name=".game.view.fragment.WaitActivity">
-        </fragment>
-
+        </activity>
+        <activity android:name=".login.view.PlayerListAdminActivity">
+        </activity>
+        <activity android:name=".login.view.PlayerListGuestActivity">
+        </activity>
+        <activity android:name=".login.view.GameListActivity">
+        </activity>
+        <activity android:name=".game.view.activity.WaitFragment">
+        </activity>
         <activity android:name=".game.view.activity.GameActivity">
         </activity>
     </application>

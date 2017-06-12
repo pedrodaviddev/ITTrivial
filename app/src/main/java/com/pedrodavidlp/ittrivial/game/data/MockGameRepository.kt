@@ -9,6 +9,10 @@ import com.pedrodavidlp.ittrivial.game.domain.repository.GameRepository
 import com.pedrodavidlp.ittrivial.game.view.Category
 
 class MockGameRepository : GameRepository {
+  override fun listenEndGame(callback: WaitContract.InteractorOutput) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
   override fun winCategory(game: Game, username: String, category: Category) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }

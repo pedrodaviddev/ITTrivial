@@ -164,7 +164,8 @@ class FireLobbyRepository : LobbyRepository {
             val userList = ArrayList<Player>()
             val playerMap: HashMap<*, *> = dataSnapshot.value as HashMap<*, *>
             playerMap.entries.forEach {
-              val map = dataSnapshot.value as HashMap<*, *>
+              var map = (dataSnapshot.value as HashMap<*, *>)[it.key] as HashMap<*, *>
+
               val player: Player =
                   Player(it.key.toString(),
                       map["admin"].toString() == "true",

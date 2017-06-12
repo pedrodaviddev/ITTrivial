@@ -1,10 +1,12 @@
 package com.pedrodavidlp.ittrivial.game.view.activity
 
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
+import android.view.View
 import android.view.View.VISIBLE
+import android.view.ViewGroup
 import com.pedrodavidlp.ittrivial.R
 import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.RouletteContract
@@ -14,19 +16,21 @@ import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 import com.pedrodavidlp.ittrivial.game.view.Roulette
 import com.pedrodavidlp.ittrivial.login.view.PlayerListAdapter
-import kotlinx.android.synthetic.main.activity_match.*
-import org.jetbrains.anko.alert
+import kotlinx.android.synthetic.main.fragment_roulette.*
 
-class RouletteFragment : AppCompatActivity(), RouletteContract.View, Roulette.OnCategorySelected {
+class RouletteFragment : Fragment(), RouletteContract.View, Roulette.OnCategorySelected {
 
   lateinit var presenter: RoulettePresenter
   lateinit var router: RouletteRouter
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_match)
-    presenter = ServiceLocator.provideRoulettePresenter(this)
+
+  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    presenter = ServiceLocator.provideRoulettePresenter()
+    return inflater?.inflate(R.layout.fragment_roulette, container, false)
+  }
+
+  override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
     presenter.setView(this)
-    presenter.manageTurn(intent.getBooleanExtra("a", false))
     presenter.init()
   }
 
@@ -36,7 +40,7 @@ class RouletteFragment : AppCompatActivity(), RouletteContract.View, Roulette.On
 
   override fun initUi() {
     gamePlayerList.adapter = PlayerListAdapter()
-    gamePlayerList.layoutManager = LinearLayoutManager(applicationContext)
+    gamePlayerList.layoutManager = LinearLayoutManager(context)
     roulette.setWheelChangeListener(object : Roulette.RouletteChangeListener {
       override fun onSelectionChange(category: Category) {
         selectedCategoryText.visibility = VISIBLE
@@ -54,17 +58,4 @@ class RouletteFragment : AppCompatActivity(), RouletteContract.View, Roulette.On
     presenter.goToQuestion(category, transitionImage)
   }
 
-  override fun onBackPressed() {
-    alert("Are you sure to leave the game?") {
-      title("Exit")
-      yesButton {
-        //TODO
-      }
-      noButton {}
-    }.show()
-  }
-
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    presenter.manageBack(resultCode)
-  }
 }

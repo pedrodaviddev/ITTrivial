@@ -15,9 +15,6 @@ import com.pedrodavidlp.ittrivial.game.router.QuestionRouter
 import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
 import com.pedrodavidlp.ittrivial.game.router.WaitRouter
 import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
-import com.pedrodavidlp.ittrivial.game.view.activity.QuestionFragment
-import com.pedrodavidlp.ittrivial.game.view.activity.RouletteFragment
-import com.pedrodavidlp.ittrivial.game.view.activity.WaitActivity
 import com.pedrodavidlp.ittrivial.login.data.FireLobbyRepository
 import com.pedrodavidlp.ittrivial.login.domain.usecase.*
 import com.pedrodavidlp.ittrivial.login.presenter.EnterGamePresenter
@@ -60,11 +57,11 @@ object ServiceLocator {
 
   private fun provideGameRouter(activity: GameActivity) = GameRouter(activity)
 
-  private fun provideWaitRouter(activity: WaitActivity): WaitRouter = WaitRouter(activity)
+  private fun provideWaitRouter(): WaitRouter = WaitRouter()
   private fun provideUserListAdminRouter(activity: PlayerListAdminActivity) = UserListRouter(activity)
   private fun provideUserListGuestRouter(activity: PlayerListGuestActivity) = UserListRouter(activity)
-  private fun provideRouletteRouter(activity: RouletteFragment) = RouletteRouter(activity)
-  private fun provideQuestionRouter(fragment: QuestionFragment) = QuestionRouter(fragment)
+  private fun provideRouletteRouter() = RouletteRouter()
+  private fun provideQuestionRouter() = QuestionRouter()
 
   private fun provideMenuRouter(activity: MenuActivity) = MenuRouter(activity)
 
@@ -88,9 +85,9 @@ object ServiceLocator {
       provideUserListGuestRouter(activity))
 
 
-  fun provideRoulettePresenter(activity: RouletteFragment) = RoulettePresenter(provideGameRepository(), provideLeaveGameUseCase(), provideRouletteRouter(activity))
-  fun provideQuestionPresenter(fragment: QuestionFragment) = QuestionPresenter(provideQuestionRepository(), provideFireGameRepository(), provideQuestionRouter(fragment))
-  fun provideWaitPresenter(activity: WaitActivity) = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideEndGameUseCase(), provideGetUserListUseCase(), provideWaitRouter(activity))
+  fun provideRoulettePresenter() = RoulettePresenter(provideGameRepository(), provideLeaveGameUseCase(), provideRouletteRouter())
+  fun provideQuestionPresenter() = QuestionPresenter(provideQuestionRepository(), provideFireGameRepository(), provideQuestionRouter())
+  fun provideWaitPresenter() = WaitPresenter(provideGetTurnUseCase(), provideLeaveGameUseCase(), provideEndGameUseCase(), provideGetUserListUseCase(), provideWaitRouter())
 
   fun provideGamePresenter(activity: GameActivity): GamePresenter = GamePresenter(provideGameRouter(activity))
 

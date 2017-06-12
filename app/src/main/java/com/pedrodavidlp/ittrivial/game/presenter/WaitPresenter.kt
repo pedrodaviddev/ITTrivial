@@ -20,7 +20,6 @@ class WaitPresenter(val turn: GetTurn,
     UserListContract.InteractorOutput {
 
   override fun onLeaveGame() {
-    router.leaveGame()
   }
 
   override fun onFetchUserListSuccess(list: List<Player>) {
