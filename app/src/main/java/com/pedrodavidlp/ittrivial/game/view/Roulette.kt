@@ -50,7 +50,7 @@ class Roulette(rContext: Context, attrs: AttributeSet) : ImageView(rContext, att
       override fun onAnimationEnd(p0: Animation?) {
         rChangeListener.onSelectionChange(current)
         rotation += auxAngle
-        this@Roulette.setOnTouchListener(RouletteTouchListener())
+        //this@Roulette.setOnTouchListener(RouletteTouchListener())
         listener.onCategorySelected(current)
       }
 
