@@ -1,22 +1,18 @@
 package com.pedrodavidlp.ittrivial.game.router
 
-import android.os.Handler
+import com.pedrodavidlp.ittrivial.ServiceLocator
 import com.pedrodavidlp.ittrivial.game.contract.QuestionContract
-import com.pedrodavidlp.ittrivial.game.view.activity.QuestionActivity
-import com.pedrodavidlp.ittrivial.game.view.activity.WaitActivity
-import org.jetbrains.anko.startActivity
+import com.pedrodavidlp.ittrivial.game.view.activity.GameActivity
+import com.pedrodavidlp.ittrivial.game.view.activity.QuestionFragment
 
-class QuestionRouter(val activity: QuestionActivity) : QuestionContract.Router {
+class QuestionRouter(private val fragment: QuestionFragment) : QuestionContract.Router {
   override fun goToGame() {
-    Handler().postDelayed({
-      activity.finish()
-    }, 500)
+    val parentRouter: GameRouter = ServiceLocator.provideGameRouter(fragment.activity as GameActivity)
+    parentRouter.goToRoulette()
   }
 
   override fun goToWait() {
-    Handler().postDelayed({
-      activity.startActivity<WaitActivity>()
-      activity.finish()
-    }, 500)
+    val parentRouter: GameRouter = ServiceLocator.provideGameRouter(fragment.activity as GameActivity)
+    parentRouter.goToWait()
   }
 }

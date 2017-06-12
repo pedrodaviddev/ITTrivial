@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.pedrodavidlp.ittrivial">
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,8 +11,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".login.view.MenuActivity">
         </activity>
-        <activity android:name=".game.view.activity.GameActivity">
-        </activity>
         <activity android:name=".login.view.EnterGameActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,15 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".game.view.activity.QuestionActivity">
-        </activity>
         <activity android:name=".login.view.PlayerListAdminActivity">
         </activity>
         <activity android:name=".login.view.PlayerListGuestActivity">
         </activity>
         <activity android:name=".login.view.GameListActivity">
         </activity>
-        <activity android:name=".game.view.activity.WaitActivity">
+        <activity android:name=".game.view.activity.GameActivity">
+        </activity>
+        <activity android:name=".game.view.activity.FinishGameActivity">
         </activity>
     </application>
 

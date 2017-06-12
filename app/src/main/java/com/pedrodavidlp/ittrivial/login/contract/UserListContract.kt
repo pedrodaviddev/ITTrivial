@@ -21,7 +21,7 @@ class UserListContract {
   }
 
   interface InteractorOutput {
-    fun onFetchUserListSuccess(list: List<Player>)
+    fun onFetchUserList(list: List<Player>)
     fun onError()
     fun onInitAndMyTurn()
     fun onInitAndWait()

@@ -38,10 +38,12 @@ class QuestionPresenter(val question: QuestionRepository,
   fun fail() {
     vw.stopCounter()
     game.loseTurnInGame(Session.game, this)
+    router.goToWait()
   }
 
-  fun hit() {
+  fun hit(category: Category) {
     vw.stopCounter()
+    game.winCategory(Session.game, Session.username, category)
     router.goToGame()
   }
 

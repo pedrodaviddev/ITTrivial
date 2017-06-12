@@ -6,10 +6,10 @@ import android.view.View.VISIBLE
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
-import com.pedrodavidlp.ittrivial.game.router.GameRouter
+import com.pedrodavidlp.ittrivial.game.router.RouletteRouter
 import com.pedrodavidlp.ittrivial.game.view.Category
 
-class TransitionHistory(image: ImageView, router: GameRouter) : TransitionTemplate(image, router) {
+class TransitionHistory(image: ImageView, router: RouletteRouter) : TransitionTemplate(image, router) {
 
   override fun setImage() {
     image.setImageResource(com.pedrodavidlp.ittrivial.R.drawable.ic_history)
